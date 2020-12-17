@@ -1,18 +1,18 @@
 import React from "react";
-import '../App.css';
+import s from './profile.module.css';
 export default function Profile(){
     return(<div >
-        <aside className='aside'>
-            <div className='fonPage'>
+
+            <div className={s.fonPage}>
                 <img  src={'https://i1.wallbox.ru/wallpapers/main/201522/1644fde2217f9fa.jpg'}/>
 
             </div>
-            <div className='about'>
-                <div className='ava'>
+            <div className={s.about}>
+                <div className={s.ava}>
                     <img src={'https://avatanplus.com/files/resources/original/5830a866169da1587e11cecd.png'}/>
                 </div>
 
-                <div className='info'>
+                <div className={s.info}>
                     <div>Anton Kliachonak</div>
                     <div>
                         <span>Date of brithday:</span>
@@ -31,6 +31,6 @@ export default function Profile(){
             <div className='posts'>
                 Posts
             </div>
-        </aside>
+
     </div>)
 }

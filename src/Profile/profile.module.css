@@ -1,0 +1,25 @@
+.fonPage img{
+    width: 100%;
+    height: 300px;
+}
+.about{
+    display: grid;
+    grid-template-areas:
+
+"ava info";
+
+    grid-template-rows: 100%;
+    grid-template-columns: 1.5fr 8.5fr;
+    grid-gap: 10px;
+}
+.ava{
+    grid-area: ava;
+}
+.info{
+    grid-area: info;
+}
+.ava img{
+    width: 150px;
+    height: 150px;
+
+}
