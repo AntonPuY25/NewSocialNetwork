@@ -1,5 +1,6 @@
 import React from "react";
 import s from './profile.module.css';
+import Posts from "./Posts/Posts";
 export default function Profile(){
     return(<div >
 
@@ -29,7 +30,7 @@ export default function Profile(){
                 </div>
             </div>
             <div className='posts'>
-                Posts
+              <Posts/>
             </div>
 
     </div>)
