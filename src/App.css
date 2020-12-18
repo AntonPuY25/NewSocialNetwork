@@ -9,26 +9,27 @@
 "footer footer footer";
   grid-template-rows: 60px 1fr 30px;
   grid-template-columns: 2fr 10fr;
-  grid-gap: 10px;
+
 }
 .header {
   grid-area: header;
-  background: #7D5F8C;
+
+  background-color: #304159;
 
 }
 
 .nav {
   grid-area: nav;
-  background: #5d5d4d;
+  background-color: #F0F2F7;
 }
 .aside {
   grid-area: aside;
-  background: #decdac;
+  background-color: #F0F2F7;
 }
 
 
 
 .footer{
   grid-area: footer;
-  background: #aeddde;
+  background-color: darkgrey;
 }

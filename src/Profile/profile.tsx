@@ -5,12 +5,12 @@ export default function Profile(){
     return(<div >
 
             <div className={s.fonPage}>
-                <img  src={'https://i1.wallbox.ru/wallpapers/main/201522/1644fde2217f9fa.jpg'}/>
+                <img src={require('../Img/fon.jpg')}/>
 
             </div>
             <div className={s.about}>
                 <div className={s.ava}>
-                    <img src={'https://avatanplus.com/files/resources/original/5830a866169da1587e11cecd.png'}/>
+                    <img src={require('../Img/ava1.png')}/>
                 </div>
 
                 <div className={s.info}>

@@ -9,7 +9,7 @@ export default function Header(){
 
             </div>
 
-            <div>Header</div>
+            <div></div>
 
     </div>)
 }

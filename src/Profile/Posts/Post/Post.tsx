@@ -8,7 +8,7 @@ export default function Post(props:PostType){
     return(<div className={s.post}>
 
 
-        <div>
+        <img src={require('../../../Img/ava2.png')}/>        <div>
             <span>Like:</span>
             <span>{props.like}</span>
         </div>
