@@ -1,7 +1,11 @@
 import React from "react";
 import s from './profile.module.css';
 import Posts from "./Posts/Posts";
-export default function Profile(){
+import {PostTypeProps} from "../index";
+type PropsType = {
+    dataPost: Array<PostTypeProps>
+}
+export default function Profile(props:PropsType){
     return(<div >
 
             <div className={s.fonPage}>
@@ -29,8 +33,8 @@ export default function Profile(){
                     </div>
                 </div>
             </div>
-            <div className='posts'>
-              <Posts/>
+            <div className={s.posts}>
+              <Posts dataPost={props.dataPost}/>
             </div>
 
     </div>)

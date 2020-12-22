@@ -1,0 +1,19 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 1.5fr 8.5fr;
+}
+
+.name{
+    padding: 3px;
+}
+.name a{
+
+    text-decoration: none;
+    color:black;
+}
+.activeName a{
+    color:gold;
+}
+.message{
+    padding: 5px;
+}

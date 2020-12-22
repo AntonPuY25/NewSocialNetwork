@@ -1,4 +1,39 @@
-.post img{
-    width:100px;
-    border-radius: 30px;
+.post{
+    width: 800px;
+    height: 450px;
+    background-color: white;
+    margin-top: 15px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.miniAva img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin: 10px;
+    float: left;
+}
+.miniName{
+    position: relative;
+    top:25px;
+    font-size: 20px;
+}
+.seen{
+    position: relative;
+    top:10px;
+    text-align: right;
+}
+.postImg img{
+    width: 100%;
+    height:300px;
+}
+.countLike{
+    text-align: right;
+}
+.like{
+    margin-left: 5px;
+    float: right;
+}
+.countLike{
+    margin: 10px;
 }

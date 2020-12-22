@@ -9,9 +9,14 @@ import Dialogs from "./Profile/Dialogs/dialogs";
 import News from "./Profile/News/news";
 import Music from "./Profile/Music/music";
 import Settings from "./Profile/Setings/settings";
+import {StorePropsType} from "./index";
 
 
-function App() {
+type PropsType = {
+    dataStore:StorePropsType
+}
+
+function App(props:PropsType) {
     return (
         <BrowserRouter>
         <div className="App">
@@ -26,8 +31,8 @@ function App() {
 
             <aside className='aside'>
 
-                <Route path='/profile' render={() => <Profile/>} />
-                <Route path='/dialogs' render={() => <Dialogs/>} />
+                <Route path='/profile' render={() => <Profile dataPost={props.dataStore.dataPost} />} />
+                <Route path='/dialogs' render={() => <Dialogs dataStore={props.dataStore}/>} />
                 <Route path='/news' render={() => <News/>} />
                 <Route path='/music' render={() => <Music/>} />
                 <Route path='/settings' render={() => <Settings/>} />
