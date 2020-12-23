@@ -16,13 +16,6 @@ export type TypePropsMessage = {
     message: string
 }
 
-
-// export type StorePropsType = {
-//     dataPost: Array<PostType>
-//     dataDialog: Array<TypePropsDialog>
-//     dataMessage:Array<TypePropsMessage>
-//
-// }
 export type PostDataType = {
     dataPost: Array<PostType>
 }
