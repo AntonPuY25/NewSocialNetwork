@@ -1,13 +1,15 @@
 import React from "react";
 import s from "./dialogs.module.css";
-import { TypePropsMessage} from "../../index";
+import {TypeMessage} from "../../Redux/Reducers/dealogsReducer";
+
 type PropsDialog={
-    messageData:Array<TypePropsMessage>
+    message:Array<TypeMessage>
 }
 let Message = (props:PropsDialog)=>{
-    let message = props.messageData.map(m => {
+
+    let message = props.message.map((m,i) => {
         return (
-            <div className={s.message}>{m.message}</div>
+            <div key={i} className={s.message}>{m.message}</div>
         )
     })
     return (

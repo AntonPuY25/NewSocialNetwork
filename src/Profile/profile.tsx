@@ -1,20 +1,20 @@
 import React from "react";
 import s from './profile.module.css';
-import Posts from "./Posts/Posts";
-import {PostTypeProps} from "../index";
-type PropsType = {
-    dataPost: Array<PostTypeProps>
-}
-export default function Profile(props:PropsType){
+import PostsConteiner from "./Posts/PostsConteiner";
+
+
+
+export default function Profile(){
+
     return(<div >
 
             <div className={s.fonPage}>
-                <img src={require('../Img/fon.jpg')}/>
+                <img alt={'ava'} src={require('../Img/fon.jpg')}/>
 
             </div>
             <div className={s.about}>
                 <div className={s.ava}>
-                    <img src={require('../Img/ava1.png')}/>
+                    <img alt={'ava'} src={require('../Img/ava1.png')}/>
                 </div>
 
                 <div className={s.info}>
@@ -34,7 +34,7 @@ export default function Profile(props:PropsType){
                 </div>
             </div>
             <div className={s.posts}>
-              <Posts dataPost={props.dataPost}/>
+              <PostsConteiner/>
             </div>
 
     </div>)

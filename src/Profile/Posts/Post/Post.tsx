@@ -1,23 +1,29 @@
 import React from "react";
 import s from './post.module.css';
-import {strict} from "assert";
+
 export type PostTypeProps = {
     id:number
     name:string
     date:string
     textPost:string
     likes:number
+    /*
+
+   HEEEEEEEEEYYYY This is my comment
+    */
     imgPost:string
+    fun?:()=>void
 
 }
 export default function Post(props:PostTypeProps){
+
     return(<div>
 
         <div className={s.post}>
             <div className={s.miniAva}>
-                <img src={require('../../../Img/ava2.png')}/>
+                <img  alt={'ava'} src={require('../../../Img/ava2.png')} />
             </div>
-            <div className={s.miniName}>
+            <div className={s.miniName}  >
                 {props.name}
             </div>
             <div className={s.seen}>
@@ -27,12 +33,12 @@ export default function Post(props:PostTypeProps){
 
             <div className={s.postImg}>
                 {props.textPost}
-                <img src={require(`../../../Img/${props.imgPost}.jpg`)}/>
+                <img alt={'posts'}  src={require(`../../../Img/${props.imgPost}.jpg`)}/>
             </div>
             <div className={s.countLike}>
                 <div className={s.like}>
 
-                    <img src={require('../../../Img/like.png')}/>
+                    <img onClick={props.fun}   alt={'like'} src={require('../../../Img/like.png')}/>
 
 
                 </div>
