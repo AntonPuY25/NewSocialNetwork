@@ -1,19 +1,33 @@
 import {User} from "../../Profile/Users/users";
 
 export type TypeInitialStateUsers = {
-    users: Array<User>
+    users: Array<User>,
+    totalCount:number,
+    count:number,
+    pageNumber:number,
 }
 export  type TypeAction = {
     type?: string
     id?: number
-    arr?:TypeInitialStateUsers
+    arr?:TypeInitialStateUsers,
+    pageNumber?:number,
+    totalCount?:number,
 }
 let initialState: TypeInitialStateUsers = {
-    users: []
+    users: [],
+    totalCount:0,
+    pageNumber:1,
+    count:10,
+
+
 }
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UN_FOLLOW";
-const GETUSERS="GET_USERS"
+const GETUSERS="GET_USERS";
+const SETPAGENUMBER = "SET_PAGE_NUMBER";
+const SETTOTALCOUNT = "SET_TOTAL_COUNT";
+export const setTotalCount:(value:number)=>TypeAction=(totalCount)=>({type:SETTOTALCOUNT,totalCount})
+export const setPageAC:(value:number)=>TypeAction=(pageNumber)=>({type:SETPAGENUMBER,pageNumber})
 export const FollowAC:(value:number)=>TypeAction=(id)=>({type:FOLLOW,id:id})
 export const UnFollowAC:(value:number)=>TypeAction=(id)=>({type:UNFOLLOW,id:id})
 export const getUsersAC:(value:Array<User>)=>void
@@ -43,9 +57,19 @@ let usersReducer =(state:TypeInitialStateUsers = initialState,action:TypeAction)
         case GETUSERS:
 
             return {
+                ...state,
+                 users: action.arr
 
-                users:action.arr
-
+            }
+        case SETPAGENUMBER:
+            return {
+                ...state,
+                pageNumber:action.pageNumber
+            }
+        case SETTOTALCOUNT:
+            return {
+                ...state,
+                totalCount:action.totalCount
             }
 
         default:

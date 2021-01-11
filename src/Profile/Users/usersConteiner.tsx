@@ -1,13 +1,16 @@
 import {connect} from "react-redux";
 import {User} from "./users";
 import {TypeStoreReducer} from "../../Redux/reduxStore";
-import {FollowAC, getUsersAC, UnFollowAC} from "../../Redux/Reducers/usersReducer";
+import {FollowAC, getUsersAC, setPageAC, setTotalCount, UnFollowAC} from "../../Redux/Reducers/usersReducer";
 import Users from "./usercClassComponent";
 
 
 const mapStateToProps = (state:TypeStoreReducer)=>{
     return{
-        users:state.usersPage.users
+        users:state.usersPage.users,
+        count:state.usersPage.count,
+        totalCount:state.usersPage.totalCount,
+        pageNumber: state.usersPage.pageNumber
     }
 }
 const mapDispatchToProps = (dispatch:any)=>{
@@ -20,6 +23,12 @@ const mapDispatchToProps = (dispatch:any)=>{
         },
         setUsers:(arr:Array<User>)=>{
             dispatch(getUsersAC(arr))
+        },
+        setPageNumber:(pageNumber:number)=>{
+            dispatch(setPageAC(pageNumber))
+        },
+        setTotalCount:(totalCount:number)=>{
+            dispatch(setTotalCount(totalCount))
         }
     }
 }
