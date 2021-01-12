@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/NewSocialNetwork/static/css/main.69c88006.chunk.css",
-    "main.js": "/NewSocialNetwork/static/js/main.f226f489.chunk.js",
-    "main.js.map": "/NewSocialNetwork/static/js/main.f226f489.chunk.js.map",
+    "main.css": "/NewSocialNetwork/static/css/main.c76599d0.chunk.css",
+    "main.js": "/NewSocialNetwork/static/js/main.216a355e.chunk.js",
+    "main.js.map": "/NewSocialNetwork/static/js/main.216a355e.chunk.js.map",
     "runtime-main.js": "/NewSocialNetwork/static/js/runtime-main.a86eb3e9.js",
     "runtime-main.js.map": "/NewSocialNetwork/static/js/runtime-main.a86eb3e9.js.map",
-    "static/js/2.a61cbcb0.chunk.js": "/NewSocialNetwork/static/js/2.a61cbcb0.chunk.js",
-    "static/js/2.a61cbcb0.chunk.js.map": "/NewSocialNetwork/static/js/2.a61cbcb0.chunk.js.map",
+    "static/js/2.62ecd2b3.chunk.js": "/NewSocialNetwork/static/js/2.62ecd2b3.chunk.js",
+    "static/js/2.62ecd2b3.chunk.js.map": "/NewSocialNetwork/static/js/2.62ecd2b3.chunk.js.map",
     "index.html": "/NewSocialNetwork/index.html",
-    "precache-manifest.02ec5dbeb0e324881bb80aca7f2c911d.js": "/NewSocialNetwork/precache-manifest.02ec5dbeb0e324881bb80aca7f2c911d.js",
+    "precache-manifest.3bdb024a78e9dfe0cacc239eec270f95.js": "/NewSocialNetwork/precache-manifest.3bdb024a78e9dfe0cacc239eec270f95.js",
     "service-worker.js": "/NewSocialNetwork/service-worker.js",
-    "static/css/main.69c88006.chunk.css.map": "/NewSocialNetwork/static/css/main.69c88006.chunk.css.map",
-    "static/js/2.a61cbcb0.chunk.js.LICENSE.txt": "/NewSocialNetwork/static/js/2.a61cbcb0.chunk.js.LICENSE.txt",
+    "static/css/main.c76599d0.chunk.css.map": "/NewSocialNetwork/static/css/main.c76599d0.chunk.css.map",
+    "static/js/2.62ecd2b3.chunk.js.LICENSE.txt": "/NewSocialNetwork/static/js/2.62ecd2b3.chunk.js.LICENSE.txt",
     "static/media/ava1.png": "/NewSocialNetwork/static/media/ava1.efeaeea8.png",
     "static/media/ava2.png": "/NewSocialNetwork/static/media/ava2.2189f529.png",
     "static/media/fon.jpg": "/NewSocialNetwork/static/media/fon.778a408f.jpg",
@@ -22,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.a86eb3e9.js",
-    "static/js/2.a61cbcb0.chunk.js",
-    "static/css/main.69c88006.chunk.css",
-    "static/js/main.f226f489.chunk.js"
+    "static/js/2.62ecd2b3.chunk.js",
+    "static/css/main.c76599d0.chunk.css",
+    "static/js/main.216a355e.chunk.js"
   ]
 }
