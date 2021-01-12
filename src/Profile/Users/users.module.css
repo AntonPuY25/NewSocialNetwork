@@ -2,9 +2,14 @@
     width:100px;
 
 }
+.people{
+    padding: 10px;
+}
 .pageNumber {
     font-weight: bold;
 }
 .test {
+
     cursor: pointer;
+
 }

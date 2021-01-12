@@ -1,55 +1,57 @@
 import {User} from "../../Profile/Users/users";
 
 export type TypeInitialStateUsers = {
-    users: Array<User>,
-    totalCount:number,
-    count:number,
-    pageNumber:number,
+    users: Array<User>
+    count: number
+    pageNumber: number
+    countPage: number
 }
 export  type TypeAction = {
     type?: string
     id?: number
-    arr?:TypeInitialStateUsers,
-    pageNumber?:number,
-    totalCount?:number,
+    arr?: TypeInitialStateUsers
+    pageNumber?: number
+    totalCount?: number
+    countPage?: number
 }
 let initialState: TypeInitialStateUsers = {
     users: [],
-    totalCount:0,
-    pageNumber:1,
-    count:10,
+    pageNumber: 1,
+    count: 10,
+    countPage: 10,
 
 
 }
 const FOLLOW = "FOLLOW";
+const SETCOUNTPEGA = "SET_COUNT_PAGE";
 const UNFOLLOW = "UN_FOLLOW";
-const GETUSERS="GET_USERS";
+const GETUSERS = "GET_USERS";
 const SETPAGENUMBER = "SET_PAGE_NUMBER";
-const SETTOTALCOUNT = "SET_TOTAL_COUNT";
-export const setTotalCount:(value:number)=>TypeAction=(totalCount)=>({type:SETTOTALCOUNT,totalCount})
-export const setPageAC:(value:number)=>TypeAction=(pageNumber)=>({type:SETPAGENUMBER,pageNumber})
-export const FollowAC:(value:number)=>TypeAction=(id)=>({type:FOLLOW,id:id})
-export const UnFollowAC:(value:number)=>TypeAction=(id)=>({type:UNFOLLOW,id:id})
-export const getUsersAC:(value:Array<User>)=>void
-    =(arr:Array<User>)=>({type:GETUSERS,arr:arr})
-let usersReducer =(state:TypeInitialStateUsers = initialState,action:TypeAction)=>{
-    switch (action.type){
+export const setCountPAgeAC: (value: number) => TypeAction = (countPage) => ({type: SETCOUNTPEGA, countPage})
+export const setPageAC: (value: number) => TypeAction = (pageNumber) => ({type: SETPAGENUMBER, pageNumber})
+export const FollowAC: (value: number) => TypeAction = (id) => ({type: FOLLOW, id: id})
+export const UnFollowAC: (value: number) => TypeAction = (id) => ({type: UNFOLLOW, id: id})
+export const getUsersAC: (value: Array<User>) => void
+    = (arr: Array<User>) => ({type: GETUSERS, arr: arr})
+let usersReducer = (state: TypeInitialStateUsers = initialState, action: TypeAction) => {
+    switch (action.type) {
         case FOLLOW:
             return {
                 ...state,
-                users:state.users.map(i=>{
-                    if(i.id === action.id){
-                        return {...i,followed:false}
+                users: state.users.map(i => {
+                        if (i.id === action.id) {
+                            return {...i, followed: false}
+                        }
+                        return i
                     }
-                    return i  }
                 )
             }
         case UNFOLLOW:
-            return{
+            return {
                 ...state,
-                users:state.users.map(i=>{
-                    if(i.id === action.id){
-                        return  {...i,followed:true}
+                users: state.users.map(i => {
+                    if (i.id === action.id) {
+                        return {...i, followed: true}
                     }
                     return i
                 })
@@ -58,27 +60,24 @@ let usersReducer =(state:TypeInitialStateUsers = initialState,action:TypeAction)
 
             return {
                 ...state,
-                 users: action.arr
+                users: action.arr
 
             }
         case SETPAGENUMBER:
             return {
                 ...state,
-                pageNumber:action.pageNumber
-            }
-        case SETTOTALCOUNT:
-            return {
-                ...state,
-                totalCount:action.totalCount
+                pageNumber: action.pageNumber
             }
 
+        case SETCOUNTPEGA:
+            return {
+                ...state,
+                countPage: action.countPage
+            }
         default:
             return state
     }
 }
-
-
-
 
 
 export default usersReducer;
