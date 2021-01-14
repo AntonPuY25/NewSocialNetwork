@@ -34,7 +34,6 @@ function App() {
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
                 </aside>
-
                 <footer className='footer'><Footer/></footer>
             </div>
         </BrowserRouter>
