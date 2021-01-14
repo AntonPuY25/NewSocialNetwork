@@ -26,18 +26,13 @@ function App() {
                 </nav>
 
                 <aside className='aside'>
-
                     <Route path='/profile' render={() =>
                         <Profile/>}/>
-
                     <Route path='/dialogs' render={() => <DialogsConteiner/>}/>
                     <Route path='/friends' render={() => <UserConteiner/>}/>
-
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
-
-
                 </aside>
 
                 <footer className='footer'><Footer/></footer>
