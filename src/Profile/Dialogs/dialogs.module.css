@@ -1,31 +1,35 @@
-.dialogs{
+.dialogs {
     display: grid;
     grid-template-columns: 1.5fr 8.5fr;
 }
 
-.name{
+.name {
     padding: 3px;
 }
-.name a{
 
+.name a {
     text-decoration: none;
-    color:black;
+    color: black;
 }
-.activeName a{
-    color:gold;
+
+.activeName a {
+    color: gold;
 }
-.message{
+
+.message {
     padding: 5px;
 }
-.nameMyPost{
+
+.nameMyPost {
     font-family: bold;
     font-size: 20px;
-
 }
-.textareaPost{
-    width:30%;
+
+.textareaPost {
+    width: 30%;
     height: 130px;
 }
-.butPost{
+
+.butPost {
     padding: 7px;
 }

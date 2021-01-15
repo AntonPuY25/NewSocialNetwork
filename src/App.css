@@ -1,35 +1,36 @@
 .App {
-  padding: 30px;
-  display: grid;
+    display: grid;
 
+    padding: 30px;
 
-  grid-template-areas:
-"header header header"
-"nav aside aside"
-"footer footer footer";
-  grid-template-rows: 60px 1fr 30px;
-  grid-template-columns: 2fr 10fr;
-
+    grid-template-areas: 'header header header'
+    'nav aside aside'
+    'footer footer footer';
+    grid-template-rows: 60px 1fr 30px;
+    grid-template-columns: 2fr 10fr;
 }
+
 .header {
-  grid-area: header;
+    background-color: #304159;
 
-  background-color: #304159;
-
+    grid-area: header;
 }
 
 .nav {
-  grid-area: nav;
-  background-color: #F0F2F7;
+    background-color: #f0f2f7;
+
+    grid-area: nav;
 }
+
 .aside {
-  grid-area: aside;
-  background-color: #F0F2F7;
+    background-color: #f0f2f7;
+
+    grid-area: aside;
 }
 
 
+.footer {
+    background-color: darkgrey;
 
-.footer{
-  grid-area: footer;
-  background-color: darkgrey;
+    grid-area: footer;
 }
