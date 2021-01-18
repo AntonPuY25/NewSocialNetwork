@@ -2,7 +2,6 @@ import React from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
 import './App.css';
 import Footer from "./Footer/footer";
-import Profile from "./Profile/profile";
 import Menu from "./Menu/menu";
 import Header from "./Header/header";
 import DialogsConteiner from "./Profile/Dialogs/dialogsConteiner";
@@ -10,6 +9,7 @@ import News from "./Profile/News/news";
 import Settings from "./Profile/Setings/settings";
 import UserConteiner from "./Profile/Users/usersConteiner";
 import MusicConteiner from "./Profile/Music/musicConteiner";
+import ProfileConteiner from "./Profile/profileConteiner";
 
 function App() {
 
@@ -27,7 +27,7 @@ function App() {
 
                 <aside className='aside'>
                     <Route path='/profile' render={() =>
-                        <Profile/>}/>
+                        <ProfileConteiner/>}/>
                     <Route path='/dialogs' render={() => <DialogsConteiner/>}/>
                     <Route path='/friends' render={() => <UserConteiner/>}/>
                     <Route path='/news' render={() => <News/>}/>
