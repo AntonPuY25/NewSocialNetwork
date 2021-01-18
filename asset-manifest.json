@@ -1,29 +1,30 @@
 {
   "files": {
-    "main.css": "/NewSocialNetwork/static/css/main.c76599d0.chunk.css",
-    "main.js": "/NewSocialNetwork/static/js/main.216a355e.chunk.js",
-    "main.js.map": "/NewSocialNetwork/static/js/main.216a355e.chunk.js.map",
+    "main.css": "/NewSocialNetwork/static/css/main.e128cecf.chunk.css",
+    "main.js": "/NewSocialNetwork/static/js/main.88b9b16f.chunk.js",
+    "main.js.map": "/NewSocialNetwork/static/js/main.88b9b16f.chunk.js.map",
     "runtime-main.js": "/NewSocialNetwork/static/js/runtime-main.a86eb3e9.js",
     "runtime-main.js.map": "/NewSocialNetwork/static/js/runtime-main.a86eb3e9.js.map",
-    "static/js/2.62ecd2b3.chunk.js": "/NewSocialNetwork/static/js/2.62ecd2b3.chunk.js",
-    "static/js/2.62ecd2b3.chunk.js.map": "/NewSocialNetwork/static/js/2.62ecd2b3.chunk.js.map",
+    "static/js/2.685cfa49.chunk.js": "/NewSocialNetwork/static/js/2.685cfa49.chunk.js",
+    "static/js/2.685cfa49.chunk.js.map": "/NewSocialNetwork/static/js/2.685cfa49.chunk.js.map",
     "index.html": "/NewSocialNetwork/index.html",
-    "precache-manifest.3bdb024a78e9dfe0cacc239eec270f95.js": "/NewSocialNetwork/precache-manifest.3bdb024a78e9dfe0cacc239eec270f95.js",
+    "precache-manifest.b2ac22fae5b832d0fcb3aa7ec09420de.js": "/NewSocialNetwork/precache-manifest.b2ac22fae5b832d0fcb3aa7ec09420de.js",
     "service-worker.js": "/NewSocialNetwork/service-worker.js",
-    "static/css/main.c76599d0.chunk.css.map": "/NewSocialNetwork/static/css/main.c76599d0.chunk.css.map",
-    "static/js/2.62ecd2b3.chunk.js.LICENSE.txt": "/NewSocialNetwork/static/js/2.62ecd2b3.chunk.js.LICENSE.txt",
+    "static/css/main.e128cecf.chunk.css.map": "/NewSocialNetwork/static/css/main.e128cecf.chunk.css.map",
+    "static/js/2.685cfa49.chunk.js.LICENSE.txt": "/NewSocialNetwork/static/js/2.685cfa49.chunk.js.LICENSE.txt",
     "static/media/ava1.png": "/NewSocialNetwork/static/media/ava1.efeaeea8.png",
     "static/media/ava2.png": "/NewSocialNetwork/static/media/ava2.2189f529.png",
     "static/media/fon.jpg": "/NewSocialNetwork/static/media/fon.778a408f.jpg",
     "static/media/friends.png": "/NewSocialNetwork/static/media/friends.9af25c38.png",
     "static/media/post1.jpg": "/NewSocialNetwork/static/media/post1.e8b340f0.jpg",
     "static/media/post2.jpg": "/NewSocialNetwork/static/media/post2.aef379ad.jpg",
-    "static/media/settings.png": "/NewSocialNetwork/static/media/settings.92c25f37.png"
+    "static/media/settings.png": "/NewSocialNetwork/static/media/settings.92c25f37.png",
+    "static/media/tms-loading.gif": "/NewSocialNetwork/static/media/tms-loading.6068d1f9.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.a86eb3e9.js",
-    "static/js/2.62ecd2b3.chunk.js",
-    "static/css/main.c76599d0.chunk.css",
-    "static/js/main.216a355e.chunk.js"
+    "static/js/2.685cfa49.chunk.js",
+    "static/css/main.e128cecf.chunk.css",
+    "static/js/main.88b9b16f.chunk.js"
   ]
 }
