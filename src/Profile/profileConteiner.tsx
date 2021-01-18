@@ -28,15 +28,16 @@ export type TypeResponseDataProfile = {
     lookingForAJobDescription: string
     fullName: string
     userId: number
-    photos:TypePhotosDataProfile
+    photos: TypePhotosDataProfile
 }
 
 type TypeProfileProps = {
-    profile:TypeResponseDataProfile
-    setProfileDataAC:(data:TypeResponseDataProfile)=>void
-    isPreloader:boolean
-    setPreloaderAC:(preloader:boolean)=>void
+    profile: TypeResponseDataProfile
+    setProfileDataAC: (data: TypeResponseDataProfile) => void
+    isPreloader: boolean
+    setPreloaderAC: (preloader: boolean) => void
 }
+
 class ProfileConteiner extends React.Component<TypeProfileProps, any> {
     componentDidMount() {
         axios.get<TypeResponseDataProfile>(`https://social-network.samuraijs.com/api/1.0/profile/2`)
@@ -50,8 +51,8 @@ class ProfileConteiner extends React.Component<TypeProfileProps, any> {
 
 
         return (<div>
-                {this.props.isPreloader ? <Profile profile={this.props.profile}/>:<Preloader/>}
-        </div>
+                {this.props.isPreloader ? <Profile profile={this.props.profile}/> : <Preloader/>}
+            </div>
 
         )
 
@@ -60,8 +61,8 @@ class ProfileConteiner extends React.Component<TypeProfileProps, any> {
 
 let mapStateToProps = (state: TypeStoreReducer) => {
     return {
-        profile:state.profilePage.profile,
-        isPreloader:state.profilePage.isPreloader
+        profile: state.profilePage.profile,
+        isPreloader: state.profilePage.isPreloader
     }
 }
-export default connect(mapStateToProps, {setProfileDataAC,setPreloaderAC})(ProfileConteiner)
+export default connect(mapStateToProps, {setProfileDataAC, setPreloaderAC})(ProfileConteiner)
