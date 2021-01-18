@@ -3,7 +3,8 @@ import Profile from "./profile";
 import {connect} from "react-redux";
 import axios from "axios";
 import {TypeStoreReducer} from "../Redux/reduxStore";
-import {setProfileDataAC} from "../Redux/Reducers/profileReducer";
+import {setPreloaderAC, setProfileDataAC} from "../Redux/Reducers/profileReducer";
+import Preloader from "./Preloader/Preloader";
 
 export type TypeContactsDataProfile = {
     facebook: string,
@@ -33,20 +34,25 @@ export type TypeResponseDataProfile = {
 type TypeProfileProps = {
     profile:TypeResponseDataProfile
     setProfileDataAC:(data:TypeResponseDataProfile)=>void
+    isPreloader:boolean
+    setPreloaderAC:(preloader:boolean)=>void
 }
 class ProfileConteiner extends React.Component<TypeProfileProps, any> {
     componentDidMount() {
         axios.get<TypeResponseDataProfile>(`https://social-network.samuraijs.com/api/1.0/profile/2`)
             .then((response) => {
                 this.props.setProfileDataAC(response.data)
+                this.props.setPreloaderAC(true)
             })
     }
 
     render() {
 
 
-        return (
-            <Profile profile={this.props.profile}/>
+        return (<div>
+                {this.props.isPreloader ? <Profile profile={this.props.profile}/>:<Preloader/>}
+        </div>
+
         )
 
     }
@@ -54,7 +60,8 @@ class ProfileConteiner extends React.Component<TypeProfileProps, any> {
 
 let mapStateToProps = (state: TypeStoreReducer) => {
     return {
-        profile:state.profilePage.profile
+        profile:state.profilePage.profile,
+        isPreloader:state.profilePage.isPreloader
     }
 }
-export default connect(mapStateToProps, {setProfileDataAC})(ProfileConteiner)
+export default connect(mapStateToProps, {setProfileDataAC,setPreloaderAC})(ProfileConteiner)
