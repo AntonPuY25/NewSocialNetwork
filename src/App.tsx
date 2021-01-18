@@ -7,9 +7,9 @@ import Menu from "./Menu/menu";
 import Header from "./Header/header";
 import DialogsConteiner from "./Profile/Dialogs/dialogsConteiner";
 import News from "./Profile/News/news";
-import Music from "./Profile/Music/music";
 import Settings from "./Profile/Setings/settings";
 import UserConteiner from "./Profile/Users/usersConteiner";
+import MusicConteiner from "./Profile/Music/musicConteiner";
 
 function App() {
 
@@ -31,7 +31,7 @@ function App() {
                     <Route path='/dialogs' render={() => <DialogsConteiner/>}/>
                     <Route path='/friends' render={() => <UserConteiner/>}/>
                     <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
+                    <Route path='/music' render={() => <MusicConteiner/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
                 </aside>
                 <footer className='footer'><Footer/></footer>

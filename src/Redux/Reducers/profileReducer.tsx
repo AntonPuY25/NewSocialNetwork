@@ -9,10 +9,12 @@ export type PostType = {
     imgPost: string
 
 }
-export  type TypeAction = {
-    type?: string
-    text?: string
+export type TypeAddPostAction = ReturnType<typeof PostAC>;
+export type TypeAddPostTextAction = {
+    type: typeof ADD_TEXT_POST,
+    text:string
 }
+export  type TypeAction = TypeAddPostAction |TypeAddPostTextAction
 export type TypePostData = {
     dataPost: Array<PostType>
 }
@@ -79,6 +81,16 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
             return state
     }
 }
-export const PostTextAC: (value: string) => TypeAction = (text) => ({type: ADD_TEXT_POST, text: text})
-export const PostAC: () => TypeAction = () => ({type: ADD_POST})
+export const PostTextAC = (text:string)=>{
+    return{
+        type:ADD_TEXT_POST,
+        text
+
+    } as const
+}
+export const PostAC = ()=>{
+    return {
+        type:ADD_POST
+    } as const
+}
 export default profileReducer;

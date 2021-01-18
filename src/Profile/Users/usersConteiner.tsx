@@ -4,12 +4,13 @@ import {
     FollowAC,
     getUsersAC,
     setCountPAgeAC,
-    setPageAC,
+    setPageAC, SetPreloaderAC,
     UnFollowAC
 } from "../../Redux/Reducers/usersReducer";
 import React from "react";
 import axios from "axios";
 import UserFun from "./userFunctional";
+import Preloader from "../Preloader/Preloader";
 
 export type TypePhoto = {
     small: null
@@ -39,38 +40,40 @@ export type TypeUsersProps = {
     setPageNumber: (pageNumber: number) => void
     countPAge: number
     setCountPage: (countPage: number) => void
-
+    isPreloader:boolean
+    setPreloader:(prelaoder:boolean)=>void
 }
 
-class Users extends React.Component<TypeUsersProps> {
-
+class Users extends React.Component<TypeUsersProps,any> {
 
     arr: Array<number> = [];
-
     componentDidMount() {
+        this.props.setPreloader(true)
         axios.get<TypeResponseData>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.pageNumber}&count=${this.props.count}`)
             .then((response) => {
                 this.props.setUsers(response.data.items)
-
+                this.props.setPreloader(false)
             })
 
         for (let i = 1; i <= this.props.countPAge; i++) {
             this.arr.push(i)
         }
+
     }
 
     clickPage = (id: number) => {
+        this.props.setPreloader(true)
         this.props.setPageNumber(id)
         console.log(id)
         axios.get<TypeResponseData>(`https://social-network.samuraijs.com/api/1.0/users?page=${id}&count=${this.props.count}`)
             .then((response) => {
                 this.props.setUsers(response.data.items)
+                this.props.setPreloader(false)
             })
 
     }
 
     render() {
-
 
 
 
@@ -91,13 +94,14 @@ class Users extends React.Component<TypeUsersProps> {
             }
         }
 
-        return <UserFun functionTest={functionTest} arr={this.arr}
-                        clickPage={this.clickPage} pageNumber={this.props.pageNumber}
-                        users={this.props.users}
-                        follow={this.props.follow}
-                        unFollow={this.props.unFollow}
-
-        />
+        return <div>
+            {this.props.isPreloader?<Preloader/>
+                :<UserFun functionTest={functionTest} arr={this.arr}
+                clickPage={this.clickPage} pageNumber={this.props.pageNumber}
+                users={this.props.users}
+                follow={this.props.follow}
+                unFollow={this.props.unFollow}/>}
+        </div>
     }
 }
 
@@ -106,7 +110,8 @@ const mapStateToProps = (state: TypeStoreReducer) => {
         users: state.usersPage.users,
         count: state.usersPage.count,
         pageNumber: state.usersPage.pageNumber,
-        countPAge: state.usersPage.countPage
+        countPAge: state.usersPage.countPage,
+        isPreloader:state.usersPage.isPreloader
     }
 }
 const mapDispatchToProps = (dispatch: any) => {
@@ -126,6 +131,9 @@ const mapDispatchToProps = (dispatch: any) => {
 
         setCountPage: (countPage: number) => {
             dispatch(setCountPAgeAC(countPage))
+        },
+        setPreloader :(preloader:boolean)=>{
+            dispatch(SetPreloaderAC(preloader))
         }
     }
 }

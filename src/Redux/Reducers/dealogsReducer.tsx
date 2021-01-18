@@ -13,10 +13,11 @@ export type TypeMessageData = {
     dataDialog: Array<TypeDialog>
     dataMessage: Array<TypeMessage>
 }
-export  type TypeAction = {
-    type?: string
-    text?: string
-}
+type TypeAddTextMessageAction = ReturnType<typeof DialogTextAC>
+
+type TypeAddMessageAction = ReturnType<typeof DialogAC>
+export  type TypeAction = TypeAddTextMessageAction|TypeAddMessageAction
+
 export type TypeInitialStateDialogs = {
     messageData: TypeMessageData
     valueMessage: string
@@ -95,6 +96,15 @@ let dialogsReducer = (state: TypeInitialStateDialogs = initialState, action: Typ
 
 
 }
-export const DialogTextAC: (value: string) => TypeAction = (text) => ({type: ADD_TEXT_MESSAGE, text: text})
-export const DialogAC: () => TypeAction = () => ({type: ADD_MESSAGE})
+export const DialogTextAC = (text:string)=>{
+    return {
+        type:ADD_TEXT_MESSAGE,
+        text
+    } as const
+}
+export const DialogAC= ()=>{
+    return{
+        type:ADD_MESSAGE
+    } as const
+}
 export default dialogsReducer;
