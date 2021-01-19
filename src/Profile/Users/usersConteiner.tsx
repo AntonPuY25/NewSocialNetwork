@@ -64,7 +64,6 @@ class Users extends React.Component<TypeUsersProps,any> {
     clickPage = (id: number) => {
         this.props.setPreloader(true)
         this.props.setPageNumber(id)
-        console.log(id)
         axios.get<TypeResponseData>(`https://social-network.samuraijs.com/api/1.0/users?page=${id}&count=${this.props.count}`)
             .then((response) => {
                 this.props.setUsers(response.data.items)

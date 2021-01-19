@@ -23,9 +23,10 @@ export default function Profile(props: TypePropsProfile) {
 
             <div className={s.info}>
                 <h3>{props.profile.fullName}</h3>
-                <div>{props.profile.aboutMe}</div>
+                <div>Status:{props.profile.aboutMe}</div>
+                <div>ID:{props.profile.userId}</div>
                 <div>
-                    <span>{props.profile.lookingForAJobDescription}</span>
+                    <span>Job:{props.profile.lookingForAJobDescription}</span>
                 </div>
 
             </div>
