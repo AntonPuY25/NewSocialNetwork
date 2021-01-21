@@ -2,14 +2,8 @@ import React, {ChangeEvent} from "react";
 import s from './dialogs.module.css';
 import Dialog from "./dialog";
 import Message from "./message";
-import {TypeMessageData} from "../../Redux/Reducers/dealogsReducer";
+import {TypeDialogs} from "../../Types/Types";
 
-export type TypeDialogs = {
-     onChangeMessageText:(text:string)=>void
-    addMessage:()=>void
-    messageData:TypeMessageData
-    valueMessage:string
-}
 
 export default function Dialogs(props: TypeDialogs) {
     let onChangeMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {

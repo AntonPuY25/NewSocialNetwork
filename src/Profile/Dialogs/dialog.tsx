@@ -1,10 +1,7 @@
 import React from "react";
 import s from "./dialogs.module.css";
 import {NavLink} from "react-router-dom";
-import {TypeDialog} from "../../Redux/Reducers/dealogsReducer";
-export type TypeDialogData = {
-    dataDialog:Array<TypeDialog>
-}
+import {TypeDialogData} from "../../Types/Types";
 
 let Dialog = (props:TypeDialogData) => {
 

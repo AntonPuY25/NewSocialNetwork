@@ -1,15 +1,24 @@
-import {DialogAC, DialogTextAC} from "../../Redux/Reducers/dealogsReducer";
+import {
+    DialogAC,
+    DialogTextAC,
+} from "../../Redux/Reducers/dealogsReducer";
 import Dialogs from "./dialogs";
 import {connect} from "react-redux";
-import {TypeStoreReducer} from "../../Redux/reduxStore";
+import {Dispatch} from "react";
+import {
+    TypeAction,
+    TypeMapDispatchToProps,
+    TypeMapStateToProps,
+    TypeStoreReducer
+} from "../../Types/Types";
 
-let mapStateToProps = (state:TypeStoreReducer)=>{
+let mapStateToProps = (state:TypeStoreReducer):TypeMapStateToProps=>{
     return{
         valueMessage:state.dialogsPage.valueMessage,
         messageData:state.dialogsPage.messageData
     }
 }
-let mapDispatchToProps = (dispatch:any)=>{
+let mapDispatchToProps = (dispatch:Dispatch<TypeAction>):TypeMapDispatchToProps=>{
     return{
         addMessage:()=>{
             dispatch(DialogAC())
@@ -19,6 +28,7 @@ let mapDispatchToProps = (dispatch:any)=>{
         }
     }
 }
-let DialogsConteiner = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+let DialogsConteiner = connect<TypeMapStateToProps,TypeMapDispatchToProps,
+    {},TypeStoreReducer>(mapStateToProps,mapDispatchToProps)(Dialogs);
 
 export default DialogsConteiner;

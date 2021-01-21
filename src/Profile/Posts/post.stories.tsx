@@ -1,7 +1,8 @@
 import React from 'react';
 import {Story, Meta} from '@storybook/react/types-6-0';
-import Post, {PostTypeProps} from "./Post/Post";
+import Post from "./Post/Post";
 import {action} from "@storybook/addon-actions";
+import {PostTypeProps} from "../../Types/Types";
 
 
 export default {

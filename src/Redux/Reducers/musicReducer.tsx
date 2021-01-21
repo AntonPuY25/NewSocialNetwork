@@ -1,4 +1,5 @@
-type TypeAddSongAC = ReturnType<typeof AddSongAC>
+import {TypeActionMusicReducer, TypeInitialStateMusic} from "../../Types/Types";
+
 export const AddSongAC = (song:string)=>{
     return {
         type:ADDSONG,
@@ -6,18 +7,11 @@ export const AddSongAC = (song:string)=>{
     } as const
 
 }
-const ADDSONG='ADD_SONG'
-export type TypeInitialStateMusic = {
-    songs:string[]
-}
-type TypeAction = TypeAddSongAC
-
+export const ADDSONG='ADD_SONG'
 let initialState: TypeInitialStateMusic = {
     songs: ['Take me back', 'Scars', 'Broken home'],
-
 }
-
-let MusicReducer = (state = initialState, action: TypeAction) => {
+let MusicReducer = (state = initialState, action: TypeActionMusicReducer) => {
   switch (action.type){
       case ADDSONG:
           return {

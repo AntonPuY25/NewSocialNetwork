@@ -1,17 +1,7 @@
 import React from "react";
 import s from "./users.module.css";
-import {User} from "./users";
 import {NavLink} from "react-router-dom";
-type TypeUserFunProps = {
-    functionTest: (num:number,check:boolean)=>void
-    arr:Array<number>
-    clickPage:(id:number) =>void
-    pageNumber:number
-    users:Array<User>
-    follow: (value: number) => void
-    unFollow: (value: number) => void
-
-}
+import {TypeUserFunProps} from "../../Types/Types";
 
 let UserFun:React.FC<TypeUserFunProps> = ({functionTest,arr,clickPage,pageNumber,users,
                                               follow,unFollow})=>{
@@ -32,7 +22,7 @@ let UserFun:React.FC<TypeUserFunProps> = ({functionTest,arr,clickPage,pageNumber
             return (<div className={s.people} key={i.id}>
                     <div><NavLink
                         to={`/profile/${i.id}`}> <img className={s.avaUser} alt={'Ava'}
-                                            src={i.photos.small ? i.photos.small : require(`../../Img/ava1.png`)}/></NavLink>
+                  src={i.photos.small ? i.photos.small : require(`../../Img/ava1.png`)}/></NavLink>
                        </div>
                     <div>{i.name}</div>
                     <div>{i.status}</div>

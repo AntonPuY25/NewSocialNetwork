@@ -1,27 +1,8 @@
-const ADD_TEXT_MESSAGE = "ADD_TEXT_MESSAGE";
-const ADD_MESSAGE = "ADD_MESSAGE";
-export type TypeDialog = {
-    id: number
-    name: string
-    address: number
-}
-export type TypeMessage = {
-    id: number
-    message: string
-}
-export type TypeMessageData = {
-    dataDialog: Array<TypeDialog>
-    dataMessage: Array<TypeMessage>
-}
-type TypeAddTextMessageAction = ReturnType<typeof DialogTextAC>
+import {TypeAction, TypeInitialStateDialogs} from "../../Types/Types";
 
-type TypeAddMessageAction = ReturnType<typeof DialogAC>
-export  type TypeAction = TypeAddTextMessageAction|TypeAddMessageAction
+export const ADD_TEXT_MESSAGE = "ADD_TEXT_MESSAGE";
+export const ADD_MESSAGE = "ADD_MESSAGE";
 
-export type TypeInitialStateDialogs = {
-    messageData: TypeMessageData
-    valueMessage: string
-}
 
 let initialState = {
     messageData: {

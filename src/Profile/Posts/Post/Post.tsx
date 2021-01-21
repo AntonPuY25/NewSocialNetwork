@@ -1,20 +1,7 @@
 import React from "react";
 import s from './post.module.css';
+import {PostTypeProps} from "../../../Types/Types";
 
-export type PostTypeProps = {
-    id:number
-    name:string
-    date:string
-    textPost:string
-    likes:number
-    /*
-
-   HEEEEEEEEEYYYY This is my comment
-    */
-    imgPost:string
-    fun?:()=>void
-
-}
 export default function Post(props:PostTypeProps){
 
     return(<div>

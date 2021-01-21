@@ -1,32 +1,7 @@
 import React from "react";
 import s from './users.module.css'
 import axios from 'axios';
-export type TypePhoto = {
-    small:null
-    large:null
-
-}
-export type User = {
-    name:string
-    id:number
-    uniqueUrlName:null
-    photos:TypePhoto
-    status:null
-    followed:boolean
-}
-export type TypeResponseData = {
-    items:Array<User>
-    totalCount: number
-    error: null
-}
-export type TypeUsersProps = {
-   users:Array<User>
-    follow:(value:number)=>void
-    unFollow:(value:number)=>void
-    setUsers:(value:Array<User>)=>void
-
-
-}
+import {TypeResponseData, TypeUsersProps} from "../../Types/Types";
 
 
 

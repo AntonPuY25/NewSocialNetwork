@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./dialogs.module.css";
-import {TypeMessage} from "../../Redux/Reducers/dealogsReducer";
+import {TypeMessage} from "../../Types/Types";
 
 type PropsDialog={
     message:Array<TypeMessage>

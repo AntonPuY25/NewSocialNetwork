@@ -1,5 +1,4 @@
 import {connect} from "react-redux";
-import {TypeStoreReducer} from "../../Redux/reduxStore";
 import {
     FollowAC,
     getUsersAC,
@@ -7,49 +6,29 @@ import {
     setPageAC, SetPreloaderAC,
     UnFollowAC
 } from "../../Redux/Reducers/usersReducer";
-import React from "react";
+import React, {Dispatch} from "react";
 import axios from "axios";
 import UserFun from "./userFunctional";
 import Preloader from "../Preloader/Preloader";
+import {
+    TypeActionUserReducer,
+    TypeMapDispatchToPropsUserContainer,
+    TypeMapStateToPropsUserContainer,
+    TypeResponseDataUsers,
+    TypeStoreReducer,
+    TypeUsersProps,
+    UserType
+} from "../../Types/Types";
 
-export type TypePhoto = {
-    small: null
-    large: null
 
-}
-export type User = {
-    name: string
-    id: number
-    uniqueUrlName: null
-    photos: TypePhoto
-    status: null
-    followed: boolean
-}
-export type TypeResponseData = {
-    items: Array<User>
-    totalCount: number
-    error: null
-}
-export type TypeUsersProps = {
-    users: Array<User>
-    follow: (value: number) => void
-    unFollow: (value: number) => void
-    setUsers: (value: Array<User>) => void
-    count: number
-    pageNumber: number
-    setPageNumber: (pageNumber: number) => void
-    countPAge: number
-    setCountPage: (countPage: number) => void
-    isPreloader:boolean
-    setPreloader:(prelaoder:boolean)=>void
-}
+
 
 class Users extends React.Component<TypeUsersProps,any> {
 
     arr: Array<number> = [];
     componentDidMount() {
         this.props.setPreloader(true)
-        axios.get<TypeResponseData>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.pageNumber}&count=${this.props.count}`)
+        axios.get<TypeResponseDataUsers>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.pageNumber}&count=${this.props.count}`)
             .then((response) => {
                 this.props.setUsers(response.data.items)
                 this.props.setPreloader(false)
@@ -64,7 +43,7 @@ class Users extends React.Component<TypeUsersProps,any> {
     clickPage = (id: number) => {
         this.props.setPreloader(true)
         this.props.setPageNumber(id)
-        axios.get<TypeResponseData>(`https://social-network.samuraijs.com/api/1.0/users?page=${id}&count=${this.props.count}`)
+        axios.get<TypeResponseDataUsers>(`https://social-network.samuraijs.com/api/1.0/users?page=${id}&count=${this.props.count}`)
             .then((response) => {
                 this.props.setUsers(response.data.items)
                 this.props.setPreloader(false)
@@ -104,7 +83,7 @@ class Users extends React.Component<TypeUsersProps,any> {
     }
 }
 
-const mapStateToProps = (state: TypeStoreReducer) => {
+const mapStateToProps = (state: TypeStoreReducer):TypeMapStateToPropsUserContainer => {
     return {
         users: state.usersPage.users,
         count: state.usersPage.count,
@@ -113,7 +92,7 @@ const mapStateToProps = (state: TypeStoreReducer) => {
         isPreloader:state.usersPage.isPreloader
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch<TypeActionUserReducer>):TypeMapDispatchToPropsUserContainer => {
     return {
         follow: (id: number) => {
             dispatch(FollowAC(id))
@@ -121,7 +100,7 @@ const mapDispatchToProps = (dispatch: any) => {
         unFollow: (id: number) => {
             dispatch(UnFollowAC(id))
         },
-        setUsers: (arr: Array<User>) => {
+        setUsers: (arr: Array<UserType>) => {
             dispatch(getUsersAC(arr))
         },
         setPageNumber: (pageNumber: number) => {
@@ -137,6 +116,7 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-const UserConteiner = connect(mapStateToProps, mapDispatchToProps)(Users)
+const UserConteiner = connect<TypeMapStateToPropsUserContainer,TypeMapDispatchToPropsUserContainer,
+    {},TypeStoreReducer>(mapStateToProps, mapDispatchToProps)(Users)
 
 export default UserConteiner;

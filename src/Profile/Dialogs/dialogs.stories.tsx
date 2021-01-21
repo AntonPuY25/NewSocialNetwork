@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import {Story, Meta} from '@storybook/react/types-6-0';
 import s from "./dialogs.module.css";
-import Dialog, {TypeDialogData} from "./dialog";
+import Dialog from "./dialog";
+import {TypeDialogData} from "../../Types/Types";
 
 
 export default {

@@ -1,33 +1,18 @@
-import {TypeResponseDataProfile} from "../../Profile/profileConteiner";
+import {
+    PostType, TypeActionProfileReducer,
+    TypeAddPostAction, TypeAddPostTextAction,
+    TypeInitialStateProfile,
+    TypePreloaderProfile,
+    TypeProfileData,
+    TypeResponseDataProfile
+} from "../../Types/Types";
 
-const ADD_TEXT_POST = "ADD_TEXT_POST";
-const ADD_POST = "ADD_POST";
-const SET_PROFILE = "SET_PROFILE"
-const SET_PRELOADER = "SET_PRELOADER"
-export type PostType = {
-    id: number
-    name: string
-    date: string
-    textPost: string
-    likes: number
-    imgPost: string
 
-}
-export type TypeAddPostAction = ReturnType<typeof PostAC>;
-export type TypeAddPostTextAction = ReturnType<typeof PostTextAC>
-export type TypeProfileData = ReturnType<typeof setProfileDataAC>
-export type TypePreloaderProfile = ReturnType<typeof setPreloaderAC>
+export const ADD_TEXT_POST = "ADD_TEXT_POST";
+export const ADD_POST = "ADD_POST";
+export const SET_PROFILE = "SET_PROFILE"
+export const SET_PRELOADER = "SET_PRELOADER"
 
-export  type TypeAction = TypeAddPostAction | TypeAddPostTextAction | TypeProfileData | TypePreloaderProfile;
-export type TypePostData = {
-    dataPost: Array<PostType>
-}
-export type TypeInitialStateProfile = {
-    postData: TypePostData
-    valueTextPost: string
-    profile: TypeResponseDataProfile
-    isPreloader: boolean
-}
 let initialState = {
     postData: {
         dataPost: [
@@ -58,7 +43,7 @@ let initialState = {
 }
 
 
-let profileReducer = (state: TypeInitialStateProfile = initialState, action: TypeAction): TypeInitialStateProfile => {
+let profileReducer = (state: TypeInitialStateProfile = initialState, action: TypeActionProfileReducer): TypeInitialStateProfile => {
     switch (action.type) {
         case ADD_TEXT_POST:
             return {
@@ -102,28 +87,28 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
             return state
     }
 }
-export const PostTextAC = (text: string) => {
+export const PostTextAC = (text: string):TypeAddPostTextAction => {
     return {
         type: ADD_TEXT_POST,
         text
 
     } as const
 }
-export const PostAC = () => {
+export const PostAC = ():TypeAddPostAction => {
     return {
         type: ADD_POST
-    } as const
+    }
 }
-export const setProfileDataAC = (data: TypeResponseDataProfile) => {
+export const setProfileDataAC = (data: TypeResponseDataProfile): TypeProfileData => {
     return {
         type: SET_PROFILE,
         data
-    } as const
+    }
 }
-export const setPreloaderAC = (preloader: boolean) => {
+export const setPreloaderAC = (preloader: boolean): TypePreloaderProfile => {
     return {
         type: SET_PRELOADER,
         preloader
-    } as const
+    }
 }
 export default profileReducer;

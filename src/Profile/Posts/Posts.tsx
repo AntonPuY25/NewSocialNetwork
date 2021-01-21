@@ -1,13 +1,8 @@
 import React, {ChangeEvent} from "react";
 import s from './posts.module.css';
 import Post from "./Post/Post";
-import {PostType} from "../../Redux/Reducers/profileReducer";
-type PropsType = {
-    valueTextPost:string
-    dataPost: Array<PostType>
-    addPost:()=>void
-    onChangePostText:(text:string)=>void
-}
+import { PropsType} from "../../Types/Types";
+
 
 
 export default function Posts(props:PropsType) {

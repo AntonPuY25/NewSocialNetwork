@@ -1,15 +1,21 @@
 import {PostAC, PostTextAC} from "../../Redux/Reducers/profileReducer";
 import Posts from "./Posts";
 import {connect} from "react-redux";
-import {TypeStoreReducer} from "../../Redux/reduxStore";
+import {
+    TypeActionProfileReducer,
+    TypeMapDispatchToPropsPostConteiner,
+    TypeMapStateToPropsPostConteiner,
+    TypeStoreReducer
+} from "../../Types/Types";
+import {Dispatch} from "react";
 
-let mapStateToProps = (state: TypeStoreReducer) => {
+let mapStateToProps = (state: TypeStoreReducer):TypeMapStateToPropsPostConteiner => {
     return {
         dataPost: state.profilePage.postData.dataPost,
         valueTextPost: state.profilePage.valueTextPost
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch<TypeActionProfileReducer>):TypeMapDispatchToPropsPostConteiner => {
     return {
         addPost: () => {
             dispatch(PostAC())
@@ -19,6 +25,7 @@ let mapDispatchToProps = (dispatch: any) => {
         }
     }
 }
-let PostsConteiner = connect(mapStateToProps, mapDispatchToProps)(Posts);
+let PostsConteiner = connect<TypeMapStateToPropsPostConteiner,TypeMapDispatchToPropsPostConteiner,
+    {},TypeStoreReducer>(mapStateToProps, mapDispatchToProps)(Posts);
 
 export default PostsConteiner;

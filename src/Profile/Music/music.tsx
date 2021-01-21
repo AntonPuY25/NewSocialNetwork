@@ -1,9 +1,7 @@
 import React, {ChangeEvent, useState,KeyboardEvent} from "react";
+import {TypePropsMusic} from "../../Types/Types";
 
-type TypePropsMusic = {
-    songs: string[]
-    AddSongAC:(song:string)=>void
-}
+
 
 const Music: React.FC<TypePropsMusic> = ({songs,AddSongAC}) => {
     let [textSong, setTextSong] = useState<string>("")

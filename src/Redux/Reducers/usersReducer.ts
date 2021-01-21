@@ -1,38 +1,13 @@
-import {User} from "../../Profile/Users/users";
+import {
+    TypeActionUserReducer,
+    TypeActionFollow, TypeActionGetUsers,
+    TypeActionSetCountPage,
+    TypeActionSetPage,
+    TypeActionSetPreloader, TypeActionUnFollow,
+    TypeInitialStateUsers, User
+} from "../../Types/Types";
 
-export type TypeInitialStateUsers = {
-    users: Array<User>
-    count: number
-    pageNumber: number
-    countPage: number
-    isPreloader: boolean
-}
-type TypeActionFollow = {
-    type: typeof FOLLOW
-    id: number
-}
-type TypeActionUnFollow = {
-    type: typeof UNFOLLOW
-    id: number
-}
-type TypeActionSetCountPage = {
-    type: typeof SETCOUNTPAGE
-    countPage: number
-}
-type TypeActionSetPage = {
-    type: typeof SETPAGENUMBER
-    pageNumber: number
-}
-type TypeActionGetUsers = {
-    type: typeof GETUSERS
-    arr: Array<User>
-}
-type TypeActionSetPreloader = {
-    type: typeof SetPreloader
-    preloader: boolean
-}
-export  type TypeAction = TypeActionFollow | TypeActionUnFollow | TypeActionSetCountPage
-    | TypeActionSetPage | TypeActionGetUsers | TypeActionSetPreloader;
+
 
 let initialState: TypeInitialStateUsers = {
     users: [],
@@ -40,15 +15,13 @@ let initialState: TypeInitialStateUsers = {
     count: 10,
     countPage: 10,
     isPreloader: false
-
-
 }
-const SetPreloader = "SET_PRELOADER";
-const FOLLOW = "FOLLOW";
-const SETCOUNTPAGE = "SET_COUNT_PAGE";
-const UNFOLLOW = "UN_FOLLOW";
-const GETUSERS = "GET_USERS";
-const SETPAGENUMBER = "SET_PAGE_NUMBER";
+export const SetPreloader = "SET_PRELOADER";
+export const FOLLOW = "FOLLOW";
+export const SETCOUNTPAGE = "SET_COUNT_PAGE";
+export const UNFOLLOW = "UN_FOLLOW";
+export const GETUSERS = "GET_USERS";
+export const SETPAGENUMBER = "SET_PAGE_NUMBER";
 
 export const setCountPAgeAC = (countPage: number): TypeActionSetCountPage => {
     return {
@@ -68,7 +41,7 @@ export const UnFollowAC = (id: number): TypeActionUnFollow => ({type: UNFOLLOW, 
 export const getUsersAC = (arr: Array<User>): TypeActionGetUsers => ({type: GETUSERS, arr: arr})
 
 
-let usersReducer = (state: TypeInitialStateUsers = initialState, action: TypeAction): TypeInitialStateUsers => {
+let usersReducer = (state: TypeInitialStateUsers = initialState, action: TypeActionUserReducer): TypeInitialStateUsers => {
     switch (action.type) {
         case FOLLOW:
             return {

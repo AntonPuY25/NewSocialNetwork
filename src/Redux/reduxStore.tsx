@@ -1,16 +1,10 @@
 import {createStore, combineReducers} from 'redux';
-import dialogsReducer, {TypeInitialStateDialogs} from "./Reducers/dealogsReducer";
-import profileReducer, {TypeInitialStateProfile} from "./Reducers/profileReducer";
-import usersReducer, {TypeInitialStateUsers} from "./Reducers/usersReducer";
-import MusicReducer, {TypeInitialStateMusic} from "./Reducers/musicReducer";
+import dialogsReducer from "./Reducers/dealogsReducer";
+import profileReducer from "./Reducers/profileReducer";
+import usersReducer from "./Reducers/usersReducer";
+import MusicReducer from "./Reducers/musicReducer";
 
-export type TypeStoreReducer = {
-    profilePage: TypeInitialStateProfile
-    dialogsPage: TypeInitialStateDialogs
-    usersPage:TypeInitialStateUsers
-    musicPage:TypeInitialStateMusic
 
-}
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,

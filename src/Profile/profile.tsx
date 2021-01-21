@@ -1,7 +1,8 @@
 import React from "react";
 import s from './profile.module.css';
 import PostsConteiner from "./Posts/PostsConteiner";
-import {TypeResponseDataProfile} from "./profileConteiner";
+import {TypeResponseDataProfile} from "../Types/Types";
+
 
 type TypePropsProfile = {
     profile: TypeResponseDataProfile
