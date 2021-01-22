@@ -43,16 +43,10 @@ test('Set_Page_User',()=>{
     let action=setPageAC(55);
     let newState = usersReducer (initialState, action)
     expect(newState.pageNumber).toBe(55)
-    expect(newState.users.length<400).toBe(true)
+    expect(newState.users.length<5).toBe(true)
 })
 test('Get_USERS',()=>{
-    let action ;
-    axios.get<TypeResponseDataUsers>
-    (`https://social-network.samuraijs.com/api/1.0/users?page=2&count=10`)
-        .then((response) => {
-            getUsersAC( response.data.items)
-        })
-    action = getUsersAC([{
+    let action =getUsersAC([{
         name:"string",
         id:1,
         uniqueUrlName:null,

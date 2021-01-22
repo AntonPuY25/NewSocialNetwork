@@ -57,7 +57,7 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
                 name: 'Anton',
                 date: '21.12.2020',
                 textPost: state.valueTextPost,
-                likes: 22,
+                likes: 0,
                 imgPost: 'post1',
 
             }
