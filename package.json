@@ -1,6 +1,6 @@
 {
+  "homepage": "https://antonpuy25.github.io/NewSocialNetwork/",
   "name": "it-incubator-todolist-ts",
-  "homepage": "https://AntonPuY25.github.io/NewSocialNetwork",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
