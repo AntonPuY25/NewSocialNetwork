@@ -4,7 +4,7 @@ import {
     SET_PRELOADER,
     SET_PROFILE
 } from "../Redux/Reducers/profileReducer";
-import {DialogAC, DialogTextAC} from "../Redux/Reducers/dealogsReducer";
+import {DeleteMessageAC, DialogAC, DialogTextAC} from "../Redux/Reducers/dealogsReducer";
 import {
     FOLLOW,
     GETUSERS,
@@ -260,7 +260,8 @@ export type TypeMessageData = {
 }
 export type TypeAddTextMessageAction = ReturnType<typeof DialogTextAC>
 export type TypeAddMessageAction = ReturnType<typeof DialogAC>
-export type TypeAction = TypeAddTextMessageAction | TypeAddMessageAction
+export type TypeDeleteMessageAction = ReturnType<typeof DeleteMessageAC>
+export type TypeAction = TypeAddTextMessageAction | TypeAddMessageAction|TypeDeleteMessageAction
 export type TypeInitialStateDialogs = {
     messageData: TypeMessageData
     valueMessage: string

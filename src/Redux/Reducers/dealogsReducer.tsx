@@ -2,6 +2,7 @@ import {TypeAction, TypeInitialStateDialogs} from "../../Types/Types";
 
 export const ADD_TEXT_MESSAGE = "ADD_TEXT_MESSAGE";
 export const ADD_MESSAGE = "ADD_MESSAGE";
+export const DELETE_MESSAGE = "DELETE_MESSAGE";
 
 
 let initialState = {
@@ -50,7 +51,7 @@ let initialState = {
     },
     valueMessage: "",
 }
-let dialogsReducer = (state: TypeInitialStateDialogs = initialState, action: TypeAction):TypeInitialStateDialogs => {
+export let dialogsReducer = (state: TypeInitialStateDialogs = initialState, action: TypeAction):TypeInitialStateDialogs => {
     switch (action.type) {
         case ADD_TEXT_MESSAGE:
             return {
@@ -71,6 +72,17 @@ let dialogsReducer = (state: TypeInitialStateDialogs = initialState, action: Typ
                 },
                 valueMessage:""
             }
+        case "DELETE_MESSAGE":
+            return {
+                ...state,
+                messageData:{
+                    ...state.messageData,
+                    dataMessage:[...state.messageData.dataMessage.filter(mes=>{
+                        return mes.id!==action.id
+                    })]
+                }
+
+            }
         default:
             return state
     }
@@ -88,4 +100,11 @@ export const DialogAC= ()=>{
         type:ADD_MESSAGE
     } as const
 }
+export const DeleteMessageAC = (id:number)=> {
+    return {
+        type: DELETE_MESSAGE,
+        id
+    } as const
+}
+
 export default dialogsReducer;
