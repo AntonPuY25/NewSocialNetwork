@@ -23,13 +23,15 @@
 .nameMyPost {
     font-family: bold;
     font-size: 20px;
+
 }
 
 .textareaPost {
-    width: 30%;
-    height: 130px;
+  padding-top: 20px;
+
 }
 
 .butPost {
     padding: 7px;
+
 }

@@ -2,20 +2,22 @@ import React from "react";
 import s from "./users.module.css";
 import {NavLink} from "react-router-dom";
 import {TypeUserFunProps} from "../../Types/Types";
-
+import {Button} from "@material-ui/core";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 let UserFun:React.FC<TypeUserFunProps> = ({functionTest,arr,clickPage,pageNumber,users,
                                               follow,unFollow})=>{
 
     return <div>
-        <button onClick={()=>{functionTest(10,false)}}>{`<`}</button>
+        <Button   variant={"contained"} onClick={()=>{functionTest(10,false)}}><ArrowBackIosIcon fontSize={"default"}/></Button>
         {arr.map((i, id) => {
 
-            return <span onClick={() => {
+            return <span  onClick={() => {
                 clickPage(i)
             }} key={id}  className={pageNumber  ===i ? s.pageNumber : "" + s.test}>{i}</span>
 
         })}
-        <button onClick={()=>{functionTest(10,true)}}>{`>`}</button>
+        <Button variant={"contained"} onClick={()=>{functionTest(10,true)}}><KeyboardArrowRightIcon fontSize={"large"}/></Button>
 
 
         {users.map(i => {
@@ -27,12 +29,12 @@ let UserFun:React.FC<TypeUserFunProps> = ({functionTest,arr,clickPage,pageNumber
                     <div>{i.name}</div>
                     <div>{i.status}</div>
 
-                    {i.followed === true ? <button onClick={() => {
+                    {i.followed === true ? <Button variant={"contained"} onClick={() => {
                             follow(i.id)
-                        }}>Follow</button>
-                        : <button onClick={() => {
+                        }}>Follow</Button>
+                        : <Button  variant={"contained"} onClick={() => {
                             unFollow(i.id)
-                        }}>UnFollow</button>}
+                        }}>UnFollow</Button>}
 
                 </div>
 

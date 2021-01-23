@@ -7,9 +7,10 @@
 }
 .pageNumber {
     font-weight: bold;
+    padding: 5px;
 }
 .test {
-
+    padding:5px;
     cursor: pointer;
 
 }

@@ -6,3 +6,9 @@
     padding: 0.5em;
     float: left;
 }
+.login{
+    display: block;
+    position: relative;
+    color:white;
+    text-align: right;
+}

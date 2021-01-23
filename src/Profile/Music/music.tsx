@@ -1,9 +1,10 @@
-import React, {ChangeEvent, useState,KeyboardEvent} from "react";
+import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 import {TypePropsMusic} from "../../Types/Types";
+import {Button, TextField} from "@material-ui/core";
+import s from './music.module.css'
 
 
-
-const Music: React.FC<TypePropsMusic> = ({songs,AddSongAC}) => {
+const Music: React.FC<TypePropsMusic> = ({songs, AddSongAC}) => {
     let [textSong, setTextSong] = useState<string>("")
     let changeTextSong = (event: ChangeEvent<HTMLInputElement>) => {
         setTextSong(event.currentTarget.value)
@@ -12,8 +13,8 @@ const Music: React.FC<TypePropsMusic> = ({songs,AddSongAC}) => {
         AddSongAC(textSong)
         setTextSong("")
     }
-    const onKeyHandlerInput = (event:KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter'){
+    const onKeyHandlerInput = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
             AddSongAC(textSong)
             setTextSong("")
         }
@@ -25,15 +26,17 @@ const Music: React.FC<TypePropsMusic> = ({songs,AddSongAC}) => {
             })}
         </div>
         <div>
-            <div>
-                <input onKeyPress={onKeyHandlerInput}
-                       value={textSong}
-                       onChange={changeTextSong}
-                autoFocus/>
+            <div className={s.inputText}>
+                <TextField defaultValue="Default Value"
+                           multiline variant="outlined" onKeyPress={onKeyHandlerInput}
+                           value={textSong}
+                           label={'Enter Message'}
+                           onChange={changeTextSong}
+                           autoFocus/>
 
             </div>
             <div>
-                <button onClick={addSong}>Add Song</button>
+                <Button variant={"contained"} color={"default"} onClick={addSong}>Add Song</Button>
             </div>
         </div>
     </div>

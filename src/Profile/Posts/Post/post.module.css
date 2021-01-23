@@ -1,28 +1,25 @@
 .post
 {
-    width: 800px;
     height: 450px;
     margin-top: 15px;
     margin-bottom: 10px;
     padding: 10px;
-    background-color: white;
+    background-color: #F0F2F7;
 }
 
 .miniAva img
 {
     float: left;
-
     width: 50px;
     height: 50px;
     margin: 10px;
-
     border-radius: 50px;
 }
 
 .miniName
 {
+    font-family: Elephant;
     font-size: 20px;
-
     position: relative;
     top: 25px;
 }
@@ -34,7 +31,9 @@
 
     text-align: right;
 }
-
+.postImg{
+    font-size: 15px;
+}
 .postImg img
 {
     width: 100%;

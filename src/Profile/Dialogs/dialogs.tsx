@@ -3,6 +3,7 @@ import s from './dialogs.module.css';
 import Dialog from "./dialog";
 import Message from "./message";
 import {TypeDialogs} from "../../Types/Types";
+import {Button, TextField} from "@material-ui/core";
 
 
 export default function Dialogs(props: TypeDialogs) {
@@ -12,7 +13,7 @@ export default function Dialogs(props: TypeDialogs) {
 
     }
     let addMessages = () => {
-         props.addMessage()
+        props.addMessage()
 
     }
 
@@ -25,9 +26,13 @@ export default function Dialogs(props: TypeDialogs) {
             <Message message={props.messageData.dataMessage}/>
             <hr/>
             <div className={s.nameMyPost}>New Message</div>
-            <textarea value={props.valueMessage} onChange={onChangeMessage} className={s.textareaPost}/>
+            <div className={s.textareaPost}><TextField defaultValue="Default Value"
+                            multiline variant="outlined" value={props.valueMessage} label={'Enter Message'}
+                            onChange={onChangeMessage}/></div>
+
             <div>
-                <button onClick={addMessages} className={s.butPost}>Send Message</button>
+                <Button variant={"contained"} color={"default"} onClick={addMessages} className={s.butPost}>Send
+                    Message</Button>
             </div>
         </div>
 

@@ -1,12 +1,4 @@
-.nameMyPost{
-    font-family: bold;
-    font-size: 20px;
-
-}
-.textareaPost{
-    width:30%;
-    height: 130px;
-}
-.butPost{
-    padding: 7px;
+.test{
+    padding: 20px;
+    width: 80%;
 }

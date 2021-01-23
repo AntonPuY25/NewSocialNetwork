@@ -6,7 +6,7 @@
     grid-template-areas: 'header header header'
     'nav aside aside'
     'footer footer footer';
-    grid-template-rows: 60px 1fr 30px;
+    grid-template-rows: 60px 1fr 20px;
     grid-template-columns: 2fr 10fr;
 }
 

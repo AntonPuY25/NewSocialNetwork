@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import s from './posts.module.css';
 import Post from "./Post/Post";
 import { PropsType} from "../../Types/Types";
+import {Button, Container, TextField} from "@material-ui/core";
 
 
 
@@ -20,11 +21,19 @@ export default function Posts(props:PropsType) {
 
 
     }
-    return (<div>
-       <div className={s.nameMyPost} >My Posts</div>
-        <textarea value={props.valueTextPost} onChange={onChangePost} className={s.textareaPost}/>
-       <div> <button onClick={addPosts} className={s.butPost}>Add Post</button></div>
+    return (<div className={s.test}>
+        <Container >
 
-        {posts}
+
+                <TextField   value={props.valueTextPost} onChange={onChangePost}  id="filled-textarea" label="Enter Text" multiline   variant="outlined" />
+                <div> <Button variant={"contained"}  onClick={addPosts} color={"default"} >Add Post</Button></div>
+
+
+            {posts}
+
+        </Container>
+
+
+
     </div>)
 }
