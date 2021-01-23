@@ -14,6 +14,7 @@ import {
     UNFOLLOW
 } from "../Redux/Reducers/usersReducer";
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
+import {SET_AUTH_DATA, SetAuthDataAC, SetAuthIsAuthTestAC} from "../Redux/Reducers/authReducer";
 //PROFILE_CONTAINER
 export type TypeContactsDataProfile = {
     facebook: string,
@@ -307,11 +308,49 @@ export type TypePropsMusic = {
     AddSongAC:(song:string)=>void
 }
 
+//AUTH_REDUCER
+export type TypeResponseDataData = {
+    id:number
+    email:string
+    login:string
+}
+export type TypeResponseDataAuth = {
+    data:TypeResponseDataData
+    fieldsErrors: []
+    messages: []
+    resultCode:number
+}
+export type TypeInitialStateAuth = {
+    data: TypeResponseDataData
+    isAuth:boolean
+}
+export type TypeActionSetAuthData = {
+    type: typeof SET_AUTH_DATA
+    data:TypeResponseDataData
+}
+export type TypeActionSetIsAuth = ReturnType<typeof SetAuthIsAuthTestAC> ;
+export type TypeActionAuth =  TypeActionSetAuthData|TypeActionSetIsAuth
+
+//HEADER
+export type TypePropsHeader = {
+    isAuth:boolean
+    email:string
+
+}
+export type TypePropsHeaderComponent = {
+    isAuth:boolean
+    SetAuthDataAC:(data:TypeResponseDataData)=>void
+    SetAuthIsAuthTestAC:(isAuth:boolean)=>void
+    email:any
+}
+
+
 //REDUX_STORE
 export type TypeStoreReducer = {
     profilePage: TypeInitialStateProfile
     dialogsPage: TypeInitialStateDialogs
     usersPage: TypeInitialStateUsers
     musicPage: TypeInitialStateMusic
+    authPage:TypeInitialStateAuth
 
 }

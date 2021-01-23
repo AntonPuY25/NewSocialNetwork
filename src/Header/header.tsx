@@ -1,8 +1,9 @@
 import React from "react";
 import s from './header.module.css';
 import {AppBar, Button, IconButton, Toolbar} from "@material-ui/core";
+import {TypePropsHeader} from "../Types/Types";
 
-export default function Header(){
+const Header:React.FC<TypePropsHeader>=({isAuth,email})=>{
     return(<div className={s.header} >
         <AppBar position="static" color={"transparent"}>
             <Toolbar>
@@ -12,13 +13,15 @@ export default function Header(){
 
                     </div>
                 </IconButton>
-
-                    <Button variant={"text"} ><div className={s.login}>Login</div></Button>
+                {isAuth ? <div className={s.email}>{email}</div>: <Button variant={"text"} >
+                    <div className={s.login}>Login</div></Button>}
 
             </Toolbar>
         </AppBar>
 
 
 
+
     </div>)
 }
+export default Header

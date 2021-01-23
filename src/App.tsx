@@ -3,13 +3,13 @@ import {BrowserRouter, Route} from "react-router-dom";
 import './App.css';
 import Footer from "./Footer/footer";
 import Menu from "./Menu/menu";
-import Header from "./Header/header";
 import DialogsConteiner from "./Profile/Dialogs/dialogsConteiner";
 import News from "./Profile/News/news";
 import Settings from "./Profile/Setings/settings";
 import UserConteiner from "./Profile/Users/usersConteiner";
 import MusicConteiner from "./Profile/Music/musicConteiner";
 import ProfileConteiner from "./Profile/profileConteiner";
+import HeaderComponent from "./Header/headerComponent";
 
 function  App() {
 
@@ -17,7 +17,7 @@ function  App() {
         <BrowserRouter>
             <div className="App">
                 <header className='header'>
-                    <Header/>
+                    <HeaderComponent/>
                 </header>
                 <nav className='nav'>
                     <Menu/>
