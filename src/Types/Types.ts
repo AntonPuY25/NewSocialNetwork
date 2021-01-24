@@ -14,7 +14,7 @@ import {
     UNFOLLOW
 } from "../Redux/Reducers/usersReducer";
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
-import {SET_AUTH_DATA, SetAuthDataAC, SetAuthIsAuthTestAC} from "../Redux/Reducers/authReducer";
+import {SET_AUTH_DATA, SetAuthIsAuthTestAC} from "../Redux/Reducers/authReducer";
 //PROFILE_CONTAINER
 export type TypeContactsDataProfile = {
     facebook: string,
@@ -101,31 +101,31 @@ export type TypeInitialStateProfile = {
 
 //POST
 export type PostTypeProps = {
-    id:number
-    name:string
-    date:string
-    textPost:string
-    likes:number
-    imgPost:string
-    fun?:()=>void
+    id: number
+    name: string
+    date: string
+    textPost: string
+    likes: number
+    imgPost: string
+    fun?: () => void
 
 }
 //POSTS
 export type PropsType = {
-    valueTextPost:string
+    valueTextPost: string
     dataPost: Array<PostType>
-    addPost:()=>void
-    onChangePostText:(text:string)=>void
+    addPost: () => void
+    onChangePostText: (text: string) => void
 }
 //POST_CONTEINER
-export type TypeMapStateToPropsPostConteiner={
-    dataPost:Array<PostType>
-    valueTextPost:string
+export type TypeMapStateToPropsPostConteiner = {
+    dataPost: Array<PostType>
+    valueTextPost: string
 
 }
 export type TypeMapDispatchToPropsPostConteiner = {
-    addPost: () =>void
-    onChangePostText: (text: string) =>void
+    addPost: () => void
+    onChangePostText: (text: string) => void
 }
 
 
@@ -178,16 +178,22 @@ export type TypeMapDispatchToPropsUserContainer = {
 }
 //USER_FUNCTIONAL
 export type TypeUserFunProps = {
-    functionTest: (num:number,check:boolean)=>void
-    arr:Array<number>
-    clickPage:(id:number) =>void
-    pageNumber:number
-    users:Array<User>
+    functionTest: (num: number, check: boolean) => void
+    arr: Array<number>
+    clickPage: (id: number) => void
+    pageNumber: number
+    users: Array<User>
     follow: (value: number) => void
     unFollow: (value: number) => void
 
 }
+export type TypeUserResponseData = {
+    data: {}
+    fieldsErrors: []
+    messages: []
+    resultCode: number
 
+}
 
 //USER_REDUCER
 export type TypeInitialStateUsers = {
@@ -225,24 +231,23 @@ export  type TypeActionUserReducer = TypeActionFollow | TypeActionUnFollow | Typ
     | TypeActionSetPage | TypeActionGetUsers | TypeActionSetPreloader;
 //USERS
 export type TypePhotoUsers = {
-    small:null
-    large:null
+    small: null
+    large: null
 
 }
 export type UserType = {
-    name:string
-    id:number
-    uniqueUrlName:null
-    photos:TypePhotoUsers
-    status:null
-    followed:boolean
+    name: string
+    id: number
+    uniqueUrlName: null
+    photos: TypePhotoUsers
+    status: null
+    followed: boolean
 }
 export type TypeResponseDataUsers = {
-    items:Array<UserType>
+    items: Array<UserType>
     totalCount: number
     error: null
 }
-
 
 
 //DIALOGS_REDUCER
@@ -262,88 +267,101 @@ export type TypeMessageData = {
 export type TypeAddTextMessageAction = ReturnType<typeof DialogTextAC>
 export type TypeAddMessageAction = ReturnType<typeof DialogAC>
 export type TypeDeleteMessageAction = ReturnType<typeof DeleteMessageAC>
-export type TypeAction = TypeAddTextMessageAction | TypeAddMessageAction|TypeDeleteMessageAction
+export type TypeAction = TypeAddTextMessageAction | TypeAddMessageAction | TypeDeleteMessageAction
 export type TypeInitialStateDialogs = {
     messageData: TypeMessageData
     valueMessage: string
 }
 //DIALOGS_CONTEINER
 export type TypeMapDispatchToProps = {
-    addMessage:()=>void
-    onChangeMessageText:(text:string)=>void
+    addMessage: () => void
+    onChangeMessageText: (text: string) => void
 }
 export type TypeMapStateToProps = {
-    valueMessage:string
-    messageData:TypeMessageData
+    valueMessage: string
+    messageData: TypeMessageData
 }
 //DIALOGS
 export type TypeDialogs = {
-    onChangeMessageText:(text:string)=>void
-    addMessage:()=>void
-    messageData:TypeMessageData
-    valueMessage:string
+    onChangeMessageText: (text: string) => void
+    addMessage: () => void
+    messageData: TypeMessageData
+    valueMessage: string
 }
 //DIALOG
 export type TypeDialogData = {
-    dataDialog:Array<TypeDialog>
+    dataDialog: Array<TypeDialog>
 }
 
 
 //MUSIC_REDUCER
 export type TypeInitialStateMusic = {
-    songs:string[]
+    songs: string[]
 }
 export type TypeActionMusicReducer = TypeAddSongAC
 export type TypeAddSongAC = ReturnType<typeof AddSongAC>
 //MUSIC_CONTEINER
 export type TypeMapStateToPropsMusicConteiner = {
-    songs:string[]
+    songs: string[]
 }
 export type TypeMapDispatchToPropsMusicConteiner = {
-    AddSongAC:(song:string)=>void
+    AddSongAC: (song: string) => void
 }
 //MUSIC
 export type TypePropsMusic = {
     songs: string[]
-    AddSongAC:(song:string)=>void
+    AddSongAC: (song: string) => void
 }
 
 //AUTH_REDUCER
 export type TypeResponseDataData = {
-    id:number
-    email:string
-    login:string
+    id: number
+    email: string
+    login: string
 }
 export type TypeResponseDataAuth = {
-    data:TypeResponseDataData
+    data: TypeResponseDataData
     fieldsErrors: []
     messages: []
-    resultCode:number
+    resultCode: number
 }
 export type TypeInitialStateAuth = {
     data: TypeResponseDataData
-    isAuth:boolean
+    isAuth: boolean
 }
 export type TypeActionSetAuthData = {
     type: typeof SET_AUTH_DATA
-    data:TypeResponseDataData
+    data: TypeResponseDataData
 }
-export type TypeActionSetIsAuth = ReturnType<typeof SetAuthIsAuthTestAC> ;
-export type TypeActionAuth =  TypeActionSetAuthData|TypeActionSetIsAuth
+export type TypeActionSetIsAuth = ReturnType<typeof SetAuthIsAuthTestAC>;
+export type TypeActionAuth = TypeActionSetAuthData | TypeActionSetIsAuth
 
 //HEADER
 export type TypePropsHeader = {
-    isAuth:boolean
-    email:string
+    isAuth: boolean
+    email: string
 
 }
 export type TypePropsHeaderComponent = {
-    isAuth:boolean
-    SetAuthDataAC:(data:TypeResponseDataData)=>void
-    SetAuthIsAuthTestAC:(isAuth:boolean)=>void
-    email:any
+    isAuth: boolean
+    SetAuthDataAC: (data: TypeResponseDataData) => void
+    SetAuthIsAuthTestAC: (isAuth: boolean) => void
+    email: any
 }
 
+//DALL
+export type TypeGetUsersApi = {
+    getUsersPages: (pageNumber: number, count: number) => any
+    getUsersPageNumber: (pageId: number, count: number) => any
+    followUsersApi: (id: number) => any
+    UnfollowUsersApi: (id: number) => any
+}
+export type TypeGetAuthApi = {
+    checkLogin: () => any
+}
+export type TypeGetProfileApi = {
+    getProfile: (userId: string) => any
+}
 
 //REDUX_STORE
 export type TypeStoreReducer = {
@@ -351,6 +369,6 @@ export type TypeStoreReducer = {
     dialogsPage: TypeInitialStateDialogs
     usersPage: TypeInitialStateUsers
     musicPage: TypeInitialStateMusic
-    authPage:TypeInitialStateAuth
+    authPage: TypeInitialStateAuth
 
 }

@@ -1,11 +1,11 @@
 import React from "react";
 import s from "./users.module.css";
 import {NavLink} from "react-router-dom";
-import {TypeUserFunProps} from "../../Types/Types";
+import {TypeUserFunProps, TypeUserResponseData} from "../../Types/Types";
 import {Button} from "@material-ui/core";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import axios from "axios";
+import {getUsersApi} from "../../DALL/api";
 
 let UserFun: React.FC<TypeUserFunProps> = ({
                                                functionTest, arr, clickPage, pageNumber, users,
@@ -38,33 +38,20 @@ let UserFun: React.FC<TypeUserFunProps> = ({
                     <div>{i.status}</div>
 
                     {i.followed === true ? <Button variant={"contained"} onClick={() => {
-                            axios.delete<any>(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}`,
-                                {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '9943ad9b-2b43-46f7-bddd-09fd21e745ce'
-                                    }
-                                })
-                                .then((response) => {
-                                    if (response.data.resultCode === 0) {
-                                        follow(i.id)
-                                    }
-                                })
+                            getUsersApi.followUsersApi(i.id).then((data: TypeUserResponseData) => {
+                                if (data.resultCode === 0) {
+                                    follow(i.id)
+                                }
+                            })
 
                         }}>Follow</Button>
                         : <Button variant={"contained"} onClick={() => {
-                            axios.post<any>(`https://social-network.samuraijs.com/api/1.0/follow/${i.id}`, {},
-                                {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '9943ad9b-2b43-46f7-bddd-09fd21e745ce'
-                                    }
-                                })
-                                .then((response) => {
-                                    if (response.data.resultCode === 0) {
-                                        unFollow(i.id)
-                                    }
-                                })
+
+                            getUsersApi.UnfollowUsersApi(i.id).then((data: TypeUserResponseData) => {
+                                if (data.resultCode === 0) {
+                                    unFollow(i.id)
+                                }
+                            })
                         }}>UnFollow</Button>}
 
                 </div>

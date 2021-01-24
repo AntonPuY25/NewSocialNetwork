@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import Profile from "./profile";
 import {connect} from "react-redux";
-import axios from "axios";
 import {setPreloaderAC, setProfileDataAC} from "../Redux/Reducers/profileReducer";
 import Preloader from "./Preloader/Preloader";
 import {withRouter} from 'react-router-dom';
@@ -11,6 +10,7 @@ import {
     TypeProfileProps,
     TypeResponseDataProfile, TypeStoreReducer
 } from "../Types/Types";
+import {getProfileApi} from "../DALL/api";
 
 
 export class ProfileConteiner extends Component<TypeProfileProps & RouteComponentProps<PathParamsType>> {
@@ -19,10 +19,8 @@ export class ProfileConteiner extends Component<TypeProfileProps & RouteComponen
         if (!userId) {
             userId = '2'
         }
-
-        axios.get<TypeResponseDataProfile>(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then((response) => {
-                this.props.setProfileDataAC(response.data)
+        getProfileApi.getProfile(userId).then((data:TypeResponseDataProfile) => {
+                this.props.setProfileDataAC(data)
                 this.props.setPreloaderAC(true)
 
             })

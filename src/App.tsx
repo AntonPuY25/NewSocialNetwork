@@ -11,7 +11,7 @@ import MusicConteiner from "./Profile/Music/musicConteiner";
 import ProfileConteiner from "./Profile/profileConteiner";
 import HeaderComponent from "./Header/headerComponent";
 
-function  App() {
+function  App () {
 
     return (
         <BrowserRouter>

@@ -26,7 +26,8 @@ export default function Dialogs(props: TypeDialogs) {
             <Message message={props.messageData.dataMessage}/>
             <hr/>
             <div className={s.nameMyPost}>New Message</div>
-            <div className={s.textareaPost}><TextField defaultValue="Default Value"
+            <div className={s.textareaPost}>
+                <TextField
                             multiline variant="outlined" value={props.valueMessage} label={'Enter Message'}
                             onChange={onChangeMessage}/></div>
 

@@ -7,7 +7,6 @@ import {
     UnFollowAC
 } from "../../Redux/Reducers/usersReducer";
 import React, {Dispatch} from "react";
-import axios from "axios";
 import UserFun from "./userFunctional";
 import Preloader from "../Preloader/Preloader";
 import {
@@ -19,22 +18,20 @@ import {
     TypeUsersProps,
     UserType
 } from "../../Types/Types";
+import {getUsersApi} from "../../DALL/api";
 
 
-
-
-class Users extends React.Component<TypeUsersProps,any> {
+class Users extends React.Component<TypeUsersProps, any> {
 
     arr: Array<number> = [];
+
     componentDidMount() {
         this.props.setPreloader(true)
-        axios.get<TypeResponseDataUsers>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.pageNumber}&count=${this.props.count}`,{
-            withCredentials:true
+
+        getUsersApi.getUsersPages(this.props.pageNumber, this.props.count).then((data: TypeResponseDataUsers) => {
+            this.props.setUsers(data.items)
+            this.props.setPreloader(false)
         })
-            .then((response) => {
-                this.props.setUsers(response.data.items)
-                this.props.setPreloader(false)
-            })
 
         for (let i = 1; i <= this.props.countPAge; i++) {
             this.arr.push(i)
@@ -45,18 +42,15 @@ class Users extends React.Component<TypeUsersProps,any> {
     clickPage = (id: number) => {
         this.props.setPreloader(true)
         this.props.setPageNumber(id)
-        axios.get<TypeResponseDataUsers>(`https://social-network.samuraijs.com/api/1.0/users?page=${id}&count=${this.props.count}`,{
-            withCredentials:true
-        })
-            .then((response) => {
-                this.props.setUsers(response.data.items)
+        getUsersApi.getUsersPageNumber(id, this.props.count)
+            .then((data: TypeResponseDataUsers) => {
+                this.props.setUsers(data.items)
                 this.props.setPreloader(false)
             })
 
     }
 
     render() {
-
 
 
         let functionTest = (num: number, check: boolean) => {
@@ -77,26 +71,26 @@ class Users extends React.Component<TypeUsersProps,any> {
         }
 
         return <div>
-            {this.props.isPreloader?<Preloader/>
-                :<UserFun functionTest={functionTest} arr={this.arr}
-                clickPage={this.clickPage} pageNumber={this.props.pageNumber}
-                users={this.props.users}
-                follow={this.props.follow}
-                unFollow={this.props.unFollow}/>}
+            {this.props.isPreloader ? <Preloader/>
+                : <UserFun functionTest={functionTest} arr={this.arr}
+                           clickPage={this.clickPage} pageNumber={this.props.pageNumber}
+                           users={this.props.users}
+                           follow={this.props.follow}
+                           unFollow={this.props.unFollow}/>}
         </div>
     }
 }
 
-const mapStateToProps = (state: TypeStoreReducer):TypeMapStateToPropsUserContainer => {
+const mapStateToProps = (state: TypeStoreReducer): TypeMapStateToPropsUserContainer => {
     return {
         users: state.usersPage.users,
         count: state.usersPage.count,
         pageNumber: state.usersPage.pageNumber,
         countPAge: state.usersPage.countPage,
-        isPreloader:state.usersPage.isPreloader
+        isPreloader: state.usersPage.isPreloader
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch<TypeActionUserReducer>):TypeMapDispatchToPropsUserContainer => {
+const mapDispatchToProps = (dispatch: Dispatch<TypeActionUserReducer>): TypeMapDispatchToPropsUserContainer => {
     return {
         follow: (id: number) => {
             dispatch(FollowAC(id))
@@ -114,13 +108,13 @@ const mapDispatchToProps = (dispatch: Dispatch<TypeActionUserReducer>):TypeMapDi
         setCountPage: (countPage: number) => {
             dispatch(setCountPAgeAC(countPage))
         },
-        setPreloader :(preloader:boolean)=>{
+        setPreloader: (preloader: boolean) => {
             dispatch(SetPreloaderAC(preloader))
         }
     }
 }
 
-const UserConteiner = connect<TypeMapStateToPropsUserContainer,TypeMapDispatchToPropsUserContainer,
-    {},TypeStoreReducer>(mapStateToProps, mapDispatchToProps)(Users)
+const UserConteiner = connect<TypeMapStateToPropsUserContainer, TypeMapDispatchToPropsUserContainer,
+    {}, TypeStoreReducer>(mapStateToProps, mapDispatchToProps)(Users)
 
 export default UserConteiner;
