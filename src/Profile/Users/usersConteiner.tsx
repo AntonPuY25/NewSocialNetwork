@@ -28,7 +28,9 @@ class Users extends React.Component<TypeUsersProps,any> {
     arr: Array<number> = [];
     componentDidMount() {
         this.props.setPreloader(true)
-        axios.get<TypeResponseDataUsers>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.pageNumber}&count=${this.props.count}`)
+        axios.get<TypeResponseDataUsers>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.pageNumber}&count=${this.props.count}`,{
+            withCredentials:true
+        })
             .then((response) => {
                 this.props.setUsers(response.data.items)
                 this.props.setPreloader(false)
@@ -43,7 +45,9 @@ class Users extends React.Component<TypeUsersProps,any> {
     clickPage = (id: number) => {
         this.props.setPreloader(true)
         this.props.setPageNumber(id)
-        axios.get<TypeResponseDataUsers>(`https://social-network.samuraijs.com/api/1.0/users?page=${id}&count=${this.props.count}`)
+        axios.get<TypeResponseDataUsers>(`https://social-network.samuraijs.com/api/1.0/users?page=${id}&count=${this.props.count}`,{
+            withCredentials:true
+        })
             .then((response) => {
                 this.props.setUsers(response.data.items)
                 this.props.setPreloader(false)

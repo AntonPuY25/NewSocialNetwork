@@ -24,7 +24,10 @@ export class ProfileConteiner extends Component<TypeProfileProps & RouteComponen
             .then((response) => {
                 this.props.setProfileDataAC(response.data)
                 this.props.setPreloaderAC(true)
+
             })
+
+
     }
 
     render() {
