@@ -10,7 +10,7 @@ import {
     GETUSERS,
     SETCOUNTPAGE,
     SETPAGENUMBER, SetPreloader,
-
+    SET_DISABLED_BUTTON,
     UNFOLLOW
 } from "../Redux/Reducers/usersReducer";
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
@@ -142,6 +142,8 @@ export type TypeUsersProps = {
     setCountPage: (countPage: number) => void
     isPreloader: boolean
     setPreloader: (prelaoder: boolean) => void
+    idDisabledButton:Array<number>
+    disabledButton:(isDisabled:Array<number>)=>void
 }
 export type TypePhoto = {
     small: null
@@ -167,6 +169,7 @@ export type TypeMapStateToPropsUserContainer = {
     pageNumber: number
     countPAge: number
     isPreloader: boolean
+    idDisabledButton:Array<number>
 }
 export type TypeMapDispatchToPropsUserContainer = {
     follow: (id: number) => void
@@ -175,6 +178,7 @@ export type TypeMapDispatchToPropsUserContainer = {
     setPageNumber: (pageNumber: number) => void
     setCountPage: (countPage: number) => void
     setPreloader: (preloader: boolean) => void
+    disabledButton:(isDisabled:Array<number>)=>void
 }
 //USER_FUNCTIONAL
 export type TypeUserFunProps = {
@@ -185,6 +189,8 @@ export type TypeUserFunProps = {
     users: Array<User>
     follow: (value: number) => void
     unFollow: (value: number) => void
+    isDisabled:Array<number>
+    disabledButton:(isDisabled:Array<number>)=>void
 
 }
 export type TypeUserResponseData = {
@@ -202,6 +208,13 @@ export type TypeInitialStateUsers = {
     pageNumber: number
     countPage: number
     isPreloader: boolean
+    disabledButton:Array<number>
+}
+export type TypeActionDisabledButton = {
+    type:typeof SET_DISABLED_BUTTON
+    isDisable:Array<number>
+
+
 }
 export type TypeActionFollow = {
     type: typeof FOLLOW
@@ -228,7 +241,7 @@ export type TypeActionSetPreloader = {
     preloader: boolean
 }
 export  type TypeActionUserReducer = TypeActionFollow | TypeActionUnFollow | TypeActionSetCountPage
-    | TypeActionSetPage | TypeActionGetUsers | TypeActionSetPreloader;
+    | TypeActionSetPage | TypeActionGetUsers | TypeActionSetPreloader |TypeActionDisabledButton;
 //USERS
 export type TypePhotoUsers = {
     small: null

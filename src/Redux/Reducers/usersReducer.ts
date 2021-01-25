@@ -4,7 +4,7 @@ import {
     TypeActionSetCountPage,
     TypeActionSetPage,
     TypeActionSetPreloader, TypeActionUnFollow,
-    TypeInitialStateUsers, User
+    TypeInitialStateUsers, User, TypeActionDisabledButton
 } from "../../Types/Types";
 
 
@@ -14,15 +14,25 @@ let initialState: TypeInitialStateUsers = {
     pageNumber: 1,
     count: 10,
     countPage: 10,
-    isPreloader: false
+    isPreloader: true,
+    disabledButton:[]
 }
+// 14339,14338
 export const SetPreloader = "SET_PRELOADER";
 export const FOLLOW = "FOLLOW";
 export const SETCOUNTPAGE = "SET_COUNT_PAGE";
 export const UNFOLLOW = "UN_FOLLOW";
 export const GETUSERS = "GET_USERS";
 export const SETPAGENUMBER = "SET_PAGE_NUMBER";
+export const SET_DISABLED_BUTTON = "SET_DISABLED_BUTTON";
 
+export const setDisabledButtonAC = (isDisable:Array<number>):TypeActionDisabledButton=>{
+    return {
+        type:SET_DISABLED_BUTTON,
+        isDisable
+
+    }
+}
 export const setCountPAgeAC = (countPage: number): TypeActionSetCountPage => {
     return {
         type: SETCOUNTPAGE,
@@ -86,6 +96,11 @@ let usersReducer = (state: TypeInitialStateUsers = initialState, action: TypeAct
             return {
                 ...state,
                 isPreloader: action.preloader
+            }
+        case "SET_DISABLED_BUTTON":
+            return {
+                ...state,
+                disabledButton:action.isDisable
             }
         default:
             return state

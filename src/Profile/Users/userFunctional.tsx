@@ -9,7 +9,7 @@ import {getUsersApi} from "../../DALL/api";
 
 let UserFun: React.FC<TypeUserFunProps> = ({
                                                functionTest, arr, clickPage, pageNumber, users,
-                                               follow, unFollow
+                                               follow, unFollow,isDisabled,disabledButton
                                            }) => {
 
     return <div>
@@ -37,21 +37,31 @@ let UserFun: React.FC<TypeUserFunProps> = ({
                     <div>{i.name}</div>
                     <div>{i.status}</div>
 
-                    {i.followed === true ? <Button variant={"contained"} onClick={() => {
+                    {i.followed === true ? <Button disabled={isDisabled.some(id=>id===i.id)} variant={"contained"} onClick={() => {
+
+                            disabledButton([i.id])
+
                             getUsersApi.followUsersApi(i.id).then((data: TypeUserResponseData) => {
                                 if (data.resultCode === 0) {
+
                                     follow(i.id)
+                                    disabledButton([])
                                 }
+
                             })
 
                         }}>Follow</Button>
-                        : <Button variant={"contained"} onClick={() => {
-
+                        : <Button disabled={isDisabled.some(id=>id===i.id)} variant={"contained"} onClick={() => {
+                            disabledButton([i.id])
                             getUsersApi.UnfollowUsersApi(i.id).then((data: TypeUserResponseData) => {
                                 if (data.resultCode === 0) {
+
                                     unFollow(i.id)
+                                    disabledButton([])
                                 }
+
                             })
+
                         }}>UnFollow</Button>}
 
                 </div>

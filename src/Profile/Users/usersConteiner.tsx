@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {
     FollowAC,
     getUsersAC,
-    setCountPAgeAC,
+    setCountPAgeAC, setDisabledButtonAC,
     setPageAC, SetPreloaderAC,
     UnFollowAC
 } from "../../Redux/Reducers/usersReducer";
@@ -76,7 +76,11 @@ class Users extends React.Component<TypeUsersProps, any> {
                            clickPage={this.clickPage} pageNumber={this.props.pageNumber}
                            users={this.props.users}
                            follow={this.props.follow}
-                           unFollow={this.props.unFollow}/>}
+                           unFollow={this.props.unFollow}
+                           isDisabled={this.props.idDisabledButton}
+                           disabledButton={this.props.disabledButton}
+                />
+            }
         </div>
     }
 }
@@ -87,7 +91,8 @@ const mapStateToProps = (state: TypeStoreReducer): TypeMapStateToPropsUserContai
         count: state.usersPage.count,
         pageNumber: state.usersPage.pageNumber,
         countPAge: state.usersPage.countPage,
-        isPreloader: state.usersPage.isPreloader
+        isPreloader: state.usersPage.isPreloader,
+        idDisabledButton:state.usersPage.disabledButton,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch<TypeActionUserReducer>): TypeMapDispatchToPropsUserContainer => {
@@ -110,6 +115,9 @@ const mapDispatchToProps = (dispatch: Dispatch<TypeActionUserReducer>): TypeMapD
         },
         setPreloader: (preloader: boolean) => {
             dispatch(SetPreloaderAC(preloader))
+        },
+        disabledButton: (isDisabled: Array<number>) => {
+            dispatch(setDisabledButtonAC(isDisabled))
         }
     }
 }
