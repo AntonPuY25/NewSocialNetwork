@@ -7,6 +7,7 @@ import {
     TypeInitialStateUsers, User, TypeActionDisabledButton, TypeResponseDataUsers, TypeUserResponseData
 } from "../../Types/Types";
 import {getUsersApi} from "../../DALL/api";
+import {ThunkAction} from "redux-thunk";
 
 
 
@@ -51,8 +52,8 @@ export const FollowAC = (id: number): TypeActionFollow => ({type: FOLLOW, id: id
 export const UnFollowAC = (id: number): TypeActionUnFollow => ({type: UNFOLLOW, id: id})
 export const getUsersAC = (arr: Array<User>): TypeActionGetUsers => ({type: GETUSERS, arr: arr})
 
-export const getUsersThunkCreator = (pageNumber:number,count:number):any=>{
-    return (dispatch:any)=>{
+export const getUsersThunkCreator = (pageNumber:number,count:number):ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer>=>{
+    return (dispatch)=>{
         dispatch(SetPreloaderAC(true))
         getUsersApi.getUsersPages(pageNumber, count).then((data: TypeResponseDataUsers) => {
             dispatch(getUsersAC(data.items))
@@ -61,8 +62,8 @@ export const getUsersThunkCreator = (pageNumber:number,count:number):any=>{
 
     }
 }
-export const getPageUsersThunkCreator = (id:number, count:number):any=>{
-    return (dispatch:any)=>{
+export const getPageUsersThunkCreator = (id:number, count:number):ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer>=>{
+    return (dispatch)=>{
         dispatch(SetPreloaderAC(true))
         dispatch(setPageAC(id))
         getUsersApi.getUsersPageNumber(id,count)
@@ -72,8 +73,8 @@ export const getPageUsersThunkCreator = (id:number, count:number):any=>{
             })
     }
 }
-export const followThunkCreator = (userId:number):any=>{
-    return (dispatch:any)=>{
+export const followThunkCreator = (userId:number):ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer>=>{
+    return (dispatch)=>{
         dispatch(setDisabledButtonAC([userId]))
         getUsersApi.followUsersApi(userId).then((data: TypeUserResponseData) => {
             if (data.resultCode === 0) {
@@ -84,8 +85,8 @@ export const followThunkCreator = (userId:number):any=>{
         })
     }
 }
-export const unFollowThunkCreator = (userId:number):any=>{
-    return (dispatch:any)=>{
+export const unFollowThunkCreator = (userId:number):ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer>=>{
+    return (dispatch)=>{
         dispatch(setDisabledButtonAC([userId]))
         getUsersApi.UnfollowUsersApi(userId).then((data: TypeUserResponseData) => {
             if (data.resultCode === 0) {

@@ -4,9 +4,10 @@ import {
     TypeInitialStateProfile,
     TypePreloaderProfile,
     TypeProfileData,
-    TypeResponseDataProfile
+    TypeResponseDataProfile, TypeStoreReducer
 } from "../../Types/Types";
 import {getProfileApi} from "../../DALL/api";
+import {ThunkAction} from "redux-thunk";
 
 
 export const ADD_TEXT_POST = "ADD_TEXT_POST";
@@ -113,8 +114,9 @@ export const setPreloaderAC = (preloader: boolean): TypePreloaderProfile => {
     }
 }
 
-export const setProfileThunkCreator = (userId: string): any => {
-    return (dispatch: any) => {
+export const setProfileThunkCreator = (userId: string):ThunkAction<void, TypeStoreReducer,
+    unknown, TypeActionProfileReducer> => {
+    return (dispatch) => {
         getProfileApi.getProfile(userId).then((data: TypeResponseDataProfile) => {
             dispatch(setProfileDataAC(data))
             dispatch(setPreloaderAC(true))
