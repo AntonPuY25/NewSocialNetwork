@@ -3,7 +3,7 @@ import Profile from "./profile";
 import {connect} from "react-redux";
 import {setProfileThunkCreator} from "../Redux/Reducers/profileReducer";
 import Preloader from "./Preloader/Preloader";
-import {withRouter} from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router'
 import {
     PathParamsType, TypeMapDispatchToPropsProfile, TypeMapStateToPropsProfile,
@@ -23,17 +23,20 @@ export class ProfileConteiner extends Component<TypeProfileProps & RouteComponen
     }
 
     render() {
-        return (<div>
+       return  this.props.isAuth?  (<div>
                 {this.props.isPreloader ? <Profile profile={this.props.profile}/> : <Preloader/>}
-            </div>
-        )
+            </div>): <Redirect to={'/login'}/>
+
+
     }
+
 }
 
 let mapStateToProps = (state: TypeStoreReducer): TypeMapStateToPropsProfile => {
     return {
         profile: state.profilePage.profile,
-        isPreloader: state.profilePage.isPreloader
+        isPreloader: state.profilePage.isPreloader,
+        isAuth:state.authPage.isAuth
     }
 }
 

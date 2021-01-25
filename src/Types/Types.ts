@@ -47,11 +47,14 @@ export type TypeProfileProps = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
     setProfileThunkCreator:(userId:string)=>void
+    isAuth:boolean
+
 
 }
 export type TypeMapStateToPropsProfile = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
+    isAuth:boolean
 }
 export type TypeMapDispatchToPropsProfile = {
     setProfileThunkCreator:(userId:string)=>void
@@ -296,6 +299,7 @@ export type TypeMapDispatchToProps = {
 export type TypeMapStateToProps = {
     valueMessage: string
     messageData: TypeMessageData
+    isAuth:boolean
 }
 //DIALOGS
 export type TypeDialogs = {
@@ -303,6 +307,7 @@ export type TypeDialogs = {
     addMessage: () => void
     messageData: TypeMessageData
     valueMessage: string
+    isAuth:boolean
 }
 //DIALOG
 export type TypeDialogData = {

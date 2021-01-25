@@ -10,6 +10,7 @@ import UserConteiner from "./Profile/Users/usersConteiner";
 import MusicConteiner from "./Profile/Music/musicConteiner";
 import ProfileConteiner from "./Profile/profileConteiner";
 import HeaderComponent from "./Header/headerComponent";
+import Login from "./Profile/Login/login";
 
 function  App () {
 
@@ -33,6 +34,7 @@ function  App () {
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <MusicConteiner/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
                 </aside>
                 <footer className='footer'><Footer/></footer>
             </div>

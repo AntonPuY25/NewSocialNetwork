@@ -15,7 +15,8 @@ import {
 let mapStateToProps = (state:TypeStoreReducer):TypeMapStateToProps=>{
     return{
         valueMessage:state.dialogsPage.valueMessage,
-        messageData:state.dialogsPage.messageData
+        messageData:state.dialogsPage.messageData,
+        isAuth:state.authPage.isAuth
     }
 }
 let mapDispatchToProps = (dispatch:Dispatch<TypeAction>):TypeMapDispatchToProps=>{
