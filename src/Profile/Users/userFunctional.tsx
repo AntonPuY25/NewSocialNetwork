@@ -1,15 +1,14 @@
 import React from "react";
 import s from "./users.module.css";
 import {NavLink} from "react-router-dom";
-import {TypeUserFunProps, TypeUserResponseData} from "../../Types/Types";
+import {TypeUserFunProps} from "../../Types/Types";
 import {Button} from "@material-ui/core";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import {getUsersApi} from "../../DALL/api";
 
 let UserFun: React.FC<TypeUserFunProps> = ({
                                                functionTest, arr, clickPage, pageNumber, users,
-                                               follow, unFollow,isDisabled,disabledButton
+                                               followThunkCreator, unFollowThunkCreator,isDisabled
                                            }) => {
 
     return <div>
@@ -37,30 +36,13 @@ let UserFun: React.FC<TypeUserFunProps> = ({
                     <div>{i.name}</div>
                     <div>{i.status}</div>
 
-                    {i.followed === true ? <Button disabled={isDisabled.some(id=>id===i.id)} variant={"contained"} onClick={() => {
+                    {i.followed ? <Button disabled={isDisabled.some(id=>id===i.id)} variant={"contained"} onClick={() => {
 
-                            disabledButton([i.id])
-
-                            getUsersApi.followUsersApi(i.id).then((data: TypeUserResponseData) => {
-                                if (data.resultCode === 0) {
-
-                                    follow(i.id)
-                                    disabledButton([])
-                                }
-
-                            })
+                            followThunkCreator(i.id)
 
                         }}>Follow</Button>
                         : <Button disabled={isDisabled.some(id=>id===i.id)} variant={"contained"} onClick={() => {
-                            disabledButton([i.id])
-                            getUsersApi.UnfollowUsersApi(i.id).then((data: TypeUserResponseData) => {
-                                if (data.resultCode === 0) {
-
-                                    unFollow(i.id)
-                                    disabledButton([])
-                                }
-
-                            })
+                            unFollowThunkCreator(i.id)
 
                         }}>UnFollow</Button>}
 

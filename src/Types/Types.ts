@@ -11,7 +11,7 @@ import {
     SETCOUNTPAGE,
     SETPAGENUMBER, SetPreloader,
     SET_DISABLED_BUTTON,
-    UNFOLLOW
+    UNFOLLOW, FollowAC, UnFollowAC, getUsersAC, setPageAC, setCountPAgeAC, SetPreloaderAC, setDisabledButtonAC
 } from "../Redux/Reducers/usersReducer";
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
 import {SET_AUTH_DATA, SetAuthIsAuthTestAC} from "../Redux/Reducers/authReducer";
@@ -45,17 +45,16 @@ export type PathParamsType = {
 }
 export type TypeProfileProps = {
     profile: TypeResponseDataProfile
-    setProfileDataAC: (data: TypeResponseDataProfile) => void
     isPreloader: boolean
-    setPreloaderAC: (preloader: boolean) => void
+    setProfileThunkCreator:(userId:string)=>void
+
 }
 export type TypeMapStateToPropsProfile = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
 }
 export type TypeMapDispatchToPropsProfile = {
-    setProfileDataAC: (data: TypeResponseDataProfile) => void
-    setPreloaderAC: (preloader: boolean) => void
+    setProfileThunkCreator:(userId:string)=>void
 }
 
 
@@ -132,18 +131,20 @@ export type TypeMapDispatchToPropsPostConteiner = {
 //USER_CONTAINER
 export type TypeUsersProps = {
     users: Array<UserType>
-    follow: (value: number) => void
-    unFollow: (value: number) => void
-    setUsers: (value: Array<UserType>) => void
     count: number
     pageNumber: number
-    setPageNumber: (pageNumber: number) => void
     countPAge: number
-    setCountPage: (countPage: number) => void
     isPreloader: boolean
-    setPreloader: (prelaoder: boolean) => void
     idDisabledButton:Array<number>
-    disabledButton:(isDisabled:Array<number>)=>void
+    followThunkCreator: (userId: number) => void
+    unFollowThunkCreator: (userId: number) => void
+    getUsersAC: (arr: Array<UserType>) => void
+    setPageAC: (pageNumber: number) => void
+    setCountPAgeAC: (countPage: number) => void
+    SetPreloaderAC: (preloader: boolean) => void
+    getUsersThunkCreator:(pageNumber:number,count:number)=>void
+    getPageUsersThunkCreator:(id:number, count:number)=>void
+
 }
 export type TypePhoto = {
     small: null
@@ -172,13 +173,16 @@ export type TypeMapStateToPropsUserContainer = {
     idDisabledButton:Array<number>
 }
 export type TypeMapDispatchToPropsUserContainer = {
-    follow: (id: number) => void
-    unFollow: (id: number) => void
-    setUsers: (arr: Array<UserType>) => void
-    setPageNumber: (pageNumber: number) => void
-    setCountPage: (countPage: number) => void
-    setPreloader: (preloader: boolean) => void
-    disabledButton:(isDisabled:Array<number>)=>void
+    getUsersAC: (arr: Array<UserType>) => void
+    setPageAC: (pageNumber: number) => void
+    setCountPAgeAC: (countPage: number) => void
+    SetPreloaderAC: (preloader: boolean) => void
+    getUsersThunkCreator:(pageNumber:number,count:number)=>void
+    getPageUsersThunkCreator:(id:number, count:number)=>void
+    followThunkCreator: (userId: number) => void
+    unFollowThunkCreator: (userId: number) => void
+
+
 }
 //USER_FUNCTIONAL
 export type TypeUserFunProps = {
@@ -187,10 +191,9 @@ export type TypeUserFunProps = {
     clickPage: (id: number) => void
     pageNumber: number
     users: Array<User>
-    follow: (value: number) => void
-    unFollow: (value: number) => void
+    followThunkCreator: (userId: number) => void
+    unFollowThunkCreator: (userId: number) => void
     isDisabled:Array<number>
-    disabledButton:(isDisabled:Array<number>)=>void
 
 }
 export type TypeUserResponseData = {
@@ -357,8 +360,7 @@ export type TypePropsHeader = {
 }
 export type TypePropsHeaderComponent = {
     isAuth: boolean
-    SetAuthDataAC: (data: TypeResponseDataData) => void
-    SetAuthIsAuthTestAC: (isAuth: boolean) => void
+    authThunkCreator:()=>void
     email: any
 }
 

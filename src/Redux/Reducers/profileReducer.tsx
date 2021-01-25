@@ -6,6 +6,7 @@ import {
     TypeProfileData,
     TypeResponseDataProfile
 } from "../../Types/Types";
+import {getProfileApi} from "../../DALL/api";
 
 
 export const ADD_TEXT_POST = "ADD_TEXT_POST";
@@ -87,14 +88,14 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
             return state
     }
 }
-export const PostTextAC = (text: string):TypeAddPostTextAction => {
+export const PostTextAC = (text: string): TypeAddPostTextAction => {
     return {
         type: ADD_TEXT_POST,
         text
 
     } as const
 }
-export const PostAC = ():TypeAddPostAction => {
+export const PostAC = (): TypeAddPostAction => {
     return {
         type: ADD_POST
     }
@@ -109,6 +110,16 @@ export const setPreloaderAC = (preloader: boolean): TypePreloaderProfile => {
     return {
         type: SET_PRELOADER,
         preloader
+    }
+}
+
+export const setProfileThunkCreator = (userId: string): any => {
+    return (dispatch: any) => {
+        getProfileApi.getProfile(userId).then((data: TypeResponseDataProfile) => {
+            dispatch(setProfileDataAC(data))
+            dispatch(setPreloaderAC(true))
+
+        })
     }
 }
 export default profileReducer;

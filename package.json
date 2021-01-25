@@ -23,8 +23,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "typedoc": "^0.20.3",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "typescript-fsa-redux-thunk": "^2.10.1"
   },
   "scripts": {
     "start": "react-scripts start",

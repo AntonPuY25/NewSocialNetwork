@@ -4,8 +4,9 @@ import {
     TypeActionSetCountPage,
     TypeActionSetPage,
     TypeActionSetPreloader, TypeActionUnFollow,
-    TypeInitialStateUsers, User, TypeActionDisabledButton
+    TypeInitialStateUsers, User, TypeActionDisabledButton, TypeResponseDataUsers, TypeUserResponseData
 } from "../../Types/Types";
+import {getUsersApi} from "../../DALL/api";
 
 
 
@@ -50,6 +51,51 @@ export const FollowAC = (id: number): TypeActionFollow => ({type: FOLLOW, id: id
 export const UnFollowAC = (id: number): TypeActionUnFollow => ({type: UNFOLLOW, id: id})
 export const getUsersAC = (arr: Array<User>): TypeActionGetUsers => ({type: GETUSERS, arr: arr})
 
+export const getUsersThunkCreator = (pageNumber:number,count:number):any=>{
+    return (dispatch:any)=>{
+        dispatch(SetPreloaderAC(true))
+        getUsersApi.getUsersPages(pageNumber, count).then((data: TypeResponseDataUsers) => {
+            dispatch(getUsersAC(data.items))
+            dispatch(SetPreloaderAC(false))
+        })
+
+    }
+}
+export const getPageUsersThunkCreator = (id:number, count:number):any=>{
+    return (dispatch:any)=>{
+        dispatch(SetPreloaderAC(true))
+        dispatch(setPageAC(id))
+        getUsersApi.getUsersPageNumber(id,count)
+            .then((data: TypeResponseDataUsers) => {
+                dispatch(getUsersAC(data.items))
+                dispatch(SetPreloaderAC(false))
+            })
+    }
+}
+export const followThunkCreator = (userId:number):any=>{
+    return (dispatch:any)=>{
+        dispatch(setDisabledButtonAC([userId]))
+        getUsersApi.followUsersApi(userId).then((data: TypeUserResponseData) => {
+            if (data.resultCode === 0) {
+                dispatch(FollowAC(userId))
+                dispatch(setDisabledButtonAC([]))
+            }
+
+        })
+    }
+}
+export const unFollowThunkCreator = (userId:number):any=>{
+    return (dispatch:any)=>{
+        dispatch(setDisabledButtonAC([userId]))
+        getUsersApi.UnfollowUsersApi(userId).then((data: TypeUserResponseData) => {
+            if (data.resultCode === 0) {
+                dispatch(UnFollowAC(userId))
+                dispatch(setDisabledButtonAC([]))
+            }
+
+        })
+    }
+}
 
 let usersReducer = (state: TypeInitialStateUsers = initialState, action: TypeActionUserReducer): TypeInitialStateUsers => {
     switch (action.type) {

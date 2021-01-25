@@ -1,24 +1,21 @@
 import {connect} from "react-redux";
 import {
-    FollowAC,
-    getUsersAC,
-    setCountPAgeAC, setDisabledButtonAC,
-    setPageAC, SetPreloaderAC,
-    UnFollowAC
+    followThunkCreator, getPageUsersThunkCreator,
+    getUsersAC, getUsersThunkCreator,
+    setCountPAgeAC,
+    setPageAC, SetPreloaderAC, unFollowThunkCreator
 } from "../../Redux/Reducers/usersReducer";
-import React, {Dispatch} from "react";
+import React from "react";
 import UserFun from "./userFunctional";
 import Preloader from "../Preloader/Preloader";
 import {
-    TypeActionUserReducer,
+
     TypeMapDispatchToPropsUserContainer,
     TypeMapStateToPropsUserContainer,
-    TypeResponseDataUsers,
     TypeStoreReducer,
     TypeUsersProps,
-    UserType
+
 } from "../../Types/Types";
-import {getUsersApi} from "../../DALL/api";
 
 
 class Users extends React.Component<TypeUsersProps, any> {
@@ -26,28 +23,14 @@ class Users extends React.Component<TypeUsersProps, any> {
     arr: Array<number> = [];
 
     componentDidMount() {
-        this.props.setPreloader(true)
-
-        getUsersApi.getUsersPages(this.props.pageNumber, this.props.count).then((data: TypeResponseDataUsers) => {
-            this.props.setUsers(data.items)
-            this.props.setPreloader(false)
-        })
-
+        this.props.getUsersThunkCreator(this.props.pageNumber, this.props.count)
         for (let i = 1; i <= this.props.countPAge; i++) {
             this.arr.push(i)
         }
 
     }
-
     clickPage = (id: number) => {
-        this.props.setPreloader(true)
-        this.props.setPageNumber(id)
-        getUsersApi.getUsersPageNumber(id, this.props.count)
-            .then((data: TypeResponseDataUsers) => {
-                this.props.setUsers(data.items)
-                this.props.setPreloader(false)
-            })
-
+        this.props.getPageUsersThunkCreator(id, this.props.count)
     }
 
     render() {
@@ -55,13 +38,13 @@ class Users extends React.Component<TypeUsersProps, any> {
 
         let functionTest = (num: number, check: boolean) => {
             if (check) {
-                this.props.setCountPage(this.props.countPAge + 10)
+                this.props.setCountPAgeAC(this.props.countPAge + 10)
                 this.arr = []
                 for (let i = this.props.countPAge; i <= this.props.countPAge + 10; i++) {
                     this.arr.push(i)
                 }
             } else if (!check && this.props.countPAge >= 10) {
-                this.props.setCountPage(this.props.countPAge - 10)
+                this.props.setCountPAgeAC(this.props.countPAge - 10)
 
                 this.arr = []
                 for (let i = this.props.countPAge - 10; i <= this.props.countPAge; i++) {
@@ -75,10 +58,9 @@ class Users extends React.Component<TypeUsersProps, any> {
                 : <UserFun functionTest={functionTest} arr={this.arr}
                            clickPage={this.clickPage} pageNumber={this.props.pageNumber}
                            users={this.props.users}
-                           follow={this.props.follow}
-                           unFollow={this.props.unFollow}
+                           followThunkCreator={this.props.followThunkCreator}
+                           unFollowThunkCreator={this.props.unFollowThunkCreator}
                            isDisabled={this.props.idDisabledButton}
-                           disabledButton={this.props.disabledButton}
                 />
             }
         </div>
@@ -92,37 +74,14 @@ const mapStateToProps = (state: TypeStoreReducer): TypeMapStateToPropsUserContai
         pageNumber: state.usersPage.pageNumber,
         countPAge: state.usersPage.countPage,
         isPreloader: state.usersPage.isPreloader,
-        idDisabledButton:state.usersPage.disabledButton,
+        idDisabledButton: state.usersPage.disabledButton,
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch<TypeActionUserReducer>): TypeMapDispatchToPropsUserContainer => {
-    return {
-        follow: (id: number) => {
-            dispatch(FollowAC(id))
-        },
-        unFollow: (id: number) => {
-            dispatch(UnFollowAC(id))
-        },
-        setUsers: (arr: Array<UserType>) => {
-            dispatch(getUsersAC(arr))
-        },
-        setPageNumber: (pageNumber: number) => {
-            dispatch(setPageAC(pageNumber))
-        },
 
-        setCountPage: (countPage: number) => {
-            dispatch(setCountPAgeAC(countPage))
-        },
-        setPreloader: (preloader: boolean) => {
-            dispatch(SetPreloaderAC(preloader))
-        },
-        disabledButton: (isDisabled: Array<number>) => {
-            dispatch(setDisabledButtonAC(isDisabled))
-        }
-    }
-}
 
 const UserConteiner = connect<TypeMapStateToPropsUserContainer, TypeMapDispatchToPropsUserContainer,
-    {}, TypeStoreReducer>(mapStateToProps, mapDispatchToProps)(Users)
+    {}, TypeStoreReducer>(mapStateToProps, {followThunkCreator,unFollowThunkCreator,getUsersAC,setPageAC,
+    getUsersThunkCreator,getPageUsersThunkCreator,SetPreloaderAC,setCountPAgeAC
+    })(Users)
 
 export default UserConteiner;
