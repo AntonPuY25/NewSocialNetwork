@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "87d5e43b0a2c496eb9171a692d0e68dd",
+    "revision": "957ed210df92fd1f1fa9e8429aa7da6e",
     "url": "/NewSocialNetwork/index.html"
   },
   {
-    "revision": "fc269500b51383269b78",
+    "revision": "6af3585646fa4f43eb93",
     "url": "/NewSocialNetwork/static/css/main.1d4960fd.chunk.css"
   },
   {
-    "revision": "2ca8fc96dc3ac031b026",
-    "url": "/NewSocialNetwork/static/js/2.db689f68.chunk.js"
+    "revision": "e45a315ff94519ce1164",
+    "url": "/NewSocialNetwork/static/js/2.9012bd8b.chunk.js"
   },
   {
     "revision": "d2266803016540034565984c8bb59069",
-    "url": "/NewSocialNetwork/static/js/2.db689f68.chunk.js.LICENSE.txt"
+    "url": "/NewSocialNetwork/static/js/2.9012bd8b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "fc269500b51383269b78",
-    "url": "/NewSocialNetwork/static/js/main.9943335b.chunk.js"
+    "revision": "6af3585646fa4f43eb93",
+    "url": "/NewSocialNetwork/static/js/main.6d12a81e.chunk.js"
   },
   {
     "revision": "5fb735c09589394ca536",
