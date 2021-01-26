@@ -3,16 +3,18 @@ import Profile from "./profile";
 import {connect} from "react-redux";
 import {setProfileThunkCreator} from "../Redux/Reducers/profileReducer";
 import Preloader from "./Preloader/Preloader";
-import {withRouter, Redirect} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router'
 import {
     PathParamsType, TypeMapDispatchToPropsProfile, TypeMapStateToPropsProfile,
     TypeProfileProps, TypeStoreReducer
 } from "../Types/Types";
+import {RedirectHoc} from "../HOC/redirectHoc";
 
 
 export class ProfileConteiner extends Component<TypeProfileProps & RouteComponentProps<PathParamsType>> {
     componentDidMount() {
+
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = '2'
@@ -23,9 +25,9 @@ export class ProfileConteiner extends Component<TypeProfileProps & RouteComponen
     }
 
     render() {
-       return  this.props.isAuth?  (<div>
+       return  <div>
                 {this.props.isPreloader ? <Profile profile={this.props.profile}/> : <Preloader/>}
-            </div>): <Redirect to={'/login'}/>
+            </div>
 
 
     }
@@ -36,9 +38,8 @@ let mapStateToProps = (state: TypeStoreReducer): TypeMapStateToPropsProfile => {
     return {
         profile: state.profilePage.profile,
         isPreloader: state.profilePage.isPreloader,
-        isAuth:state.authPage.isAuth
     }
 }
-
+const isHocRedirect = RedirectHoc(ProfileConteiner)
 export default connect<TypeMapStateToPropsProfile, TypeMapDispatchToPropsProfile, {},
-    TypeStoreReducer>(mapStateToProps, {setProfileThunkCreator})(withRouter(ProfileConteiner))
+    TypeStoreReducer>(mapStateToProps, {setProfileThunkCreator})(withRouter(isHocRedirect))

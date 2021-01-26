@@ -47,14 +47,14 @@ export type TypeProfileProps = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
     setProfileThunkCreator:(userId:string)=>void
-    isAuth:boolean
+
 
 
 }
 export type TypeMapStateToPropsProfile = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
-    isAuth:boolean
+
 }
 export type TypeMapDispatchToPropsProfile = {
     setProfileThunkCreator:(userId:string)=>void
@@ -299,7 +299,6 @@ export type TypeMapDispatchToProps = {
 export type TypeMapStateToProps = {
     valueMessage: string
     messageData: TypeMessageData
-    isAuth:boolean
 }
 //DIALOGS
 export type TypeDialogs = {
@@ -307,7 +306,6 @@ export type TypeDialogs = {
     addMessage: () => void
     messageData: TypeMessageData
     valueMessage: string
-    isAuth:boolean
 }
 //DIALOG
 export type TypeDialogData = {
@@ -371,16 +369,16 @@ export type TypePropsHeaderComponent = {
 
 //DALL
 export type TypeGetUsersApi = {
-    getUsersPages: (pageNumber: number, count: number) => any
-    getUsersPageNumber: (pageId: number, count: number) => any
-    followUsersApi: (id: number) => any
-    UnfollowUsersApi: (id: number) => any
+    getUsersPages: (pageNumber: number, count: number) => Promise<TypeResponseDataUsers>
+    getUsersPageNumber: (pageId: number, count: number) => Promise<TypeResponseDataUsers>
+    followUsersApi: (id: number) => Promise<TypeUserResponseData>
+    UnfollowUsersApi: (id: number) => Promise<TypeUserResponseData>
 }
 export type TypeGetAuthApi = {
-    checkLogin: () => any
+    checkLogin: () => Promise<TypeResponseDataAuth>
 }
 export type TypeGetProfileApi = {
-    getProfile: (userId: string) => any
+    getProfile: (userId: string) => Promise<TypeResponseDataProfile>
 }
 
 //REDUX_STORE
@@ -391,4 +389,10 @@ export type TypeStoreReducer = {
     musicPage: TypeInitialStateMusic
     authPage: TypeInitialStateAuth
 
+}
+
+//HOC_REDIRECT
+export type TypeMapStateToPropsHoc={
+
+    isAuth:boolean
 }

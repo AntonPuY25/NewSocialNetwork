@@ -22,10 +22,7 @@ function  App () {
                 </header>
                 <nav className='nav'>
                     <Menu/>
-
-
                 </nav>
-
                 <aside className='aside'>
                     <Route path='/profile/:userId?' render={() =>
                         <ProfileConteiner/>}/>
@@ -41,6 +38,5 @@ function  App () {
         </BrowserRouter>
     );
 }
-
 export default App;
 

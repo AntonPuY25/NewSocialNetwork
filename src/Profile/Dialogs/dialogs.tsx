@@ -4,22 +4,18 @@ import Dialog from "./dialog";
 import Message from "./message";
 import {TypeDialogs} from "../../Types/Types";
 import {Button, TextField} from "@material-ui/core";
-import {Redirect} from "react-router-dom";
 
 
 export default function Dialogs(props: TypeDialogs) {
     let onChangeMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let text = (event.currentTarget.value)
         props.onChangeMessageText(text)
-
     }
     let addMessages = () => {
         props.addMessage()
-
     }
-
     return (
-        props.isAuth ? (<div className={s.dialogs}>
+     <div className={s.dialogs}>
             <div className={s.nameMessages}>
 
                 <Dialog dataDialog={props.messageData.dataDialog}/>
@@ -39,7 +35,7 @@ export default function Dialogs(props: TypeDialogs) {
                 </div>
             </div>
 
-        </div>) : <Redirect to={'/login'}/>
+        </div>
     )
 
 }
