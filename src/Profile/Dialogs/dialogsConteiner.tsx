@@ -29,13 +29,13 @@ let mapDispatchToProps = (dispatch:Dispatch<TypeAction>):TypeMapDispatchToProps=
         }
     }
 }
-const isHocRedirect = RedirectHoc(Dialogs)
-//
-// let DialogsConteiner = connect<TypeMapStateToProps,TypeMapDispatchToProps,
-//     {},TypeStoreReducer>(mapStateToProps,mapDispatchToProps)(isHocRedirect);
+type TypeTest = {
+    name:string
+}
 
-
-export default  compose(connect<TypeMapStateToProps,TypeMapDispatchToProps,
+export default  compose<React.ComponentType<TypeTest>>(
+    connect<TypeMapStateToProps,TypeMapDispatchToProps,
     {},TypeStoreReducer>(mapStateToProps,mapDispatchToProps),
-)(isHocRedirect);
+    RedirectHoc
+)(Dialogs);
 

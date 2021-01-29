@@ -8,7 +8,8 @@ import {connect} from "react-redux";
         isAuth:state.authPage.isAuth
     }
 }
-export const RedirectHoc = <P extends object>(PropsComponent: React.ComponentType<P>)=>{
+export const  RedirectHoc = <P extends object>(PropsComponent: React.ComponentType<P>)=>{
+
   const RedirectComponent:React.FC< TypeMapStateToPropsHoc >
       =(props)=>{
             return (props.isAuth) ? <PropsComponent{...props as P}/>: <Redirect to={'/login'}/>

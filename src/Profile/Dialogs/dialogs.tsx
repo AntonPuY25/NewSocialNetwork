@@ -11,6 +11,7 @@ export default function Dialogs(props: TypeDialogs) {
         let text = (event.currentTarget.value)
         props.onChangeMessageText(text)
     }
+
     let addMessages = () => {
         props.addMessage()
     }

@@ -10,6 +10,7 @@ import {
     TypeProfileProps, TypeStoreReducer
 } from "../Types/Types";
 import {RedirectHoc} from "../HOC/redirectHoc";
+import {compose} from "redux";
 
 
 export class ProfileConteiner extends Component<TypeProfileProps & RouteComponentProps<PathParamsType>> {
@@ -40,6 +41,14 @@ let mapStateToProps = (state: TypeStoreReducer): TypeMapStateToPropsProfile => {
         isPreloader: state.profilePage.isPreloader,
     }
 }
-const isHocRedirect = RedirectHoc(ProfileConteiner)
-export default connect<TypeMapStateToPropsProfile, TypeMapDispatchToPropsProfile, {},
-    TypeStoreReducer>(mapStateToProps, {setProfileThunkCreator})(withRouter(isHocRedirect))
+export  default compose<React.ComponentType>(
+
+    connect<TypeMapStateToPropsProfile, TypeMapDispatchToPropsProfile, {},
+        TypeStoreReducer>(mapStateToProps, {setProfileThunkCreator}),
+    RedirectHoc,
+    withRouter,
+)(ProfileConteiner)
+
+// const isHocRedirect = RedirectHoc(ProfileConteiner)
+//  connect<TypeMapStateToPropsProfile, TypeMapDispatchToPropsProfile, {},
+//     TypeStoreReducer>(mapStateToProps, {setProfileThunkCreator})(withRouter(isHocRedirect))

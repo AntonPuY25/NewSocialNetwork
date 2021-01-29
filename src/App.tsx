@@ -26,7 +26,7 @@ function  App () {
                 <aside className='aside'>
                     <Route path='/profile/:userId?' render={() =>
                         <ProfileConteiner/>}/>
-                    <Route path='/dialogs' render={() => <DialogsConteiner/>}/>
+                    <Route path='/dialogs' render={() => <DialogsConteiner name={'Anton'}/>}/>
                     <Route path='/friends' render={() => <UserConteiner/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <MusicConteiner/>}/>
