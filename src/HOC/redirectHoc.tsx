@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React from "react";
 import {Redirect} from "react-router-dom";
 import {TypeMapStateToPropsHoc, TypeStoreReducer} from "../Types/Types";
 import {connect} from "react-redux";

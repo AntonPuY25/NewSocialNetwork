@@ -12,7 +12,7 @@ import {
     TypeStoreReducer
 } from "../../Types/Types";
 import {RedirectHoc} from "../../HOC/redirectHoc";
-import {compose} from  'redux'
+import { compose } from "redux";
 let mapStateToProps = (state:TypeStoreReducer):TypeMapStateToProps=>{
     return{
         valueMessage:state.dialogsPage.valueMessage,
@@ -30,13 +30,12 @@ let mapDispatchToProps = (dispatch:Dispatch<TypeAction>):TypeMapDispatchToProps=
     }
 }
 const isHocRedirect = RedirectHoc(Dialogs)
+//
+// let DialogsConteiner = connect<TypeMapStateToProps,TypeMapDispatchToProps,
+//     {},TypeStoreReducer>(mapStateToProps,mapDispatchToProps)(isHocRedirect);
 
-let DialogsConteiner = connect<TypeMapStateToProps,TypeMapDispatchToProps,
-    {},TypeStoreReducer>(mapStateToProps,mapDispatchToProps)(isHocRedirect);
 
-// const result = compose(connect<TypeMapStateToProps,TypeMapDispatchToProps,
-//     {},TypeStoreReducer>(mapStateToProps,mapDispatchToProps),
-//     RedirectHoc
-//     )(Dialogs)
-export default DialogsConteiner;
+export default  compose(connect<TypeMapStateToProps,TypeMapDispatchToProps,
+    {},TypeStoreReducer>(mapStateToProps,mapDispatchToProps),
+)(isHocRedirect);
 
