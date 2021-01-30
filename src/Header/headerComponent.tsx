@@ -1,7 +1,12 @@
 import React from "react";
 import Header from "./header";
 import {connect} from "react-redux";
-import {TypePropsHeaderComponent, TypeStoreReducer} from "../Types/Types";
+import {
+    TypeMapDispatchToPropsHeader,
+    TypeMapStateToPropsHeader,
+    TypePropsHeaderComponent,
+    TypeStoreReducer
+} from "../Types/Types";
 import {authThunkCreator} from "../Redux/Reducers/authReducer";
 
 class HeaderComponent extends React.Component<TypePropsHeaderComponent, any> {
@@ -20,10 +25,11 @@ class HeaderComponent extends React.Component<TypePropsHeaderComponent, any> {
 
 }
 
-let mapStateToProps = (state: TypeStoreReducer) => {
+let mapStateToProps = (state: TypeStoreReducer):TypeMapStateToPropsHeader => {
     return {
         email: state.authPage.data.email,
         isAuth: state.authPage.isAuth
     }
 }
-export default connect(mapStateToProps, {authThunkCreator})(HeaderComponent)
+export default connect<TypeMapStateToPropsHeader,TypeMapDispatchToPropsHeader
+    ,{},TypeStoreReducer>(mapStateToProps, {authThunkCreator})(HeaderComponent)

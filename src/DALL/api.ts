@@ -2,7 +2,7 @@ import axios from "axios";
 import {
     TypeGetAuthApi,
     TypeGetProfileApi,
-    TypeGetUsersApi,
+    TypeGetUsersApi, TypeLoginResponseData, TypeLogoutResponseData,
     TypeResponseDataAuth, TypeResponseDataProfile, TypeResponseDataProfileStatus,
     TypeResponseDataUsers, TypeResponseSetDataProfileStatus, TypeUserResponseData
 } from "../Types/Types";
@@ -45,6 +45,18 @@ export const getAuthApi: TypeGetAuthApi = {
         return instance.get<TypeResponseDataAuth>(`auth/me`).then(response => {
             return response.data
         })
+    },
+    login(email,password,rememberMe,captcha){
+        return instance.post<TypeLoginResponseData>('auth/login',{email,password,rememberMe,captcha}).then(response=>{
+            return response.data
+            }
+        )
+    },
+    Logout(){
+        return instance.delete<TypeLogoutResponseData>('auth/login').then(response=>{
+                return response.data
+            }
+        )
     }
 }
 export const getProfileApi: TypeGetProfileApi = {

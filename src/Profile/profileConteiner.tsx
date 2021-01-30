@@ -15,9 +15,10 @@ import {compose} from "redux";
 export class ProfileConteiner extends Component<TypeProfileProps & RouteComponentProps<PathParamsType>> {
     componentDidMount() {
 
-        let userId = this.props.match.params.userId
+
+        let userId = Number(this.props.match.params.userId)
         if (!userId) {
-            userId = '13747'
+            userId = this.props.userId
         }
         this.props.setProfileThunkCreator(userId)
 
@@ -26,7 +27,9 @@ export class ProfileConteiner extends Component<TypeProfileProps & RouteComponen
 
     render() {
         return <div>
-            {this.props.isPreloader ? <Profile setStatusThunkCreator={this.props.setStatusThunkCreator} setTextStatusAC={this.props.setTextStatusAC} status={this.props.status} profile={this.props.profile}/> : <Preloader/>}
+            {this.props.isPreloader ?
+                <Profile userId={this.props.userId} setStatusThunkCreator={this.props.setStatusThunkCreator} setTextStatusAC={this.props.setTextStatusAC}
+                status={this.props.status} profile={this.props.profile}/> : <Preloader/>}
         </div>
 
 
@@ -38,13 +41,16 @@ let mapStateToProps = (state: TypeStoreReducer): TypeMapStateToPropsProfile => {
     return {
         profile: state.profilePage.profile,
         isPreloader: state.profilePage.isPreloader,
-        status:state.profilePage.status
+        status:state.profilePage.status,
+        userId:state.authPage.userId,
+        isAuth:state.authPage.isAuth
     }
 }
 
 export default compose<React.ComponentType>(
     connect<TypeMapStateToPropsProfile, TypeMapDispatchToPropsProfile, {},
-        TypeStoreReducer>(mapStateToProps, {setProfileThunkCreator,setTextStatusAC,setStatusThunkCreator}),
+        TypeStoreReducer>(mapStateToProps,
+        {setProfileThunkCreator,setTextStatusAC,setStatusThunkCreator}),
     withRouter,
 )(ProfileConteiner)
 

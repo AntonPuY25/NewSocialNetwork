@@ -11,10 +11,10 @@ import {
     SETCOUNTPAGE,
     SETPAGENUMBER, SetPreloader,
     SET_DISABLED_BUTTON,
-    UNFOLLOW, FollowAC, UnFollowAC, getUsersAC, setPageAC, setCountPAgeAC, SetPreloaderAC, setDisabledButtonAC
+    UNFOLLOW,
 } from "../Redux/Reducers/usersReducer";
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
-import {SET_AUTH_DATA, SetAuthIsAuthTestAC} from "../Redux/Reducers/authReducer";
+import {authThunkCreator, SET_AUTH_DATA, SetAuthIsAuthTestAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
 //PROFILE_CONTAINER
 export type TypeContactsDataProfile = {
     facebook: string,
@@ -31,23 +31,26 @@ export type TypePhotosDataProfile = {
     large: string
 
 }
+export type TypeUserId = {
+    userId: number
+}
 export type TypeResponseDataProfile = {
     aboutMe: string
     contacts: TypeContactsDataProfile
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    userId: number
+    userId: TypeUserId
     photos: TypePhotosDataProfile
     status: string
 }
 export type TypeResponseDataProfileStatus = {
-    data:string
+    data: string
 
 }
 export type TypeResponseSetDataProfileStatus = {
-    data: {  }
-    resultCode:number
+    data: {}
+    resultCode: number
 
 }
 export type PathParamsType = {
@@ -56,10 +59,12 @@ export type PathParamsType = {
 export type TypeProfileProps = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
-    setProfileThunkCreator: (userId: string) => void
+    setProfileThunkCreator: (userId: number) => void
     status: string
-    setTextStatusAC:(textStatus:string)=>void
-    setStatusThunkCreator:(textStatus:string)=>void
+    setTextStatusAC: (textStatus: string) => void
+    setStatusThunkCreator: (textStatus: string) => void
+    userId: number
+    isAuth:boolean
 
 
 }
@@ -67,12 +72,14 @@ export type TypeMapStateToPropsProfile = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
     status: string
+    userId: number
+    isAuth:boolean
 
 }
 export type TypeMapDispatchToPropsProfile = {
     setProfileThunkCreator: (userId: string) => void
-    setTextStatusAC:(textStatus:string)=>void
-    setStatusThunkCreator:(textStatus:string)=>void
+    setTextStatusAC: (textStatus: string) => void
+    setStatusThunkCreator: (textStatus: string) => void
 }
 
 
@@ -102,6 +109,7 @@ export type TypeAddPostTextAction = {
     type: typeof ADD_TEXT_POST
     text: string
 }
+
 export type TypeActionProfileReducer =
     TypeAddPostAction
     | TypeAddPostTextAction
@@ -356,6 +364,19 @@ export type TypeResponseDataData = {
     email: string
     login: string
 }
+export type TypeLoginResponseDataData = {
+    userId: number
+}
+export type TypeLoginResponseData = {
+    resultCode: number
+    messages: [],
+    data: TypeLoginResponseDataData
+}
+export type TypeLogoutResponseData = {
+    resultCode: number
+    messages: [],
+    data: {}
+}
 export type TypeResponseDataAuth = {
     data: TypeResponseDataData
     fieldsErrors: []
@@ -365,13 +386,16 @@ export type TypeResponseDataAuth = {
 export type TypeInitialStateAuth = {
     data: TypeResponseDataData
     isAuth: boolean
+    userId:number
 }
 export type TypeActionSetAuthData = {
     type: typeof SET_AUTH_DATA
     data: TypeResponseDataData
 }
+export type TypeSetUserID = ReturnType<typeof SetUserIdAC>;
+
 export type TypeActionSetIsAuth = ReturnType<typeof SetAuthIsAuthTestAC>;
-export type TypeActionAuth = TypeActionSetAuthData | TypeActionSetIsAuth
+export type TypeActionAuth = TypeActionSetAuthData | TypeActionSetIsAuth| TypeSetUserID;
 
 //HEADER
 export type TypePropsHeader = {
@@ -384,7 +408,43 @@ export type TypePropsHeaderComponent = {
     authThunkCreator: () => void
     email: any
 }
+export type TypeMapStateToPropsHeader = {
+    email:string
+    isAuth: boolean
+}
+export type TypeMapDispatchToPropsHeader = {
+    authThunkCreator:()=>void
+}
+//Login
+export type TypeMapStateToPropsLogin = {}
+export type TypeMapDispatchToPropsLogin = {
+    loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: boolean) => void
+}
+export type TypeContainerLoginProps = {
+    loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: boolean) => void
 
+}
+export type TypeLoginProps = {
+    loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: boolean) => void
+
+}
+// export type TypeFormDataLogin = {
+//     email: string
+//     password: string
+//     rememberMe: true
+// }
+
+//LOGOUT
+export type TypeMapStateToPropsLogout = {
+
+}
+export type TypeMapDispatchToPropsLogout = {
+    logoutThunkCreator:()=>void
+}
+export type TypeLogoutContainerProps = {
+    logoutThunkCreator:()=>void
+
+}
 //DALL
 export type TypeGetUsersApi = {
     getUsersPages: (pageNumber: number, count: number) => Promise<TypeResponseDataUsers>
@@ -394,11 +454,13 @@ export type TypeGetUsersApi = {
 }
 export type TypeGetAuthApi = {
     checkLogin: () => Promise<TypeResponseDataAuth>
+    login: (email: string, password: string, rememberMe: boolean, captcha: boolean) => Promise<TypeLoginResponseData>
+    Logout: () => Promise<TypeLogoutResponseData>
 }
 export type TypeGetProfileApi = {
     getProfile: (userId: string) => Promise<TypeResponseDataProfile>
-    getStatusProfile:(userId:string)=>Promise<TypeResponseDataProfileStatus>
-    setStatusProfile:(textStatus:string)=>Promise<TypeResponseSetDataProfileStatus>
+    getStatusProfile: (userId: string) => Promise<TypeResponseDataProfileStatus>
+    setStatusProfile: (textStatus: string) => Promise<TypeResponseSetDataProfileStatus>
 }
 
 //REDUX_STORE

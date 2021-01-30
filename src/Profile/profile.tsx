@@ -10,6 +10,7 @@ type TypePropsProfile = {
     status:string
     setTextStatusAC:(textStatus:string)=>void
     setStatusThunkCreator:(textStatus:string)=>void
+    userId:number
 
 }
 

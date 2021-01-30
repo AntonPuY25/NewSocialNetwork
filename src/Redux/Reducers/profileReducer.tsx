@@ -1,14 +1,18 @@
 import {
-    PostType, TypeActionProfileReducer,
-    TypeAddPostAction, TypeAddPostTextAction,
+    PostType,
+    TypeActionProfileReducer,
+    TypeAddPostAction,
+    TypeAddPostTextAction,
     TypeInitialStateProfile,
     TypePreloaderProfile,
     TypeProfileData,
-    TypeResponseDataProfile, TypeResponseDataProfileStatus, TypeResponseSetDataProfileStatus, TypeStoreReducer
+    TypeResponseDataProfile,
+    TypeResponseDataProfileStatus,
+    TypeResponseSetDataProfileStatus,
+    TypeStoreReducer,
 } from "../../Types/Types";
 import {getProfileApi} from "../../DALL/api";
 import {ThunkAction} from "redux-thunk";
-
 
 export const ADD_TEXT_POST = "ADD_TEXT_POST";
 export const ADD_POST = "ADD_POST";
@@ -79,8 +83,10 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
         case SET_PROFILE:
             return {
                 ...state,
-                profile: action.data
+                profile: action.data,
             };
+
+
         case SET_PRELOADER:
             return {
                 ...state,
@@ -114,13 +120,14 @@ export const setProfileDataAC = (data: TypeResponseDataProfile): TypeProfileData
         data
     }
 }
+
 export const setPreloaderAC = (preloader: boolean): TypePreloaderProfile => {
     return {
         type: SET_PRELOADER,
         preloader
     }
 }
-export const setTextStatusAC = (textStatus: string) => {
+export const setTextStatusAC = (textStatus: any) => {
     return {
         type: SET_STATUS_TEXT,
         textStatus
@@ -132,12 +139,10 @@ export const setProfileThunkCreator = (userId: string): ThunkAction<void, TypeSt
     return (dispatch) => {
         getProfileApi.getProfile(userId).then((data: TypeResponseDataProfile) => {
             getProfileApi.getStatusProfile(userId).then((data: TypeResponseDataProfileStatus) => {
-                let status = data.toString()
-                dispatch(setTextStatusAC(status))
+                dispatch(setTextStatusAC(data))
             })
             dispatch(setProfileDataAC(data))
             dispatch(setPreloaderAC(true))
-
         })
     }
 }
