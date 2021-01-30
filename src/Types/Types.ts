@@ -2,7 +2,7 @@ import {
     ADD_POST,
     ADD_TEXT_POST,
     SET_PRELOADER,
-    SET_PROFILE
+    SET_PROFILE, setTextStatusAC
 } from "../Redux/Reducers/profileReducer";
 import {DeleteMessageAC, DialogAC, DialogTextAC} from "../Redux/Reducers/dealogsReducer";
 import {
@@ -39,6 +39,16 @@ export type TypeResponseDataProfile = {
     fullName: string
     userId: number
     photos: TypePhotosDataProfile
+    status: string
+}
+export type TypeResponseDataProfileStatus = {
+    data:string
+
+}
+export type TypeResponseSetDataProfileStatus = {
+    data: {  }
+    resultCode:number
+
 }
 export type PathParamsType = {
     userId: string
@@ -46,18 +56,23 @@ export type PathParamsType = {
 export type TypeProfileProps = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
-    setProfileThunkCreator:(userId:string)=>void
-
+    setProfileThunkCreator: (userId: string) => void
+    status: string
+    setTextStatusAC:(textStatus:string)=>void
+    setStatusThunkCreator:(textStatus:string)=>void
 
 
 }
 export type TypeMapStateToPropsProfile = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
+    status: string
 
 }
 export type TypeMapDispatchToPropsProfile = {
-    setProfileThunkCreator:(userId:string)=>void
+    setProfileThunkCreator: (userId: string) => void
+    setTextStatusAC:(textStatus:string)=>void
+    setStatusThunkCreator:(textStatus:string)=>void
 }
 
 
@@ -82,6 +97,7 @@ export type PostType = {
 export type TypeAddPostAction = {
     type: typeof ADD_POST
 }
+export type TypeSetStatusTextAction = ReturnType<typeof setTextStatusAC>
 export type TypeAddPostTextAction = {
     type: typeof ADD_TEXT_POST
     text: string
@@ -90,7 +106,8 @@ export type TypeActionProfileReducer =
     TypeAddPostAction
     | TypeAddPostTextAction
     | TypeProfileData
-    | TypePreloaderProfile;
+    | TypePreloaderProfile
+    | TypeSetStatusTextAction;
 export type TypePostData = {
     dataPost: Array<PostType>
 }
@@ -99,6 +116,7 @@ export type TypeInitialStateProfile = {
     valueTextPost: string
     profile: TypeResponseDataProfile
     isPreloader: boolean
+    status: string
 }
 
 //POST
@@ -138,15 +156,15 @@ export type TypeUsersProps = {
     pageNumber: number
     countPAge: number
     isPreloader: boolean
-    idDisabledButton:Array<number>
+    idDisabledButton: Array<number>
     followThunkCreator: (userId: number) => void
     unFollowThunkCreator: (userId: number) => void
     getUsersAC: (arr: Array<UserType>) => void
     setPageAC: (pageNumber: number) => void
     setCountPAgeAC: (countPage: number) => void
     SetPreloaderAC: (preloader: boolean) => void
-    getUsersThunkCreator:(pageNumber:number,count:number)=>void
-    getPageUsersThunkCreator:(id:number, count:number)=>void
+    getUsersThunkCreator: (pageNumber: number, count: number) => void
+    getPageUsersThunkCreator: (id: number, count: number) => void
 
 }
 export type TypePhoto = {
@@ -173,15 +191,15 @@ export type TypeMapStateToPropsUserContainer = {
     pageNumber: number
     countPAge: number
     isPreloader: boolean
-    idDisabledButton:Array<number>
+    idDisabledButton: Array<number>
 }
 export type TypeMapDispatchToPropsUserContainer = {
     getUsersAC: (arr: Array<UserType>) => void
     setPageAC: (pageNumber: number) => void
     setCountPAgeAC: (countPage: number) => void
     SetPreloaderAC: (preloader: boolean) => void
-    getUsersThunkCreator:(pageNumber:number,count:number)=>void
-    getPageUsersThunkCreator:(id:number, count:number)=>void
+    getUsersThunkCreator: (pageNumber: number, count: number) => void
+    getPageUsersThunkCreator: (id: number, count: number) => void
     followThunkCreator: (userId: number) => void
     unFollowThunkCreator: (userId: number) => void
 
@@ -196,7 +214,7 @@ export type TypeUserFunProps = {
     users: Array<User>
     followThunkCreator: (userId: number) => void
     unFollowThunkCreator: (userId: number) => void
-    isDisabled:Array<number>
+    isDisabled: Array<number>
 
 }
 export type TypeUserResponseData = {
@@ -214,11 +232,11 @@ export type TypeInitialStateUsers = {
     pageNumber: number
     countPage: number
     isPreloader: boolean
-    disabledButton:Array<number>
+    disabledButton: Array<number>
 }
 export type TypeActionDisabledButton = {
-    type:typeof SET_DISABLED_BUTTON
-    isDisable:Array<number>
+    type: typeof SET_DISABLED_BUTTON
+    isDisable: Array<number>
 
 
 }
@@ -247,7 +265,7 @@ export type TypeActionSetPreloader = {
     preloader: boolean
 }
 export  type TypeActionUserReducer = TypeActionFollow | TypeActionUnFollow | TypeActionSetCountPage
-    | TypeActionSetPage | TypeActionGetUsers | TypeActionSetPreloader |TypeActionDisabledButton;
+    | TypeActionSetPage | TypeActionGetUsers | TypeActionSetPreloader | TypeActionDisabledButton;
 //USERS
 export type TypePhotoUsers = {
     small: null
@@ -363,7 +381,7 @@ export type TypePropsHeader = {
 }
 export type TypePropsHeaderComponent = {
     isAuth: boolean
-    authThunkCreator:()=>void
+    authThunkCreator: () => void
     email: any
 }
 
@@ -379,6 +397,8 @@ export type TypeGetAuthApi = {
 }
 export type TypeGetProfileApi = {
     getProfile: (userId: string) => Promise<TypeResponseDataProfile>
+    getStatusProfile:(userId:string)=>Promise<TypeResponseDataProfileStatus>
+    setStatusProfile:(textStatus:string)=>Promise<TypeResponseSetDataProfileStatus>
 }
 
 //REDUX_STORE
@@ -389,10 +409,11 @@ export type TypeStoreReducer = {
     musicPage: TypeInitialStateMusic
     authPage: TypeInitialStateAuth
 
+
 }
 
 //HOC_REDIRECT
-export type TypeMapStateToPropsHoc={
+export type TypeMapStateToPropsHoc = {
 
-    isAuth:boolean
+    isAuth: boolean
 }

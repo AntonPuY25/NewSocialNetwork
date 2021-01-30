@@ -4,7 +4,7 @@ import {
     TypeInitialStateProfile,
     TypePreloaderProfile,
     TypeProfileData,
-    TypeResponseDataProfile, TypeStoreReducer
+    TypeResponseDataProfile, TypeResponseDataProfileStatus, TypeResponseSetDataProfileStatus, TypeStoreReducer
 } from "../../Types/Types";
 import {getProfileApi} from "../../DALL/api";
 import {ThunkAction} from "redux-thunk";
@@ -14,6 +14,7 @@ export const ADD_TEXT_POST = "ADD_TEXT_POST";
 export const ADD_POST = "ADD_POST";
 export const SET_PROFILE = "SET_PROFILE"
 export const SET_PRELOADER = "SET_PRELOADER"
+export const SET_STATUS_TEXT = "SET_STATUS_TEXT"
 
 let initialState = {
     postData: {
@@ -40,7 +41,8 @@ let initialState = {
     },
     valueTextPost: '',
     profile: {} as TypeResponseDataProfile,
-    isPreloader: false
+    isPreloader: false,
+    status: "New Status"
 
 }
 
@@ -84,6 +86,11 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
                 ...state,
                 isPreloader: action.preloader
             }
+        case SET_STATUS_TEXT:
+            return {
+                ...state,
+                status: action.textStatus
+            }
 
         default:
             return state
@@ -113,13 +120,35 @@ export const setPreloaderAC = (preloader: boolean): TypePreloaderProfile => {
         preloader
     }
 }
+export const setTextStatusAC = (textStatus: string) => {
+    return {
+        type: SET_STATUS_TEXT,
+        textStatus
+    } as const
+}
 
-export const setProfileThunkCreator = (userId: string):ThunkAction<void, TypeStoreReducer,
+export const setProfileThunkCreator = (userId: string): ThunkAction<void, TypeStoreReducer,
     unknown, TypeActionProfileReducer> => {
     return (dispatch) => {
         getProfileApi.getProfile(userId).then((data: TypeResponseDataProfile) => {
+            getProfileApi.getStatusProfile(userId).then((data: TypeResponseDataProfileStatus) => {
+                let status = data.toString()
+                dispatch(setTextStatusAC(status))
+            })
             dispatch(setProfileDataAC(data))
             dispatch(setPreloaderAC(true))
+
+        })
+    }
+}
+
+export const setStatusThunkCreator = (textStatus:string):ThunkAction<void, TypeStoreReducer,
+    unknown, TypeActionProfileReducer> => {
+    return (dispatch) => {
+        getProfileApi.setStatusProfile(textStatus).then((data:TypeResponseSetDataProfileStatus)=>{
+            if(data.resultCode===0){
+                dispatch(setTextStatusAC(textStatus))
+            }
 
         })
     }

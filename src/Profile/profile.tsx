@@ -2,10 +2,15 @@ import React from "react";
 import s from './profile.module.css';
 import PostsConteiner from "./Posts/PostsConteiner";
 import {TypeResponseDataProfile} from "../Types/Types";
+import Status from "./Dialogs/status/status";
 
 
 type TypePropsProfile = {
     profile: TypeResponseDataProfile
+    status:string
+    setTextStatusAC:(textStatus:string)=>void
+    setStatusThunkCreator:(textStatus:string)=>void
+
 }
 
 
@@ -33,6 +38,7 @@ export default function Profile(props: TypePropsProfile) {
             </div>
         </div>
         <div className={s.posts}>
+            <Status setStatusThunkCreator={props.setStatusThunkCreator} setTextStatusAC={props.setTextStatusAC}  status={props.status}/>
             <PostsConteiner/>
         </div>
 

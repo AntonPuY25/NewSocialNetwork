@@ -3,8 +3,8 @@ import {
     TypeGetAuthApi,
     TypeGetProfileApi,
     TypeGetUsersApi,
-    TypeResponseDataAuth, TypeResponseDataProfile,
-    TypeResponseDataUsers, TypeUserResponseData
+    TypeResponseDataAuth, TypeResponseDataProfile, TypeResponseDataProfileStatus,
+    TypeResponseDataUsers, TypeResponseSetDataProfileStatus, TypeUserResponseData
 } from "../Types/Types";
 
 const instance = axios.create({
@@ -52,7 +52,19 @@ export const getProfileApi: TypeGetProfileApi = {
         return instance.get<TypeResponseDataProfile>(`profile/${userId}`).then(response => {
             return response.data
         })
+    },
+    getStatusProfile(userId) {
+        return instance.get<TypeResponseDataProfileStatus>(`/profile/status/${userId}`).then(response => {
+            return response.data
+        })
+
+    },
+    setStatusProfile(textStatus:string){
+        return instance.put<TypeResponseSetDataProfileStatus>(`/profile/status`,{status:textStatus}).then(response=>{
+            return response.data
+        })
     }
+
 }
 
 
