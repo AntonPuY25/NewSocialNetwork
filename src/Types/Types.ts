@@ -14,7 +14,7 @@ import {
     UNFOLLOW,
 } from "../Redux/Reducers/usersReducer";
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
-import {authThunkCreator, SET_AUTH_DATA, SetAuthIsAuthTestAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
+import {SET_AUTH_DATA, SetAuthIsAuthTestAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
 //PROFILE_CONTAINER
 export type TypeContactsDataProfile = {
     facebook: string,
@@ -50,7 +50,7 @@ export type TypeResponseDataProfileStatus = {
 }
 export type TypeResponseSetDataProfileStatus = {
     data: {}
-    resultCode: number
+    resultCode:ResultCodeEnum
 
 }
 export type PathParamsType = {
@@ -478,4 +478,10 @@ export type TypeStoreReducer = {
 export type TypeMapStateToPropsHoc = {
 
     isAuth: boolean
+}
+
+//Enum
+export enum ResultCodeEnum{
+    Sucsses=0,
+    error=1
 }

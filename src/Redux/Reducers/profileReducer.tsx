@@ -1,5 +1,6 @@
 import {
     PostType,
+    ResultCodeEnum,
     TypeActionProfileReducer,
     TypeAddPostAction,
     TypeAddPostTextAction,
@@ -151,7 +152,7 @@ export const setStatusThunkCreator = (textStatus:string):ThunkAction<void, TypeS
     unknown, TypeActionProfileReducer> => {
     return (dispatch) => {
         getProfileApi.setStatusProfile(textStatus).then((data:TypeResponseSetDataProfileStatus)=>{
-            if(data.resultCode===0){
+            if(data.resultCode===ResultCodeEnum.Sucsses){
                 dispatch(setTextStatusAC(textStatus))
             }
 

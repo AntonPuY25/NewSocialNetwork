@@ -8,7 +8,7 @@ import News from "./Profile/News/news";
 import Settings from "./Profile/Setings/settings";
 import UserConteiner from "./Profile/Users/usersConteiner";
 import MusicConteiner from "./Profile/Music/musicConteiner";
-import ProfileConteiner from "./Profile/profileConteiner";
+import ProfileContainer from "./Profile/profileConteiner";
 import HeaderComponent from "./Header/headerComponent";
 import ContainerLogin from "./Profile/Login/loginContainer";
 import Logout from "./Profile/Login/logoutConteiner";
@@ -26,7 +26,7 @@ function  App () {
                 </nav>
                 <aside className='aside'>
                     <Route path='/profile/:userId?' render={() =>
-                        <ProfileConteiner/>}/>
+                        <ProfileContainer/>}/>
                     <Route path='/dialogs' render={() => <DialogsConteiner name={'Anton'}/>}/>
                     <Route path='/friends' render={() => <UserConteiner/>}/>
                     <Route path='/news' render={() => <News/>}/>

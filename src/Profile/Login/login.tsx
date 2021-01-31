@@ -1,15 +1,21 @@
 import React from "react";
 import {Field,reduxForm} from "redux-form";
 import { TypeLoginProps} from "../../Types/Types";
+import {maxLengthCreator, required} from "../../Validators/validator";
+import {Input} from "../../Validators/TagsForValidators/tags";
 
 const LoginForm = (props:any)=>{
+let max = maxLengthCreator(30)
     return<div>
         <form onSubmit={props.handleSubmit}>
             <div>
-               <Field component={"input"} name={'email'} placeholder={"Login"} />
+               <Field component={Input}  validate={[required,maxLengthCreator(20)]} name={'email'}
+                      placeholder={"Login"}  />
             </div>
             <div>
-                <Field component={"input"} name={'password'} placeholder={'Password'} />
+                <Field component={Input}  name={'password'} placeholder={'Password'}
+                       validate={[required]}
+                />
             </div>
             <div>
 
@@ -29,7 +35,8 @@ export const LoginReduxForm = reduxForm({
 
 const Login = (props:TypeLoginProps)=>{
     const onSubmit = (formData:any)=>{
-        props.loginThunkCreator(formData.email,formData.password,formData.rememberMe,true)
+
+         props.loginThunkCreator(formData.email,formData.password,formData.rememberMe,true)
     }
     return<div>
         <h1>login</h1>
