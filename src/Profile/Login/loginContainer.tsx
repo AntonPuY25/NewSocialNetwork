@@ -11,13 +11,13 @@ import {
 
 const ContainerLogin = (props:TypeContainerLoginProps)=>{
     return<div>
-        <Login loginThunkCreator={props.loginThunkCreator} />
+        <Login isAuth={props.isAuth} loginThunkCreator={props.loginThunkCreator} />
     </div>
 
 }
-const mapStateToProps =():TypeMapStateToPropsLogin=> {
+const mapStateToProps =(state: TypeStoreReducer):TypeMapStateToPropsLogin=> {
       return {
-
+          isAuth:state.authPage.isAuth
       }
 }
 const connectContainerLogin = connect<TypeMapStateToPropsLogin,TypeMapDispatchToPropsLogin,{},

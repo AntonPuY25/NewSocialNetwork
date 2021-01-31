@@ -14,7 +14,7 @@ import {
     UNFOLLOW,
 } from "../Redux/Reducers/usersReducer";
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
-import {SET_AUTH_DATA, SetAuthIsAuthTestAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
+import {SetAuthIsAuthTestAC, SetEmailAC, SetLoginAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
 //PROFILE_CONTAINER
 export type TypeContactsDataProfile = {
     facebook: string,
@@ -384,18 +384,18 @@ export type TypeResponseDataAuth = {
     resultCode: number
 }
 export type TypeInitialStateAuth = {
-    data: TypeResponseDataData
+    email:string
+    login:string
     isAuth: boolean
     userId:number
 }
-export type TypeActionSetAuthData = {
-    type: typeof SET_AUTH_DATA
-    data: TypeResponseDataData
-}
+export type TypeActionSetAuthEmail = ReturnType<typeof SetEmailAC>
+export type TypeActionSetAuthLogin = ReturnType<typeof SetLoginAC>
+
 export type TypeSetUserID = ReturnType<typeof SetUserIdAC>;
 
 export type TypeActionSetIsAuth = ReturnType<typeof SetAuthIsAuthTestAC>;
-export type TypeActionAuth = TypeActionSetAuthData | TypeActionSetIsAuth| TypeSetUserID;
+export type TypeActionAuth = TypeActionSetAuthEmail | TypeActionSetIsAuth| TypeSetUserID|TypeActionSetAuthLogin;
 
 //HEADER
 export type TypePropsHeader = {
@@ -416,17 +416,19 @@ export type TypeMapDispatchToPropsHeader = {
     authThunkCreator:()=>void
 }
 //Login
-export type TypeMapStateToPropsLogin = {}
+export type TypeMapStateToPropsLogin = {
+    isAuth:boolean
+}
 export type TypeMapDispatchToPropsLogin = {
     loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: boolean) => void
 }
 export type TypeContainerLoginProps = {
     loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: boolean) => void
-
+    isAuth:boolean
 }
 export type TypeLoginProps = {
     loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: boolean) => void
-
+    isAuth:boolean
 }
 // export type TypeFormDataLogin = {
 //     email: string
@@ -436,14 +438,14 @@ export type TypeLoginProps = {
 
 //LOGOUT
 export type TypeMapStateToPropsLogout = {
-
+isAuth:boolean
 }
 export type TypeMapDispatchToPropsLogout = {
     logoutThunkCreator:()=>void
 }
 export type TypeLogoutContainerProps = {
     logoutThunkCreator:()=>void
-
+    isAuth:boolean
 }
 //DALL
 export type TypeGetUsersApi = {

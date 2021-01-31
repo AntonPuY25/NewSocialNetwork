@@ -27,7 +27,7 @@ class HeaderComponent extends React.Component<TypePropsHeaderComponent, any> {
 
 let mapStateToProps = (state: TypeStoreReducer):TypeMapStateToPropsHeader => {
     return {
-        email: state.authPage.data.email,
+        email: state.authPage.email,
         isAuth: state.authPage.isAuth
     }
 }

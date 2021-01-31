@@ -43,6 +43,7 @@ export const getUsersApi: TypeGetUsersApi = {
 export const getAuthApi: TypeGetAuthApi = {
     checkLogin() {
         return instance.get<TypeResponseDataAuth>(`auth/me`).then(response => {
+            console.log(response.data)
             return response.data
         })
     },

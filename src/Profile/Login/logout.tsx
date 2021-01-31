@@ -1,5 +1,6 @@
 import React from "react";
 import {TypeLogoutContainerProps} from "../../Types/Types";
+import {Redirect} from "react-router-dom";
 
 const Logout = (props:TypeLogoutContainerProps)=>{
 
@@ -7,7 +8,9 @@ const Logout = (props:TypeLogoutContainerProps)=>{
         props.logoutThunkCreator()
     }
     return<div>
-        <button onClick={logoutFun}>Logout</button>
+        {props.isAuth? <button onClick={logoutFun}>Logout</button>:
+            <Redirect to={'/login'}/>}
+
     </div>
 }
 export default Logout

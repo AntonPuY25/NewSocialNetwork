@@ -11,12 +11,12 @@ import {logoutThunkCreator} from "../../Redux/Reducers/authReducer";
 
 const LogoutConteriner = (props:TypeLogoutContainerProps)=>{
     return<div>
-        <Logout logoutThunkCreator={props.logoutThunkCreator}/>
+        <Logout isAuth={props.isAuth} logoutThunkCreator={props.logoutThunkCreator}/>
     </div>
 }
-let mapStateToProps =():TypeMapStateToPropsLogout=> {
-    return{
-
+let mapStateToProps =(state: TypeStoreReducer):TypeMapStateToPropsLogout=> {
+    return {
+        isAuth:state.authPage.isAuth
     }
 }
 export default  connect<TypeMapStateToPropsLogout,TypeMapDispatchToPropsLogout,

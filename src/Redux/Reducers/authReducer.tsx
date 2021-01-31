@@ -1,21 +1,17 @@
 import {
     TypeActionAuth,
-    TypeActionSetAuthData,
     TypeInitialStateAuth, TypeResponseDataAuth,
-    TypeResponseDataData, TypeStoreReducer,
+     TypeStoreReducer,
 
 } from "../../Types/Types";
 import {getAuthApi} from "../../DALL/api";
 import {ThunkAction} from "redux-thunk";
 export const SET_USER_ID = "SET_USER_ID"
-export const SET_AUTH_DATA = "SET_AUTH_DATA"
-export const SET_AUTH_ISAUTH = "SET_AUTH_ISAUTH"
-export const SetAuthDataAC = (data: TypeResponseDataData): TypeActionSetAuthData => {
-    return {
-        type: SET_AUTH_DATA,
-        data
-    }
-}
+export const SET_AUTH_EMAIL = "SET_AUTH_EMAIL"
+export const SET_AUTH_LOGIN = "SET_AUTH_LOGIN"
+export const SET_AUTH_ISAUTH = "SET_AUTH_ISAUTH";
+
+
 export const SetAuthIsAuthTestAC = (isAuth: boolean) => {
     return {
         type: SET_AUTH_ISAUTH,
@@ -28,16 +24,29 @@ export const SetUserIdAC = (userId: number) => {
         userId
     } as const
 }
+export const SetEmailAC = (email:string)=>{
+    return{
+        type:SET_AUTH_EMAIL,
+        email
+    } as const
+}
+export const SetLoginAC = (login:string)=>{
+    return{
+        type:SET_AUTH_LOGIN,
+        login
+    } as const
+}
 
 export const authThunkCreator = (): ThunkAction<void, any,
     TypeStoreReducer, TypeActionAuth> => {
     return (dispatch) => {
         getAuthApi.checkLogin().then((data: TypeResponseDataAuth) => {
             if((data.resultCode === 0)){
-                console.log(data.data.id)
+
                 dispatch(SetUserIdAC(data.data.id))
+                dispatch(SetEmailAC(data.data.email))
+                dispatch(SetLoginAC(data.data.login))
                 dispatch(SetAuthIsAuthTestAC(true))
-                dispatch(SetAuthDataAC(data.data))
 
 
             }else{
@@ -52,7 +61,10 @@ export const loginThunkCreator = (email:string,password:string,rememberMe:boolea
     return (dispatch) => {
         getAuthApi.login(email,password,rememberMe,captcha).then(data=>{
             if(data.resultCode===0){
-                dispatch(SetUserIdAC(2))
+                dispatch(SetUserIdAC(data.data.userId))
+                dispatch(SetEmailAC(email))
+                dispatch(SetAuthIsAuthTestAC(true))
+
             }
 
         })
@@ -62,11 +74,15 @@ export const logoutThunkCreator = ():ThunkAction<void, any,
     TypeStoreReducer, TypeActionAuth> => {
     return (dispatch) => {
         getAuthApi.Logout()
+        dispatch(SetEmailAC(""))
+        dispatch(SetUserIdAC(0))
+        dispatch(SetAuthIsAuthTestAC(false))
 
     }
 }
 let initilaState: TypeInitialStateAuth = {
-    data: {} as TypeResponseDataData,
+    email:"",
+    login:"",
     isAuth: false,
     userId:13747,
 
@@ -76,10 +92,10 @@ const authResucer = (state = initilaState, action: TypeActionAuth): TypeInitialS
 
     switch (action.type) {
 
-        case SET_AUTH_DATA:
+        case SET_AUTH_EMAIL:
             return {
                 ...state,
-                data: action.data
+                email:action.email
 
             }
         case SET_AUTH_ISAUTH:
@@ -89,10 +105,15 @@ const authResucer = (state = initilaState, action: TypeActionAuth): TypeInitialS
 
             }
         case SET_USER_ID:
-
             return {
                 ...state,
                 userId:action.userId
+            }
+        case SET_AUTH_LOGIN:
+
+            return {
+                ...state,
+                login:action.login
             }
 
         default:

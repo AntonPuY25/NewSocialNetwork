@@ -3,9 +3,9 @@ import {Field,reduxForm} from "redux-form";
 import { TypeLoginProps} from "../../Types/Types";
 import {maxLengthCreator, required} from "../../Validators/validator";
 import {Input} from "../../Validators/TagsForValidators/tags";
+import {Redirect} from "react-router-dom";
 
 const LoginForm = (props:any)=>{
-let max = maxLengthCreator(30)
     return<div>
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -38,9 +38,12 @@ const Login = (props:TypeLoginProps)=>{
 
          props.loginThunkCreator(formData.email,formData.password,formData.rememberMe,true)
     }
+
     return<div>
-        <h1>login</h1>
-        <LoginReduxForm onSubmit={onSubmit}/>
+        {!props.isAuth?<div><h1>login</h1>
+                <LoginReduxForm onSubmit={onSubmit}/></div>
+            :<Redirect to={'/profile'}/>}
+
     </div>
 
 }

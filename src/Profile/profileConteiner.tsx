@@ -10,6 +10,7 @@ import {
     TypeProfileProps, TypeStoreReducer
 } from "../Types/Types";
 import {compose} from "redux";
+import {RedirectHoc} from "../HOC/redirectHoc";
 
 
 export class ProfileConteiner extends Component<TypeProfileProps & RouteComponentProps<PathParamsType>> {
@@ -51,6 +52,7 @@ export default compose<React.ComponentType>(
     connect<TypeMapStateToPropsProfile, TypeMapDispatchToPropsProfile, {},
         TypeStoreReducer>(mapStateToProps,
         {setProfileThunkCreator,setTextStatusAC,setStatusThunkCreator}),
+    RedirectHoc,
     withRouter,
 )(ProfileConteiner)
 
