@@ -1,13 +1,13 @@
 import React from "react";
-import {Field,reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import { TypeLoginProps} from "../../Types/Types";
 import {maxLengthCreator, required} from "../../Validators/validator";
 import {Input} from "../../Validators/TagsForValidators/tags";
 import {Redirect} from "react-router-dom";
 
-const LoginForm = (props:any)=>{
+const LoginForm:React.FC<InjectedFormProps<TypeFormData>> = ({handleSubmit})=>{
     return<div>
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                <Field component={Input}  validate={[required,maxLengthCreator(20)]} name={'email'}
                       placeholder={"Login"}  />
@@ -29,13 +29,17 @@ const LoginForm = (props:any)=>{
     </div>
 }
 
-export const LoginReduxForm = reduxForm({
+export const LoginReduxForm = reduxForm<TypeFormData>({
     form: "Login"
 })(LoginForm);
+type TypeFormData = {
+    email:string
+    password:string
+    rememberMe:boolean
+}
 
 const Login = (props:TypeLoginProps)=>{
-    const onSubmit = (formData:any)=>{
-
+    const onSubmit = (formData:TypeFormData)=>{
          props.loginThunkCreator(formData.email,formData.password,formData.rememberMe,true)
     }
 

@@ -1,7 +1,12 @@
 import React, {Component} from "react";
 import Profile from "./profile";
 import {connect} from "react-redux";
-import {setProfileThunkCreator, setStatusThunkCreator, setTextStatusAC} from "../Redux/Reducers/profileReducer";
+import {
+    ActionsProfile,
+    setProfileThunkCreator,
+    setStatusThunkCreator,
+
+} from "../Redux/Reducers/profileReducer";
 import Preloader from "./Preloader/Preloader";
 import {withRouter} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router'
@@ -48,6 +53,8 @@ let mapStateToProps = (state: TypeStoreReducer): TypeMapStateToPropsProfile => {
     }
 }
 
+
+const {setTextStatusAC} = ActionsProfile
 export default compose<React.ComponentType>(
     connect<TypeMapStateToPropsProfile, TypeMapDispatchToPropsProfile, {},
         TypeStoreReducer>(mapStateToProps,

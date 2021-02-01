@@ -6,6 +6,7 @@ import {
 } from "../../Types/Types";
 import {getAuthApi} from "../../DALL/api";
 import {ThunkAction} from "redux-thunk";
+import {stopSubmit} from "redux-form";
 export const SET_USER_ID = "SET_USER_ID"
 export const SET_AUTH_EMAIL = "SET_AUTH_EMAIL"
 export const SET_AUTH_LOGIN = "SET_AUTH_LOGIN"
@@ -59,6 +60,7 @@ export const authThunkCreator = (): ThunkAction<void, any,
 export const loginThunkCreator = (email:string,password:string,rememberMe:boolean,captcha:boolean):ThunkAction<void, any,
     TypeStoreReducer, TypeActionAuth> => {
     return (dispatch) => {
+        dispatch(stopSubmit("Login",{email:"Email is wrong"}))
         getAuthApi.login(email,password,rememberMe,captcha).then(data=>{
             if(data.resultCode===0){
                 dispatch(SetUserIdAC(data.data.userId))

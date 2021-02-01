@@ -1,4 +1,4 @@
-import {PostAC, PostTextAC} from "../../Redux/Reducers/profileReducer";
+import {ActionsProfile} from "../../Redux/Reducers/profileReducer";
 import Posts from "./Posts";
 import {connect} from "react-redux";
 import {
@@ -18,10 +18,10 @@ let mapStateToProps = (state: TypeStoreReducer):TypeMapStateToPropsPostConteiner
 let mapDispatchToProps = (dispatch: Dispatch<TypeActionProfileReducer>):TypeMapDispatchToPropsPostConteiner => {
     return {
         addPost: () => {
-            dispatch(PostAC())
+            dispatch(ActionsProfile.PostAC())
         },
         onChangePostText: (text: string) => {
-            dispatch(PostTextAC(text))
+            dispatch(ActionsProfile.PostTextAC(text))
         }
     }
 }

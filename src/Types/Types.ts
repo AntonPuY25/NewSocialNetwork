@@ -1,9 +1,3 @@
-import {
-    ADD_POST,
-    ADD_TEXT_POST,
-    SET_PRELOADER,
-    SET_PROFILE, setTextStatusAC
-} from "../Redux/Reducers/profileReducer";
 import {DeleteMessageAC, DialogAC, DialogTextAC} from "../Redux/Reducers/dealogsReducer";
 import {
     FOLLOW,
@@ -15,6 +9,7 @@ import {
 } from "../Redux/Reducers/usersReducer";
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
 import {SetAuthIsAuthTestAC, SetEmailAC, SetLoginAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
+import {ActionsProfile} from "../Redux/Reducers/profileReducer";
 //PROFILE_CONTAINER
 export type TypeContactsDataProfile = {
     facebook: string,
@@ -84,14 +79,8 @@ export type TypeMapDispatchToPropsProfile = {
 
 
 //PROFILE_REDUCER
-export type TypeProfileData = {
-    type: typeof SET_PROFILE
-    data: TypeResponseDataProfile
-}
-export type TypePreloaderProfile = {
-    type: typeof SET_PRELOADER,
-    preloader: boolean
-}
+
+
 export type PostType = {
     id: number
     name: string
@@ -101,21 +90,9 @@ export type PostType = {
     imgPost: string
 
 }
-export type TypeAddPostAction = {
-    type: typeof ADD_POST
-}
-export type TypeSetStatusTextAction = ReturnType<typeof setTextStatusAC>
-export type TypeAddPostTextAction = {
-    type: typeof ADD_TEXT_POST
-    text: string
-}
 
-export type TypeActionProfileReducer =
-    TypeAddPostAction
-    | TypeAddPostTextAction
-    | TypeProfileData
-    | TypePreloaderProfile
-    | TypeSetStatusTextAction;
+
+export type TypeActionProfileReducer =ActionsTypeFromInfer<typeof ActionsProfile>
 export type TypePostData = {
     dataPost: Array<PostType>
 }
@@ -395,7 +372,8 @@ export type TypeActionSetAuthLogin = ReturnType<typeof SetLoginAC>
 export type TypeSetUserID = ReturnType<typeof SetUserIdAC>;
 
 export type TypeActionSetIsAuth = ReturnType<typeof SetAuthIsAuthTestAC>;
-export type TypeActionAuth = TypeActionSetAuthEmail | TypeActionSetIsAuth| TypeSetUserID|TypeActionSetAuthLogin;
+export type TypeFormLogin = any;
+export type TypeActionAuth = TypeActionSetAuthEmail | TypeActionSetIsAuth| TypeSetUserID|TypeActionSetAuthLogin|TypeFormLogin;
 
 //HEADER
 export type TypePropsHeader = {
@@ -487,3 +465,8 @@ export enum ResultCodeEnum{
     Sucsses=0,
     error=1
 }
+
+//INFER
+type PropertiesTypes<T> = T extends {[key:string]:infer U}? U:never
+export type ActionsTypeFromInfer<T extends {[key:string]:
+        (...args:any[])=>void}>= ReturnType<PropertiesTypes<T>>;
