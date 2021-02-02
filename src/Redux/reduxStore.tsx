@@ -6,6 +6,7 @@ import MusicReducer from "./Reducers/musicReducer";
 import authResucer from "./Reducers/authReducer";
 import thunkMiddleware from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
+import AppReducer from "./Reducers/appReducer";
 
 let reducers = combineReducers({
     profilePage: profileReducer,
@@ -13,6 +14,7 @@ let reducers = combineReducers({
     usersPage:usersReducer,
     musicPage:MusicReducer,
     authPage:authResucer,
+    appPage:AppReducer,
     form:formReducer
 })
 

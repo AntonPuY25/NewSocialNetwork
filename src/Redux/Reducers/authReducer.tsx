@@ -1,12 +1,13 @@
 import {
     TypeActionAuth,
     TypeInitialStateAuth, TypeResponseDataAuth,
-     TypeStoreReducer,
+    TypeStoreReducer,
 
 } from "../../Types/Types";
 import {getAuthApi} from "../../DALL/api";
 import {ThunkAction} from "redux-thunk";
-import {stopSubmit} from "redux-form";
+import {FormAction, stopSubmit} from "redux-form";
+
 export const SET_USER_ID = "SET_USER_ID"
 export const SET_AUTH_EMAIL = "SET_AUTH_EMAIL"
 export const SET_AUTH_LOGIN = "SET_AUTH_LOGIN"
@@ -25,54 +26,56 @@ export const SetUserIdAC = (userId: number) => {
         userId
     } as const
 }
-export const SetEmailAC = (email:string)=>{
-    return{
-        type:SET_AUTH_EMAIL,
+export const SetEmailAC = (email: string) => {
+    return {
+        type: SET_AUTH_EMAIL,
         email
     } as const
 }
-export const SetLoginAC = (login:string)=>{
-    return{
-        type:SET_AUTH_LOGIN,
+export const SetLoginAC = (login: string) => {
+    return {
+        type: SET_AUTH_LOGIN,
         login
     } as const
 }
 
-export const authThunkCreator = (): ThunkAction<void, any,
+export const authThunkCreator = (): ThunkAction<Promise<void>, any,
     TypeStoreReducer, TypeActionAuth> => {
     return (dispatch) => {
-        getAuthApi.checkLogin().then((data: TypeResponseDataAuth) => {
-            if((data.resultCode === 0)){
-
+       return  getAuthApi.checkLogin().then((data: TypeResponseDataAuth) => {
+            if ((data.resultCode === 0)) {
                 dispatch(SetUserIdAC(data.data.id))
                 dispatch(SetEmailAC(data.data.email))
                 dispatch(SetLoginAC(data.data.login))
                 dispatch(SetAuthIsAuthTestAC(true))
 
-
-            }else{
+            } else {
                 dispatch(SetAuthIsAuthTestAC(false))
             }
 
         })
     }
 }
-export const loginThunkCreator = (email:string,password:string,rememberMe:boolean,captcha:boolean):ThunkAction<void, any,
-    TypeStoreReducer, TypeActionAuth> => {
+
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean,
+                                  captcha: boolean): ThunkAction<void, TypeStoreReducer,
+    unknown, TypeActionAuth | FormAction> => {
     return (dispatch) => {
-        dispatch(stopSubmit("Login",{email:"Email is wrong"}))
-        getAuthApi.login(email,password,rememberMe,captcha).then(data=>{
-            if(data.resultCode===0){
+        getAuthApi.login(email, password, rememberMe, captcha).then(data => {
+            if (data.resultCode === 0) {
                 dispatch(SetUserIdAC(data.data.userId))
                 dispatch(SetEmailAC(email))
                 dispatch(SetAuthIsAuthTestAC(true))
+            } else {
+                let message = data.messages.length ? data.messages[0] : ['Some Error']
+                dispatch(stopSubmit("Login", {_error: message}))
 
             }
 
         })
     }
-    }
-export const logoutThunkCreator = ():ThunkAction<void, any,
+}
+export const logoutThunkCreator = (): ThunkAction<void, any,
     TypeStoreReducer, TypeActionAuth> => {
     return (dispatch) => {
         getAuthApi.Logout()
@@ -83,10 +86,10 @@ export const logoutThunkCreator = ():ThunkAction<void, any,
     }
 }
 let initilaState: TypeInitialStateAuth = {
-    email:"",
-    login:"",
+    email: "",
+    login: "",
     isAuth: false,
-    userId:13747,
+    userId: null as number | null,
 
 }
 
@@ -97,7 +100,7 @@ const authResucer = (state = initilaState, action: TypeActionAuth): TypeInitialS
         case SET_AUTH_EMAIL:
             return {
                 ...state,
-                email:action.email
+                email: action.email
 
             }
         case SET_AUTH_ISAUTH:
@@ -109,13 +112,13 @@ const authResucer = (state = initilaState, action: TypeActionAuth): TypeInitialS
         case SET_USER_ID:
             return {
                 ...state,
-                userId:action.userId
+                userId: action.userId
             }
         case SET_AUTH_LOGIN:
 
             return {
                 ...state,
-                login:action.login
+                login: action.login
             }
 
         default:

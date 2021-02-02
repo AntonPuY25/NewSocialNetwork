@@ -24,7 +24,7 @@ export default function Profile(props: TypePropsProfile) {
         </div>
         <div className={s.about}>
             <div className={s.ava}>
-                <img alt={'ava'} src={props.profile.photos.small?props.profile.photos.small:
+                <img alt={'ava'} src={props.profile.photos.small? props.profile.photos.small:
                     require('../Img/ava1.png')}/>
             </div>
 

@@ -7,13 +7,9 @@ import {
     TypePropsHeaderComponent,
     TypeStoreReducer
 } from "../Types/Types";
-import {authThunkCreator} from "../Redux/Reducers/authReducer";
 
 class HeaderComponent extends React.Component<TypePropsHeaderComponent, any> {
 
-    componentDidMount() {
-        this.props.authThunkCreator()
-    }
 
     render() {
         return <div>
@@ -32,4 +28,4 @@ let mapStateToProps = (state: TypeStoreReducer):TypeMapStateToPropsHeader => {
     }
 }
 export default connect<TypeMapStateToPropsHeader,TypeMapDispatchToPropsHeader
-    ,{},TypeStoreReducer>(mapStateToProps, {authThunkCreator})(HeaderComponent)
+    ,{},TypeStoreReducer>(mapStateToProps, )(HeaderComponent)

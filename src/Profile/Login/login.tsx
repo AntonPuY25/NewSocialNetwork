@@ -1,26 +1,33 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import { TypeLoginProps} from "../../Types/Types";
+import {TypeLoginProps} from "../../Types/Types";
 import {maxLengthCreator, required} from "../../Validators/validator";
 import {Input} from "../../Validators/TagsForValidators/tags";
 import {Redirect} from "react-router-dom";
-
-const LoginForm:React.FC<InjectedFormProps<TypeFormData>> = ({handleSubmit})=>{
-    return<div>
+import s from '../../Validators/TagsForValidators/validatorsTags.module.css'
+let maxLength = maxLengthCreator(20)
+const LoginForm: React.FC<InjectedFormProps<TypeFormData>> = ({
+                                                                  handleSubmit
+                                                                  , error
+                                                              }) => {
+    return <div>
         <form onSubmit={handleSubmit}>
             <div>
-               <Field component={Input}  validate={[required,maxLengthCreator(20)]} name={'email'}
-                      placeholder={"Login"}  />
+                <Field component={Input} validate={[required, maxLength]} name={'email'}
+                       placeholder={"Login"}/>
             </div>
             <div>
-                <Field component={Input}  name={'password'} placeholder={'Password'}
+                <Field component={Input} name={'password'} placeholder={'Password'}
                        validate={[required]}
                 />
             </div>
             <div>
 
-                <Field component={"input"} type={"checkbox"} name={'rememberMe'} />Remember me
+                <Field component={"input"} type={"checkbox"} name={'rememberMe'}/>Remember me
             </div>
+            {error ? <div className={s.error}>
+                {error}
+            </div> : ""}
             <div>
                 <button>Login</button>
             </div>
@@ -32,27 +39,25 @@ const LoginForm:React.FC<InjectedFormProps<TypeFormData>> = ({handleSubmit})=>{
 export const LoginReduxForm = reduxForm<TypeFormData>({
     form: "Login"
 })(LoginForm);
+
 type TypeFormData = {
-    email:string
-    password:string
-    rememberMe:boolean
+    email: string
+    password: string
+    rememberMe: boolean
 }
 
-const Login = (props:TypeLoginProps)=>{
-    const onSubmit = (formData:TypeFormData)=>{
-         props.loginThunkCreator(formData.email,formData.password,formData.rememberMe,true)
+const Login = (props: TypeLoginProps) => {
+    const onSubmit = (formData: TypeFormData) => {
+        props.loginThunkCreator(formData.email, formData.password, formData.rememberMe, true)
     }
-
-    return<div>
-        {!props.isAuth?<div><h1>login</h1>
-                <LoginReduxForm onSubmit={onSubmit}/></div>
-            :<Redirect to={'/profile'}/>}
-
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
+    }
+    return <div>
+        <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 
 }
-
-
 
 
 export default Login;

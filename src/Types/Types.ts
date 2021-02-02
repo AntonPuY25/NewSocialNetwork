@@ -10,6 +10,25 @@ import {
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
 import {SetAuthIsAuthTestAC, SetEmailAC, SetLoginAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
 import {ActionsProfile} from "../Redux/Reducers/profileReducer";
+import {ActionsApp} from "../Redux/Reducers/appReducer";
+//APP
+export type TypeAppProps={
+    initialized:boolean
+    initialThunkCreator:(initialized:boolean)=>void
+
+}
+//APP_REDUCER
+export type TypeInitialState = {
+    initialized:boolean
+}
+export type TypeActionsApp = ActionsTypeFromInfer<typeof ActionsApp>
+export type TypeMapStateToPropsApp = {
+    initialized:boolean
+}
+export type TypeMapDispatchToPropsApp = {
+    initialThunkCreator:(initialized:boolean)=>void
+}
+
 //PROFILE_CONTAINER
 export type TypeContactsDataProfile = {
     facebook: string,
@@ -67,7 +86,7 @@ export type TypeMapStateToPropsProfile = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
     status: string
-    userId: number
+    userId: number|null
     isAuth:boolean
 
 }
@@ -152,11 +171,7 @@ export type TypeUsersProps = {
     getPageUsersThunkCreator: (id: number, count: number) => void
 
 }
-export type TypePhoto = {
-    small: null
-    large: null
 
-}
 export type User = {
     name: string
     id: number
@@ -165,11 +180,7 @@ export type User = {
     status: null
     followed: boolean
 }
-export type TypeResponseData = {
-    items: Array<UserType>
-    totalCount: number
-    error: null
-}
+
 export type TypeMapStateToPropsUserContainer = {
     users: Array<UserType>
     count: number
@@ -346,9 +357,16 @@ export type TypeLoginResponseDataData = {
 }
 export type TypeLoginResponseData = {
     resultCode: number
-    messages: [],
+    messages: string[],
     data: TypeLoginResponseDataData
+    fieldsErrors: FieldsError[]
 }
+type FieldsError = {
+    error: string
+    field: string
+}
+
+
 export type TypeLogoutResponseData = {
     resultCode: number
     messages: [],
@@ -364,7 +382,7 @@ export type TypeInitialStateAuth = {
     email:string
     login:string
     isAuth: boolean
-    userId:number
+    userId:number|null
 }
 export type TypeActionSetAuthEmail = ReturnType<typeof SetEmailAC>
 export type TypeActionSetAuthLogin = ReturnType<typeof SetLoginAC>
@@ -372,8 +390,8 @@ export type TypeActionSetAuthLogin = ReturnType<typeof SetLoginAC>
 export type TypeSetUserID = ReturnType<typeof SetUserIdAC>;
 
 export type TypeActionSetIsAuth = ReturnType<typeof SetAuthIsAuthTestAC>;
-export type TypeFormLogin = any;
-export type TypeActionAuth = TypeActionSetAuthEmail | TypeActionSetIsAuth| TypeSetUserID|TypeActionSetAuthLogin|TypeFormLogin;
+export type TypeActionAuth = TypeActionSetAuthEmail |
+    TypeActionSetIsAuth| TypeSetUserID|TypeActionSetAuthLogin;
 
 //HEADER
 export type TypePropsHeader = {
@@ -383,7 +401,6 @@ export type TypePropsHeader = {
 }
 export type TypePropsHeaderComponent = {
     isAuth: boolean
-    authThunkCreator: () => void
     email: any
 }
 export type TypeMapStateToPropsHeader = {
@@ -416,7 +433,7 @@ export type TypeLoginProps = {
 
 //LOGOUT
 export type TypeMapStateToPropsLogout = {
-isAuth:boolean
+    isAuth:boolean
 }
 export type TypeMapDispatchToPropsLogout = {
     logoutThunkCreator:()=>void
@@ -450,6 +467,7 @@ export type TypeStoreReducer = {
     usersPage: TypeInitialStateUsers
     musicPage: TypeInitialStateMusic
     authPage: TypeInitialStateAuth
+    appPage: TypeInitialState
 
 
 }
@@ -468,5 +486,8 @@ export enum ResultCodeEnum{
 
 //INFER
 type PropertiesTypes<T> = T extends {[key:string]:infer U}? U:never
+
 export type ActionsTypeFromInfer<T extends {[key:string]:
         (...args:any[])=>void}>= ReturnType<PropertiesTypes<T>>;
+
+//TESt

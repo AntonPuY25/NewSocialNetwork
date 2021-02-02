@@ -10,6 +10,7 @@ import {
 } from "../../Types/Types";
 
 const ContainerLogin = (props:TypeContainerLoginProps)=>{
+
     return<div>
         <Login isAuth={props.isAuth} loginThunkCreator={props.loginThunkCreator} />
     </div>
