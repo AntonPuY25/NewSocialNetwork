@@ -8,6 +8,8 @@ const mapStateToPropsRedirect = (state: TypeStoreReducer): TypeMapStateToPropsHo
         isAuth: state.authPage.isAuth
     }
 }
+
+
 export const RedirectHoc = <P extends object>(PropsComponent: React.ComponentType<P>) => {
 
     const RedirectComponent: React.FC<TypeMapStateToPropsHoc>
