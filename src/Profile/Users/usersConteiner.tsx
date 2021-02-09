@@ -20,7 +20,7 @@ import {
     getCountPageSelector,
     getCountUsersSelector, getDisabledButtonSelector, getisPreloaderSelector,
     getPageNumberSelector,
-    getUsersSelector
+    reselectGetUsers
 } from "../../Redux/Reducers/Selectors/userSelectors";
 
 
@@ -75,7 +75,8 @@ class Users extends React.Component<TypeUsersProps, any> {
 
 const mapStateToProps = (state: TypeStoreReducer): TypeMapStateToPropsUserContainer => {
     return {
-        users:getUsersSelector(state),
+        // users:getUsersSelector(state),
+        users:reselectGetUsers(state),
         count: getCountUsersSelector(state),
         pageNumber: getPageNumberSelector(state),
         countPAge: getCountPageSelector(state),

@@ -1,8 +1,17 @@
 import {TypeStoreReducer} from "../../../Types/Types";
+import {createSelector} from 'reselect'
 
 export const getUsersSelector = (state:TypeStoreReducer)=>{
     return state.usersPage.users
 }
+
+
+
+export const reselectGetUsers = createSelector(getUsersSelector,(users)=> {
+    return users.filter(user=>user)
+})
+
+
 export const getCountUsersSelector = (state:TypeStoreReducer)=>{
     return state.usersPage.count
 }
