@@ -8,6 +8,7 @@ import {
     TypeStoreReducer
 } from "../../Types/Types";
 import {Dispatch} from "react";
+import React from "react";
 
 let mapStateToProps = (state: TypeStoreReducer):TypeMapStateToPropsPostConteiner => {
     return {
@@ -28,4 +29,6 @@ let mapDispatchToProps = (dispatch: Dispatch<TypeActionProfileReducer>):TypeMapD
 let PostsConteiner = connect<TypeMapStateToPropsPostConteiner,TypeMapDispatchToPropsPostConteiner,
     {},TypeStoreReducer>(mapStateToProps, mapDispatchToProps)(Posts);
 
-export default PostsConteiner;
+const MemoContainer = React.memo(PostsConteiner)
+
+export default MemoContainer;

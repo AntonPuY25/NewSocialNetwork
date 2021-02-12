@@ -3,8 +3,8 @@ import s from './post.module.css';
 import {PostTypeProps} from "../../../Types/Types";
 import {Paper} from "@material-ui/core";
 
-export default function Post(props:PostTypeProps){
-
+const MemoPost = React.memo((props:PostTypeProps)=>{
+    console.log('RENDER')
     return(<div>
         <Paper elevation={10} >
         <div className={s.post}>
@@ -38,4 +38,5 @@ export default function Post(props:PostTypeProps){
         </Paper>
 
     </div>)
-}
+})
+export default MemoPost;
