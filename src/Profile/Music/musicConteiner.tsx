@@ -4,10 +4,10 @@ import {AddSongAC} from "../../Redux/Reducers/musicReducer";
 import {
     TypeMapDispatchToPropsMusicConteiner,
     TypeMapStateToPropsMusicConteiner,
-    TypeStoreReducer
+    TypeStore
 } from "../../Types/Types";
 
-let mapStateToProps=(state:TypeStoreReducer):TypeMapStateToPropsMusicConteiner=>{
+let mapStateToProps=(state:TypeStore):TypeMapStateToPropsMusicConteiner=>{
 
     return{
         songs:state.musicPage.songs
@@ -15,5 +15,5 @@ let mapStateToProps=(state:TypeStoreReducer):TypeMapStateToPropsMusicConteiner=>
 }
 
 const MusicConteiner = connect<TypeMapStateToPropsMusicConteiner,
-    TypeMapDispatchToPropsMusicConteiner,{},TypeStoreReducer>(mapStateToProps,{AddSongAC,})(Music)
+    TypeMapDispatchToPropsMusicConteiner,{},TypeStore>(mapStateToProps,{AddSongAC,})(Music)
 export default MusicConteiner;

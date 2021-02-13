@@ -1,94 +1,68 @@
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
-    followThunkCreator, getPageUsersThunkCreator,
-    getUsersAC, getUsersThunkCreator,
-    setCountPAgeAC,
-    setPageAC, SetPreloaderAC, unFollowThunkCreator
+    getPageUsersThunkCreator,
+    getUsersThunkCreator, setCountPAgeAC,
+
 } from "../../Redux/Reducers/usersReducer";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import UserFun from "./userFunctional";
 import Preloader from "../Preloader/Preloader";
-import {
 
-    TypeMapDispatchToPropsUserContainer,
-    TypeMapStateToPropsUserContainer,
-    TypeStoreReducer,
-    TypeUsersProps,
-
-} from "../../Types/Types";
-import {
-    getCountPageSelector,
-    getCountUsersSelector, getDisabledButtonSelector, getisPreloaderSelector,
-    getPageNumberSelector,
-    reselectGetUsers
-} from "../../Redux/Reducers/Selectors/userSelectors";
+import {getAllSelectors} from "../../Redux/Reducers/Selectors/userSelectors";
 
 
-class Users extends React.Component<TypeUsersProps, any> {
-
-    arr: Array<number> = [];
-
-    componentDidMount() {
-        this.props.getUsersThunkCreator(this.props.pageNumber, this.props.count)
-        for (let i = 1; i <= this.props.countPAge; i++) {
-            this.arr.push(i)
+const Users: React.FC = () => {
+    const {count,countPage,isPreloader} = useSelector(getAllSelectors)
+    const dispatch = useDispatch()
+    let [arr,setArr]=useState<Array<number>>([])
+    useEffect(() => {
+        let testArr=[];
+        dispatch(getUsersThunkCreator(1, count))
+        for (let i = 1; i <= 10; i++) {
+             testArr.push(i)
         }
+        setArr(testArr)
+    }, [dispatch,count])
+
+    const clickPage = (id: number) => {
+        dispatch(getPageUsersThunkCreator(id, count))
 
     }
-    clickPage = (id: number) => {
-        this.props.getPageUsersThunkCreator(id, this.props.count)
-    }
 
-    render() {
-
-
-        let functionTest = (num: number, check: boolean) => {
-            if (check) {
-                this.props.setCountPAgeAC(this.props.countPAge + 10)
-                this.arr = []
-                for (let i = this.props.countPAge; i <= this.props.countPAge + 10; i++) {
-                    this.arr.push(i)
-                }
-            } else if (!check && this.props.countPAge >= 10) {
-                this.props.setCountPAgeAC(this.props.countPAge - 10)
-
-                this.arr = []
-                for (let i = this.props.countPAge - 10; i <= this.props.countPAge; i++) {
-                    this.arr.push(i)
-                }
+    let functionTest = (num: number, check: boolean) => {
+        let testArr=[];
+        if (check) {
+            dispatch(setCountPAgeAC(countPage + 10))
+            for (let i = countPage; i <= countPage + 10; i++) {
+                testArr.push(i)
             }
-        }
+            setArr(testArr)
+        } else if (!check && countPage >= 10) {
 
-        return <div>
-            {this.props.isPreloader ? <Preloader/>
-                : <UserFun functionTest={functionTest} arr={this.arr}
-                           clickPage={this.clickPage} pageNumber={this.props.pageNumber}
-                           users={this.props.users}
-                           followThunkCreator={this.props.followThunkCreator}
-                           unFollowThunkCreator={this.props.unFollowThunkCreator}
-                           isDisabled={this.props.idDisabledButton}
+            dispatch(setCountPAgeAC(countPage - 10))
+            for (let i = countPage - 10; i <= countPage; i++) {
+                testArr.push(i)
+            }
+            setArr(testArr)
+        }
+    }
+    return (
+
+
+        <div>
+
+            {isPreloader ? <Preloader/>
+
+                : <UserFun functionTest={functionTest} arr={arr}
+                           clickPage={clickPage}
+
+
                 />
+
             }
         </div>
-    }
-}
-
-const mapStateToProps = (state: TypeStoreReducer): TypeMapStateToPropsUserContainer => {
-    return {
-        // users:getUsersSelector(state),
-        users:reselectGetUsers(state),
-        count: getCountUsersSelector(state),
-        pageNumber: getPageNumberSelector(state),
-        countPAge: getCountPageSelector(state),
-        isPreloader: getisPreloaderSelector(state),
-        idDisabledButton: getDisabledButtonSelector(state),
-    }
+    )
 }
 
 
-const UserConteiner = connect<TypeMapStateToPropsUserContainer, TypeMapDispatchToPropsUserContainer,
-    {}, TypeStoreReducer>(mapStateToProps, {followThunkCreator,unFollowThunkCreator,getUsersAC,setPageAC,
-    getUsersThunkCreator,getPageUsersThunkCreator,SetPreloaderAC,setCountPAgeAC
-    })(Users)
-
-export default UserConteiner;
+export default Users;

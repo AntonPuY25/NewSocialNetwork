@@ -1,15 +1,20 @@
 import React from "react";
 import s from "./users.module.css";
 import {NavLink} from "react-router-dom";
-import {TypeUserFunProps} from "../../Types/Types";
+import { TypeUserFunProps} from "../../Types/Types";
 import {Button} from "@material-ui/core";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import {useDispatch, useSelector} from "react-redux";
+import {followThunkCreator, unFollowThunkCreator} from "../../Redux/Reducers/usersReducer";
+import {getAllSelectors} from "../../Redux/Reducers/Selectors/userSelectors";
 
 let UserFun: React.FC<TypeUserFunProps> = ({
-                                               functionTest, arr, clickPage, pageNumber, users,
-                                               followThunkCreator, unFollowThunkCreator,isDisabled
+                                               functionTest, arr, clickPage,
+
                                            }) => {
+    const {pageNumber,users,disabledButton} = useSelector(getAllSelectors)
+    const dispatch = useDispatch()
 
     return <div>
         <Button variant={"contained"} onClick={() => {
@@ -36,13 +41,13 @@ let UserFun: React.FC<TypeUserFunProps> = ({
                     <div>{i.name}</div>
                     <div>{i.status}</div>
 
-                    {i.followed ? <Button disabled={isDisabled.some(id=>id===i.id)} variant={"contained"} onClick={() => {
+                    {i.followed ? <Button disabled={disabledButton.some(id=>id===i.id)} variant={"contained"} onClick={() => {
 
-                            followThunkCreator(i.id)
+                            dispatch(followThunkCreator(i.id))
 
                         }}>Follow</Button>
-                        : <Button disabled={isDisabled.some(id=>id===i.id)} variant={"contained"} onClick={() => {
-                            unFollowThunkCreator(i.id)
+                        : <Button disabled={disabledButton.some(id=>id===i.id)} variant={"contained"} onClick={() => {
+                            dispatch(unFollowThunkCreator(i.id))
 
                         }}>UnFollow</Button>}
 

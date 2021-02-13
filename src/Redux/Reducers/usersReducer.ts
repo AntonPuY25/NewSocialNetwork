@@ -4,11 +4,10 @@ import {
     TypeActionSetCountPage,
     TypeActionSetPage,
     TypeActionSetPreloader, TypeActionUnFollow,
-    TypeInitialStateUsers, User, TypeActionDisabledButton, TypeResponseDataUsers, TypeUserResponseData
+    TypeInitialStateUsers, User, TypeActionDisabledButton,
 } from "../../Types/Types";
 import {getUsersApi} from "../../DALL/api";
 import {ThunkAction} from "redux-thunk";
-
 
 
 let initialState: TypeInitialStateUsers = {
@@ -17,27 +16,26 @@ let initialState: TypeInitialStateUsers = {
     count: 10,
     countPage: 10,
     isPreloader: true,
-    disabledButton:[]
+    disabledButton: []
 }
-// 14339,14338
-export const SetPreloader = "SET_PRELOADER";
-export const FOLLOW = "FOLLOW";
-export const SETCOUNTPAGE = "SET_COUNT_PAGE";
-export const UNFOLLOW = "UN_FOLLOW";
-export const GETUSERS = "GET_USERS";
-export const SETPAGENUMBER = "SET_PAGE_NUMBER";
-export const SET_DISABLED_BUTTON = "SET_DISABLED_BUTTON";
+export const SetPreloader = "user/SET_PRELOADER";
+export const FOLLOW = "user/FOLLOW";
+export const SET_COUNTPAGE = "user/SET_COUNT_PAGE";
+export const UNFOLLOW = "user/UN_FOLLOW";
+export const GET_USERS = "user/GET_USERS";
+export const SET_PAGENUMBER = "user/SET_PAGE_NUMBER";
+export const SET_DISABLED_BUTTON = "user/SET_DISABLED_BUTTON";
 
-export const setDisabledButtonAC = (isDisable:Array<number>):TypeActionDisabledButton=>{
+export const setDisabledButtonAC = (isDisable: Array<number>): TypeActionDisabledButton => {
     return {
-        type:SET_DISABLED_BUTTON,
+        type: SET_DISABLED_BUTTON,
         isDisable
 
     }
 }
 export const setCountPAgeAC = (countPage: number): TypeActionSetCountPage => {
     return {
-        type: SETCOUNTPAGE,
+        type: SET_COUNTPAGE,
         countPage
     }
 }
@@ -47,54 +45,51 @@ export const SetPreloaderAC = (preloader: boolean): TypeActionSetPreloader => {
         preloader
     }
 }
-export const setPageAC = (pageNumber: number): TypeActionSetPage => ({type: SETPAGENUMBER, pageNumber})
+export const setPageAC = (pageNumber: number): TypeActionSetPage => ({type: SET_PAGENUMBER, pageNumber})
 export const FollowAC = (id: number): TypeActionFollow => ({type: FOLLOW, id: id})
 export const UnFollowAC = (id: number): TypeActionUnFollow => ({type: UNFOLLOW, id: id})
-export const getUsersAC = (arr: Array<User>): TypeActionGetUsers => ({type: GETUSERS, arr: arr})
+export const getUsersAC = (arr: Array<User>): TypeActionGetUsers => ({type: GET_USERS, arr: arr})
 
-export const getUsersThunkCreator = (pageNumber:number,count:number):ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer>=>{
-    return (dispatch)=>{
+export const getUsersThunkCreator = (pageNumber: number, count: number): ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer> => {
+    return async (dispatch) => {
         dispatch(SetPreloaderAC(true))
-        getUsersApi.getUsersPages(pageNumber, count).then((data: TypeResponseDataUsers) => {
-            dispatch(getUsersAC(data.items))
-            dispatch(SetPreloaderAC(false))
-        })
+        let data = await getUsersApi.getUsersPages(pageNumber, count);
+        dispatch(getUsersAC(data.items))
+        dispatch(SetPreloaderAC(false))
+
 
     }
 }
-export const getPageUsersThunkCreator = (id:number, count:number):ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer>=>{
-    return (dispatch)=>{
+export const getPageUsersThunkCreator = (id: number, count: number): ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer> => {
+    return async (dispatch) => {
         dispatch(SetPreloaderAC(true))
         dispatch(setPageAC(id))
-        getUsersApi.getUsersPageNumber(id,count)
-            .then((data: TypeResponseDataUsers) => {
-                dispatch(getUsersAC(data.items))
-                dispatch(SetPreloaderAC(false))
-            })
+        let data = await getUsersApi.getUsersPageNumber(id, count)
+
+        dispatch(getUsersAC(data.items))
+        dispatch(SetPreloaderAC(false))
+
     }
 }
-export const followThunkCreator = (userId:number):ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer>=>{
-    return (dispatch)=>{
+export const followThunkCreator = (userId: number): ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer> => {
+    return async (dispatch) => {
         dispatch(setDisabledButtonAC([userId]))
-        getUsersApi.followUsersApi(userId).then((data: TypeUserResponseData) => {
+      let data = await  getUsersApi.followUsersApi(userId);
             if (data.resultCode === 0) {
                 dispatch(FollowAC(userId))
                 dispatch(setDisabledButtonAC([]))
             }
-
-        })
     }
 }
-export const unFollowThunkCreator = (userId:number):ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer>=>{
-    return (dispatch)=>{
+export const unFollowThunkCreator = (userId: number): ThunkAction<void, TypeInitialStateUsers, unknown, TypeActionUserReducer> => {
+    return async (dispatch) => {
         dispatch(setDisabledButtonAC([userId]))
-        getUsersApi.UnfollowUsersApi(userId).then((data: TypeUserResponseData) => {
+      let data = await getUsersApi.UnfollowUsersApi(userId);
             if (data.resultCode === 0) {
                 dispatch(UnFollowAC(userId))
                 dispatch(setDisabledButtonAC([]))
             }
 
-        })
     }
 }
 
@@ -121,33 +116,33 @@ let usersReducer = (state: TypeInitialStateUsers = initialState, action: TypeAct
                     return i
                 })
             }
-        case GETUSERS:
+        case GET_USERS:
 
             return {
                 ...state,
                 users: action.arr
 
             }
-        case SETPAGENUMBER:
+        case SET_PAGENUMBER:
             return {
                 ...state,
                 pageNumber: action.pageNumber
             }
 
-        case SETCOUNTPAGE:
+        case SET_COUNTPAGE:
             return {
                 ...state,
                 countPage: action.countPage
             }
-        case "SET_PRELOADER":
+        case "user/SET_PRELOADER":
             return {
                 ...state,
                 isPreloader: action.preloader
             }
-        case "SET_DISABLED_BUTTON":
+        case "user/SET_DISABLED_BUTTON":
             return {
                 ...state,
-                disabledButton:action.isDisable
+                disabledButton: action.isDisable
             }
         default:
             return state

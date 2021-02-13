@@ -1,11 +1,11 @@
 import React from "react";
 import {TypeInitialStateProfile, TypeResponseDataProfile} from "../../Types/Types";
-import profileReducer, {PostAC, PostTextAC, setPreloaderAC} from "./profileReducer";
+import profileReducer, {ActionsProfile} from "./profileReducer";
 
-let initialState:TypeInitialStateProfile
+let initialState: TypeInitialStateProfile
 
-beforeEach(()=>{
- initialState = {
+beforeEach(() => {
+    initialState = {
         postData: {
             dataPost: [
                 {
@@ -30,30 +30,31 @@ beforeEach(()=>{
         },
         valueTextPost: '',
         profile: {} as TypeResponseDataProfile,
-        isPreloader: false
+        isPreloader: false,
+        status: "Hey"
 
     }
 
 })
-test('Add_Text_Post',()=>{
-    let action=PostTextAC("Hello? the message from Test")
+test('Add_Text_Post', () => {
+    let action = ActionsProfile.PostTextAC("Hello? the message from Test")
 
-let newState = profileReducer(initialState,action)
-expect(newState.valueTextPost).toBe("Hello? the message from Test")
+    let newState = profileReducer(initialState, action)
+    expect(newState.valueTextPost).toBe("Hello? the message from Test")
 })
-test('Add_Post',()=>{
-    let action=PostAC()
+test('Add_Post', () => {
+    let action = ActionsProfile.PostAC()
 
-    let newState = profileReducer(initialState,action)
+    let newState = profileReducer(initialState, action)
 
     expect(newState.postData.dataPost.length).toBe(3)
     expect(newState.postData.dataPost[2].textPost).toBe("")
     expect(newState.postData.dataPost[2].id).toBe(5)
 })
 
-test('Set_Preloader',()=>{
-    let action=setPreloaderAC(true)
-    let newState = profileReducer(initialState,action)
+test('Set_Preloader', () => {
+    let action = ActionsProfile.setPreloaderAC(true)
+    let newState = profileReducer(initialState, action)
 
     expect(newState.isPreloader).toBe(true)
 

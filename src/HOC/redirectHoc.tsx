@@ -1,9 +1,9 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
-import {TypeMapStateToPropsHoc, TypeStoreReducer} from "../Types/Types";
+import {TypeMapStateToPropsHoc, TypeStore} from "../Types/Types";
 import {connect} from "react-redux";
 
-const mapStateToPropsRedirect = (state: TypeStoreReducer): TypeMapStateToPropsHoc => {
+const mapStateToPropsRedirect = (state: TypeStore): TypeMapStateToPropsHoc => {
     return {
         isAuth: state.authPage.isAuth
     }

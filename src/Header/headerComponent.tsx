@@ -5,7 +5,7 @@ import {
     TypeMapDispatchToPropsHeader,
     TypeMapStateToPropsHeader,
     TypePropsHeaderComponent,
-    TypeStoreReducer
+    TypeStore
 } from "../Types/Types";
 
 class HeaderComponent extends React.Component<TypePropsHeaderComponent, any> {
@@ -21,11 +21,11 @@ class HeaderComponent extends React.Component<TypePropsHeaderComponent, any> {
 
 }
 
-let mapStateToProps = (state: TypeStoreReducer):TypeMapStateToPropsHeader => {
+let mapStateToProps = (state: TypeStore):TypeMapStateToPropsHeader => {
     return {
         email: state.authPage.email,
         isAuth: state.authPage.isAuth
     }
 }
 export default connect<TypeMapStateToPropsHeader,TypeMapDispatchToPropsHeader
-    ,{},TypeStoreReducer>(mapStateToProps, )(HeaderComponent)
+    ,{},TypeStore>(mapStateToProps, )(HeaderComponent)

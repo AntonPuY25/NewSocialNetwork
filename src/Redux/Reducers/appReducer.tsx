@@ -1,4 +1,4 @@
-import {TypeActionsApp, TypeInitialState, TypeStoreReducer} from "../../Types/Types";
+import {TypeActionsApp, TypeInitialState, TypeStore} from "../../Types/Types";
 import {ThunkAction} from "redux-thunk";
 import {authThunkCreator} from "./authReducer";
 
@@ -9,14 +9,14 @@ let initialState: TypeInitialState = {
 export const ActionsApp = {
     setInitializedAC: (initialized: boolean) => {
         return {
-            type: 'SET_INITIALIZED',
+            type: 'app/SET_INITIALIZED',
             initialized
         } as const
     }
 }
 export const AppReducer = (state: TypeInitialState = initialState, action: TypeActionsApp): TypeInitialState => {
     switch (action.type) {
-        case "SET_INITIALIZED":
+        case "app/SET_INITIALIZED":
             return {
                 ...state,
                 initialized: action.initialized
@@ -26,8 +26,8 @@ export const AppReducer = (state: TypeInitialState = initialState, action: TypeA
     }
 }
 
-export const initialThunkCreator = (initialized: boolean): ThunkAction<void, any,
-    TypeStoreReducer, TypeActionsApp> => {
+export const initialThunkCreator =  (initialized: boolean): ThunkAction<void, any,
+    TypeStore, TypeActionsApp> => {
     return  async (dispatch) => {
              await  dispatch( authThunkCreator())
               dispatch(ActionsApp.setInitializedAC(initialized))

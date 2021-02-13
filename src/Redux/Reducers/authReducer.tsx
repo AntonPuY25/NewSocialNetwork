@@ -1,17 +1,17 @@
 import {
     TypeActionAuth,
-    TypeInitialStateAuth, TypeResponseDataAuth,
-    TypeStoreReducer,
+    TypeInitialStateAuth,
+    TypeStore,
 
 } from "../../Types/Types";
 import {getAuthApi} from "../../DALL/api";
 import {ThunkAction} from "redux-thunk";
 import {FormAction, stopSubmit} from "redux-form";
 
-export const SET_USER_ID = "SET_USER_ID"
-export const SET_AUTH_EMAIL = "SET_AUTH_EMAIL"
-export const SET_AUTH_LOGIN = "SET_AUTH_LOGIN"
-export const SET_AUTH_ISAUTH = "SET_AUTH_ISAUTH";
+export const SET_USER_ID = "auth/SET_USER_ID"
+export const SET_AUTH_EMAIL = "auth/SET_AUTH_EMAIL"
+export const SET_AUTH_LOGIN = "auth/SET_AUTH_LOGIN"
+export const SET_AUTH_ISAUTH = "auth/SET_AUTH_ISAUTH";
 
 
 export const SetAuthIsAuthTestAC = (isAuth: boolean) => {
@@ -20,7 +20,7 @@ export const SetAuthIsAuthTestAC = (isAuth: boolean) => {
         isAuth
     } as const
 }
-export const SetUserIdAC = (userId: number) => {
+export const SetUserIdAC = (userId: string) => {
     return {
         type: SET_USER_ID,
         userId
@@ -40,11 +40,11 @@ export const SetLoginAC = (login: string) => {
 }
 
 export const authThunkCreator = (): ThunkAction<Promise<void>, any,
-    TypeStoreReducer, TypeActionAuth> => {
-    return (dispatch) => {
-       return  getAuthApi.checkLogin().then((data: TypeResponseDataAuth) => {
+    TypeStore, TypeActionAuth> => {
+    return async (dispatch) => {
+           let data = await getAuthApi.checkLogin();
             if ((data.resultCode === 0)) {
-                dispatch(SetUserIdAC(data.data.id))
+                dispatch(SetUserIdAC(data.data.id.toString()))
                 dispatch(SetEmailAC(data.data.email))
                 dispatch(SetLoginAC(data.data.login))
                 dispatch(SetAuthIsAuthTestAC(true))
@@ -53,17 +53,17 @@ export const authThunkCreator = (): ThunkAction<Promise<void>, any,
                 dispatch(SetAuthIsAuthTestAC(false))
             }
 
-        })
+
     }
 }
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean,
-                                  captcha: boolean): ThunkAction<void, TypeStoreReducer,
+                                  captcha: boolean): ThunkAction<void, TypeStore,
     unknown, TypeActionAuth | FormAction> => {
-    return (dispatch) => {
-        getAuthApi.login(email, password, rememberMe, captcha).then(data => {
+    return async (dispatch) => {
+       let data = await getAuthApi.login(email, password, rememberMe, captcha);
             if (data.resultCode === 0) {
-                dispatch(SetUserIdAC(data.data.userId))
+                dispatch(SetUserIdAC(data.data.userId.toString()))
                 dispatch(SetEmailAC(email))
                 dispatch(SetAuthIsAuthTestAC(true))
             } else {
@@ -72,15 +72,15 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
 
             }
 
-        })
+
     }
 }
 export const logoutThunkCreator = (): ThunkAction<void, any,
-    TypeStoreReducer, TypeActionAuth> => {
-    return (dispatch) => {
-        getAuthApi.Logout()
+    TypeStore, TypeActionAuth> => {
+    return async (dispatch) => {
+       await getAuthApi.Logout()
         dispatch(SetEmailAC(""))
-        dispatch(SetUserIdAC(0))
+        dispatch(SetUserIdAC("0"))
         dispatch(SetAuthIsAuthTestAC(false))
 
     }
@@ -89,11 +89,11 @@ let initilaState: TypeInitialStateAuth = {
     email: "",
     login: "",
     isAuth: false,
-    userId: null as number | null,
+    userId: "",
 
 }
 
-const authResucer = (state = initilaState, action: TypeActionAuth): TypeInitialStateAuth => {
+const authReducer = (state = initilaState, action: TypeActionAuth): TypeInitialStateAuth => {
 
     switch (action.type) {
 
@@ -128,4 +128,4 @@ const authResucer = (state = initilaState, action: TypeActionAuth): TypeInitialS
 
 }
 
-export default authResucer;
+export default authReducer;

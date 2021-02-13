@@ -1,6 +1,5 @@
-import {TypeInitialStateUsers, TypeResponseDataUsers} from "../../Types/Types";
+import {TypeInitialStateUsers} from "../../Types/Types";
 import usersReducer, {FollowAC, getUsersAC, setPageAC} from "./usersReducer";
-import axios from "axios";
 let initialState: TypeInitialStateUsers;
 
 beforeEach(()=>{
@@ -26,7 +25,8 @@ beforeEach(()=>{
         pageNumber: 1,
         count: 10,
         countPage: 10,
-        isPreloader: false
+        isPreloader: false,
+        disabledButton:[]
     }
 
 })

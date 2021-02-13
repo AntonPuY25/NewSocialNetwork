@@ -6,7 +6,7 @@ import {
     TypeContainerLoginProps,
     TypeMapDispatchToPropsLogin,
     TypeMapStateToPropsLogin,
-    TypeStoreReducer
+    TypeStore
 } from "../../Types/Types";
 
 const ContainerLogin = (props:TypeContainerLoginProps)=>{
@@ -16,12 +16,12 @@ const ContainerLogin = (props:TypeContainerLoginProps)=>{
     </div>
 
 }
-const mapStateToProps =(state: TypeStoreReducer):TypeMapStateToPropsLogin=> {
+const mapStateToProps =(state: TypeStore):TypeMapStateToPropsLogin=> {
       return {
           isAuth:state.authPage.isAuth
       }
 }
 const connectContainerLogin = connect<TypeMapStateToPropsLogin,TypeMapDispatchToPropsLogin,{},
-    TypeStoreReducer>(mapStateToProps,
+    TypeStore>(mapStateToProps,
     {loginThunkCreator})(ContainerLogin)
 export default connectContainerLogin;

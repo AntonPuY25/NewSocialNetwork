@@ -4,9 +4,7 @@ import {
     TypeActionProfileReducer,
     TypeInitialStateProfile,
     TypeResponseDataProfile,
-    TypeResponseDataProfileStatus,
-    TypeResponseSetDataProfileStatus,
-    TypeStoreReducer,
+    TypeStore,
 } from "../../Types/Types";
 import {getProfileApi} from "../../DALL/api";
 import {ThunkAction} from "redux-thunk";
@@ -46,13 +44,13 @@ let initialState = {
 
 let profileReducer = (state: TypeInitialStateProfile = initialState, action: TypeActionProfileReducer): TypeInitialStateProfile => {
     switch (action.type) {
-        case 'ADD_TEXT_POST':
+        case 'profile/ADD_TEXT_POST':
             return {
                 ...state,
                 valueTextPost: action.text || ""
 
             };
-        case 'ADD_POST':
+        case 'profile/ADD_POST':
             let newPost: PostType = {
                 id: 5,
                 name: 'Anton',
@@ -73,19 +71,19 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
 
 
             };
-        case 'SET_PROFILE':
+        case 'profile/SET_PROFILE':
             return {
                 ...state,
                 profile: action.data,
             };
 
 
-        case 'SET_PRELOADER':
+        case 'profile/SET_PRELOADER':
             return {
                 ...state,
                 isPreloader: action.preloader
             }
-        case 'SET_STATUS_TEXT':
+        case 'profile/SET_STATUS_TEXT':
             return {
                 ...state,
                 status: action.textStatus
@@ -98,31 +96,31 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
 export const ActionsProfile = {
     PostTextAC:(text: string) => {
         return {
-            type: 'ADD_TEXT_POST',
+            type: 'profile/ADD_TEXT_POST',
             text
 
         }  as const
     },
     PostAC:() => {
         return {
-            type: 'ADD_POST'
+            type: 'profile/ADD_POST'
         } as const
     },
     setProfileDataAC:(data: TypeResponseDataProfile) => {
         return {
-            type: 'SET_PROFILE',
+            type: 'profile/SET_PROFILE',
             data
         } as const
     },
     setPreloaderAC:(preloader: boolean) => {
         return {
-            type: 'SET_PRELOADER',
+            type: 'profile/SET_PRELOADER',
             preloader
         } as const
     },
     setTextStatusAC:(textStatus: any) => {
         return {
-            type: 'SET_STATUS_TEXT',
+            type: 'profile/SET_STATUS_TEXT',
             textStatus
         } as const
     }
@@ -131,28 +129,29 @@ export const ActionsProfile = {
 
 
 
-export const setProfileThunkCreator = (userId: string): ThunkAction<void, TypeStoreReducer,
-    unknown, TypeActionProfileReducer> => {
-    return (dispatch) => {
-        getProfileApi.getProfile(userId).then((data: TypeResponseDataProfile) => {
-            getProfileApi.getStatusProfile(userId).then((data: TypeResponseDataProfileStatus) => {
-                dispatch(ActionsProfile.setTextStatusAC(data))
-            })
-            dispatch(ActionsProfile.setProfileDataAC(data))
+export const setProfileThunkCreator =  (userId: string): ThunkAction<Promise<void>, any,
+    TypeStore, TypeActionProfileReducer> => {
+    return async (dispatch) => {
+
+        let dataProfile = await getProfileApi.getProfile(userId);
+           let dataStatus = await getProfileApi.getStatusProfile(userId);
+            dispatch(ActionsProfile.setTextStatusAC(dataStatus))
+
+            dispatch(ActionsProfile.setProfileDataAC(dataProfile))
             dispatch(ActionsProfile.setPreloaderAC(true))
-        })
+
     }
 }
 
-export const setStatusThunkCreator = (textStatus:string):ThunkAction<void, TypeStoreReducer,
-    unknown, TypeActionProfileReducer> => {
-    return (dispatch) => {
-        getProfileApi.setStatusProfile(textStatus).then((data:TypeResponseSetDataProfileStatus)=>{
+export const setStatusThunkCreator = (textStatus:string):ThunkAction<Promise<void>, any,
+    TypeStore, TypeActionProfileReducer> => {
+    return async (dispatch) => {
+       let data = await getProfileApi.setStatusProfile(textStatus);
             if(data.resultCode===ResultCodeEnum.Sucsses){
                 dispatch(ActionsProfile.setTextStatusAC(textStatus))
             }
 
-        })
+
     }
 }
 export default profileReducer;

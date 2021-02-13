@@ -7,7 +7,7 @@ export const AddSongAC = (song:string)=>{
     } as const
 
 }
-export const ADDSONG='ADD_SONG'
+export const ADDSONG='music/ADD_SONG'
 let initialState: TypeInitialStateMusic = {
     songs: ['Take me back', 'Scars', 'Broken home'],
 }

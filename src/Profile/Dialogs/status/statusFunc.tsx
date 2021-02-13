@@ -1,32 +1,32 @@
 import React, {ChangeEvent, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {TypeInitialStateProfile, TypeStore} from "../../../Types/Types";
+import {ActionsProfile, setStatusThunkCreator} from "../../../Redux/Reducers/profileReducer";
 
-type TypeStatusProps = {
-    status: string
-    setTextStatusAC:(statusText:string)=>void
-    setStatusThunkCreator:(statusText:string)=>void
-}
 
-const StatusFunc:React.FC<TypeStatusProps> = (props)=>{
+const StatusFunc:React.FC = ()=>{
+    const statePage = useSelector<TypeStore, TypeInitialStateProfile>(state => state.profilePage)
+    const dispatch = useDispatch()
 
-const [toggle,setToggle]= useState<boolean>(true)
+    const [toggle,setToggle]= useState<boolean>(true)
 
     const changeISToggleFalse = ()=>{
     setToggle(false)
     }
     const changeISToggleTrue = ()=>{
         setToggle(true)
-        props.setStatusThunkCreator(props.status)
+        dispatch(setStatusThunkCreator(statePage.status))
 
     }
     const changeStatus=(e:ChangeEvent<HTMLInputElement>)=>{
-        props.setTextStatusAC(e.currentTarget.value)
+        dispatch(ActionsProfile.setTextStatusAC(e.currentTarget.value))
     }
 
         return <div>
             {toggle?
-                <div onDoubleClick={changeISToggleFalse}> {props.status}</div>
+                <div onDoubleClick={changeISToggleFalse}> {statePage.status}</div>
                 :
-                <div onBlur={changeISToggleTrue}><input onChange={changeStatus} autoFocus value={props.status}/></div>
+                <div onBlur={changeISToggleTrue}><input onChange={changeStatus} autoFocus value={statePage.status}/></div>
             }
         </div>
     }

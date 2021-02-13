@@ -1,9 +1,9 @@
 import {DeleteMessageAC, DialogAC, DialogTextAC} from "../Redux/Reducers/dealogsReducer";
 import {
     FOLLOW,
-    GETUSERS,
-    SETCOUNTPAGE,
-    SETPAGENUMBER, SetPreloader,
+    GET_USERS,
+    SET_COUNTPAGE,
+    SET_PAGENUMBER, SetPreloader,
     SET_DISABLED_BUTTON,
     UNFOLLOW,
 } from "../Redux/Reducers/usersReducer";
@@ -11,6 +11,7 @@ import {AddSongAC} from "../Redux/Reducers/musicReducer";
 import {SetAuthIsAuthTestAC, SetEmailAC, SetLoginAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
 import {ActionsProfile} from "../Redux/Reducers/profileReducer";
 import {ActionsApp} from "../Redux/Reducers/appReducer";
+import {reducers} from "../Redux/reduxStore";
 //APP
 export type TypeAppProps={
     initialized:boolean
@@ -73,7 +74,7 @@ export type PathParamsType = {
 export type TypeProfileProps = {
     profile: TypeResponseDataProfile
     isPreloader: boolean
-    setProfileThunkCreator: (userId: number) => void
+    setProfileThunkCreator: (userId: number|null) => void
     status: string
     setTextStatusAC: (textStatus: string) => void
     setStatusThunkCreator: (textStatus: string) => void
@@ -167,8 +168,6 @@ export type TypeUsersProps = {
     setPageAC: (pageNumber: number) => void
     setCountPAgeAC: (countPage: number) => void
     SetPreloaderAC: (preloader: boolean) => void
-    getUsersThunkCreator: (pageNumber: number, count: number) => void
-    getPageUsersThunkCreator: (id: number, count: number) => void
 
 }
 
@@ -181,21 +180,11 @@ export type User = {
     followed: boolean
 }
 
-export type TypeMapStateToPropsUserContainer = {
-    users: Array<UserType>
-    count: number
-    pageNumber: number
-    countPAge: number
-    isPreloader: boolean
-    idDisabledButton: Array<number>
-}
 export type TypeMapDispatchToPropsUserContainer = {
     getUsersAC: (arr: Array<UserType>) => void
     setPageAC: (pageNumber: number) => void
     setCountPAgeAC: (countPage: number) => void
     SetPreloaderAC: (preloader: boolean) => void
-    getUsersThunkCreator: (pageNumber: number, count: number) => void
-    getPageUsersThunkCreator: (id: number, count: number) => void
     followThunkCreator: (userId: number) => void
     unFollowThunkCreator: (userId: number) => void
 
@@ -206,11 +195,8 @@ export type TypeUserFunProps = {
     functionTest: (num: number, check: boolean) => void
     arr: Array<number>
     clickPage: (id: number) => void
-    pageNumber: number
-    users: Array<User>
-    followThunkCreator: (userId: number) => void
-    unFollowThunkCreator: (userId: number) => void
-    isDisabled: Array<number>
+
+
 
 }
 export type TypeUserResponseData = {
@@ -245,15 +231,15 @@ export type TypeActionUnFollow = {
     id: number
 }
 export type TypeActionSetCountPage = {
-    type: typeof SETCOUNTPAGE
+    type: typeof SET_COUNTPAGE
     countPage: number
 }
 export type TypeActionSetPage = {
-    type: typeof SETPAGENUMBER
+    type: typeof SET_PAGENUMBER
     pageNumber: number
 }
 export type TypeActionGetUsers = {
-    type: typeof GETUSERS
+    type: typeof GET_USERS
     arr: Array<UserType>
 }
 export type TypeActionSetPreloader = {
@@ -382,7 +368,7 @@ export type TypeInitialStateAuth = {
     email:string
     login:string
     isAuth: boolean
-    userId:number|null
+    userId:string
 }
 export type TypeActionSetAuthEmail = ReturnType<typeof SetEmailAC>
 export type TypeActionSetAuthLogin = ReturnType<typeof SetLoginAC>
@@ -461,16 +447,7 @@ export type TypeGetProfileApi = {
 }
 
 //REDUX_STORE
-export type TypeStoreReducer = {
-    profilePage: TypeInitialStateProfile
-    dialogsPage: TypeInitialStateDialogs
-    usersPage: TypeInitialStateUsers
-    musicPage: TypeInitialStateMusic
-    authPage: TypeInitialStateAuth
-    appPage: TypeInitialState
-
-
-}
+export type TypeStore = ReturnType<typeof reducers>
 
 //HOC_REDIRECT
 export type TypeMapStateToPropsHoc = {

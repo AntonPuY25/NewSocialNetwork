@@ -9,12 +9,12 @@ import {
     TypeAction,
     TypeMapDispatchToProps,
     TypeMapStateToProps,
-    TypeStoreReducer
+    TypeStore
 } from "../../Types/Types";
 import {RedirectHoc} from "../../HOC/redirectHoc";
 import {compose} from "redux";
 
-let mapStateToProps = (state: TypeStoreReducer): TypeMapStateToProps => {
+let mapStateToProps = (state: TypeStore): TypeMapStateToProps => {
     return {
         valueMessage: state.dialogsPage.valueMessage,
         messageData: state.dialogsPage.messageData,
@@ -36,7 +36,7 @@ type TypeTest = {
 
 export default compose<React.ComponentType<TypeTest>>(
     connect<TypeMapStateToProps, TypeMapDispatchToProps,
-        {}, TypeStoreReducer>(mapStateToProps, mapDispatchToProps),
+        {}, TypeStore>(mapStateToProps, mapDispatchToProps),
     RedirectHoc
 )(Dialogs);
 
