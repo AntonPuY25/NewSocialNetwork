@@ -3,7 +3,7 @@
 
     padding: 30px;
 
-    grid-template-areas: 'header header header'
+    grid-template-areas:'header header header'
     'nav aside aside'
     'footer footer footer';
     grid-template-rows: 60px 1fr 20px;
