@@ -4,7 +4,6 @@ import {PostTypeProps} from "../../../Types/Types";
 import {Paper} from "@material-ui/core";
 
 const MemoPost = React.memo((props:PostTypeProps)=>{
-    console.log('RENDER')
     return(<div>
         <Paper elevation={10} >
         <div className={s.post}>

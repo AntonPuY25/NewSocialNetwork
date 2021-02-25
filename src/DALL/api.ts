@@ -4,7 +4,7 @@ import {
     TypeGetProfileApi,
     TypeGetUsersApi, TypeLoginResponseData, TypeLogoutResponseData,
     TypeResponseDataAuth, TypeResponseDataProfile, TypeResponseDataProfileStatus,
-    TypeResponseDataUsers, TypeResponseSetDataProfileStatus, TypeUserResponseData
+    TypeResponseDataUsers, TypeResponseSetDataPhoto, TypeResponseSetDataProfileStatus, TypeUserResponseData
 } from "../Types/Types";
 
 const instance = axios.create({
@@ -73,6 +73,17 @@ export const getProfileApi: TypeGetProfileApi = {
     },
     setStatusProfile(textStatus:string){
         return instance.put<TypeResponseSetDataProfileStatus>(`/profile/status`,{status:textStatus}).then(response=>{
+            return response.data
+        })
+    },
+    uploadPhoto(photo:any){
+        let formData = new FormData();
+        formData.append('image',photo)
+        return instance.put<TypeResponseSetDataPhoto>(`/profile/photo`,formData,{
+            headers:{
+                'Content-Type':'multipart/form-data'
+            }
+        }).then(response=>{
             return response.data
         })
     }

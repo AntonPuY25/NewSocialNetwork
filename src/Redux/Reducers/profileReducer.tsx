@@ -88,6 +88,16 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
                 ...state,
                 status: action.textStatus
             }
+        case "profile/SET_PHOTO":{
+
+            return {
+
+                ...state,
+                profile:{...state.profile,
+                photos:action.photo
+                }
+            }
+        }
 
         default:
             return state
@@ -123,6 +133,12 @@ export const ActionsProfile = {
             type: 'profile/SET_STATUS_TEXT',
             textStatus
         } as const
+    },
+    setNewPhotoAC:(photo: any) => {
+        return {
+            type: 'profile/SET_PHOTO',
+            photo
+        } as const
     }
 }
 
@@ -151,6 +167,18 @@ export const setStatusThunkCreator = (textStatus:string):ThunkAction<Promise<voi
                 dispatch(ActionsProfile.setTextStatusAC(textStatus))
             }
 
+
+    }
+}
+export const setPhotoThunkCreator = (photos:any):ThunkAction<Promise<void>, any,
+    TypeStore, TypeActionProfileReducer>=>{
+    return async (dispatch)=>{
+        let data = await getProfileApi.uploadPhoto(photos);
+            if(data.resultCode===0){
+                 dispatch(ActionsProfile.setNewPhotoAC(data.data.photos))
+            }else{
+                alert('Error')
+            }
 
     }
 }

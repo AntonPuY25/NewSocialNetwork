@@ -20,6 +20,7 @@ import {RedirectHoc} from "../HOC/redirectHoc";
 export const ProfileContainer: React.FC<RouteComponentProps<PathParamsType>> = (props) => {
     const statePage = useSelector<TypeStore, TypeInitialStateProfile>(state => state.profilePage)
     const stateAuth = useSelector<TypeStore, TypeInitialStateAuth>(state => state.authPage)
+
     const dispatch = useDispatch()
     useEffect(() => {
         let userId: string = props.match.params.userId

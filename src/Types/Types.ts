@@ -68,6 +68,15 @@ export type TypeResponseSetDataProfileStatus = {
     resultCode:ResultCodeEnum
 
 }
+type DataTypePhoto= {
+    photos:TypePhotosDataProfile,
+}
+export type TypeResponseSetDataPhoto = {
+    data: DataTypePhoto,
+    fieldsErrors: []
+    messages: []
+    resultCode: number
+}
 export type PathParamsType = {
     userId: string
 }
@@ -444,6 +453,7 @@ export type TypeGetProfileApi = {
     getProfile: (userId: string) => Promise<TypeResponseDataProfile>
     getStatusProfile: (userId: string) => Promise<TypeResponseDataProfileStatus>
     setStatusProfile: (textStatus: string) => Promise<TypeResponseSetDataProfileStatus>
+    uploadPhoto:(textStatus: string)=>Promise<TypeResponseSetDataPhoto>
 }
 
 //REDUX_STORE
