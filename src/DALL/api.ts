@@ -46,14 +46,19 @@ export const getAuthApi: TypeGetAuthApi = {
             return response.data
         })
     },
-    login(email,password,rememberMe,captcha){
-        return instance.post<TypeLoginResponseData>('auth/login',{email,password,rememberMe,captcha}).then(response=>{
-            return response.data
+    login(email, password, rememberMe, captcha) {
+        return instance.post<TypeLoginResponseData>('auth/login', {
+            email,
+            password,
+            rememberMe,
+            captcha
+        }).then(response => {
+                return response.data
             }
         )
     },
-    Logout(){
-        return instance.delete<TypeLogoutResponseData>('auth/login').then(response=>{
+    Logout() {
+        return instance.delete<TypeLogoutResponseData>('auth/login').then(response => {
                 return response.data
             }
         )
@@ -71,19 +76,32 @@ export const getProfileApi: TypeGetProfileApi = {
         })
 
     },
-    setStatusProfile(textStatus:string){
-        return instance.put<TypeResponseSetDataProfileStatus>(`/profile/status`,{status:textStatus}).then(response=>{
+    setStatusProfile(textStatus: string) {
+        return instance.put<TypeResponseSetDataProfileStatus>(`/profile/status`, {status: textStatus}).then(response => {
             return response.data
         })
     },
-    uploadPhoto(photo:any){
+    updateProfileInfo(dataInfo) {
+        return instance.put<TypeResponseSetDataProfileStatus>(`/profile`, {
+            'fullName': dataInfo.fullName,
+            'aboutMe': dataInfo.aboutMe,
+            'lookingForAJob': dataInfo.lookingForAJob,
+            'lookingForAJobDescription': dataInfo.lookingForAJobDescription,
+            'contacts': dataInfo.contacts
+
+
+        }).then(response => {
+            return response.data
+        })
+    },
+    uploadPhoto(photo: any) {
         let formData = new FormData();
-        formData.append('image',photo)
-        return instance.put<TypeResponseSetDataPhoto>(`/profile/photo`,formData,{
-            headers:{
-                'Content-Type':'multipart/form-data'
+        formData.append('image', photo)
+        return instance.put<TypeResponseSetDataPhoto>(`/profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
             }
-        }).then(response=>{
+        }).then(response => {
             return response.data
         })
     }

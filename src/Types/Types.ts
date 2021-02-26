@@ -33,13 +33,13 @@ export type TypeMapDispatchToPropsApp = {
 //PROFILE_CONTAINER
 export type TypeContactsDataProfile = {
     facebook: string,
-    website: null,
+    website: string,
     vk: string,
     twitter: string
     instagram: string,
-    youtube: null,
+    youtube: string,
     github: string,
-    mainLink: null
+    mainLink: string
 }
 export type TypePhotosDataProfile = {
     small: string
@@ -58,6 +58,8 @@ export type TypeResponseDataProfile = {
     userId: TypeUserId
     photos: TypePhotosDataProfile
     status: string
+    facebook?:string
+
 }
 export type TypeResponseDataProfileStatus = {
     data: string
@@ -453,6 +455,7 @@ export type TypeGetProfileApi = {
     getProfile: (userId: string) => Promise<TypeResponseDataProfile>
     getStatusProfile: (userId: string) => Promise<TypeResponseDataProfileStatus>
     setStatusProfile: (textStatus: string) => Promise<TypeResponseSetDataProfileStatus>
+    updateProfileInfo: (dataInfo: TypeResponseDataProfile) => Promise<TypeResponseSetDataProfileStatus>
     uploadPhoto:(textStatus: string)=>Promise<TypeResponseSetDataPhoto>
 }
 

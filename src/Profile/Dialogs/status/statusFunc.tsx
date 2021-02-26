@@ -22,13 +22,13 @@ const StatusFunc:React.FC = ()=>{
         dispatch(ActionsProfile.setTextStatusAC(e.currentTarget.value))
     }
 
-        return <div>
+        return <>
             {toggle?
                 <div onDoubleClick={changeISToggleFalse}> {statePage.status}</div>
                 :
                 <div onBlur={changeISToggleTrue}><input onChange={changeStatus} autoFocus value={statePage.status}/></div>
             }
-        </div>
+        </>
     }
 
 

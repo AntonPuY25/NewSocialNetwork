@@ -98,6 +98,13 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
                 }
             }
         }
+        case "profile/UPDATE_PROFILE_INFO":{
+            return{
+                ...state,
+                profile:action.dataInfo
+
+            }
+        }
 
         default:
             return state
@@ -139,6 +146,12 @@ export const ActionsProfile = {
             type: 'profile/SET_PHOTO',
             photo
         } as const
+    },
+    updateProfileInfo:(dataInfo:TypeResponseDataProfile) => {
+        return {
+            type: 'profile/UPDATE_PROFILE_INFO',
+            dataInfo
+        } as const
     }
 }
 
@@ -179,6 +192,22 @@ export const setPhotoThunkCreator = (photos:any):ThunkAction<Promise<void>, any,
             }else{
                 alert('Error')
             }
+
+    }
+}
+
+export const updateProfileInfoThunkCreator = (dataInfo:TypeResponseDataProfile):ThunkAction<Promise<void>, any,
+    TypeStore, TypeActionProfileReducer>=>{
+
+    return async (dispatch)=>{
+        let data = await getProfileApi.updateProfileInfo(dataInfo);
+
+        console.log(data)
+        if(data.resultCode===0){
+            dispatch(ActionsProfile.updateProfileInfo(dataInfo))
+        }else{
+            alert('Error')
+        }
 
     }
 }

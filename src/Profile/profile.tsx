@@ -1,14 +1,15 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from './profile.module.css';
-
-import StatusFunc from "./Dialogs/status/statusFunc";
 import {useDispatch, useSelector} from "react-redux";
 import {TypeInitialStateAuth, TypeInitialStateProfile, TypeStore} from "../Types/Types";
 import Posts from "./Posts/Posts";
 import {setPhotoThunkCreator} from "../Redux/Reducers/profileReducer";
+import ProfieInfo from "./profileInfo";
+import EditProfileInfo from "./editProfileInfo";
 
 
 export default function Profile() {
+    const [editMode,setEditMode] = useState<boolean>(true)
     const statePage = useSelector<TypeStore, TypeInitialStateProfile>(state => state.profilePage)
     const stateAuth = useSelector<TypeStore, TypeInitialStateAuth>(state => state.authPage)
     const dispatch = useDispatch()
@@ -17,6 +18,10 @@ export default function Profile() {
         let newPhoto = event.currentTarget.files ? event.currentTarget.files[0] : "";
         dispatch(setPhotoThunkCreator(newPhoto))
     }
+    const changeEditMode = ()=>{
+        setEditMode(!editMode)
+    }
+
     return (<div>
 
         <div className={s.fonPage}>
@@ -38,18 +43,15 @@ export default function Profile() {
 
 
             <br/>
+
             <div className={s.info}>
-                <h3>{statePage.profile.fullName}</h3>
-                <div>Status:{statePage.profile.aboutMe}</div>
-                <div>ID:{statePage.profile.userId}</div>
-                <div>
-                    <span>Job:{statePage.profile.lookingForAJobDescription}</span>
-                </div>
+                {editMode? <ProfieInfo changeEditMode={changeEditMode} />:<EditProfileInfo changeEditMode={changeEditMode} />}
+
 
             </div>
         </div>
         <div className={s.posts}>
-            <StatusFunc/>
+
             <Posts/>
         </div>
 
