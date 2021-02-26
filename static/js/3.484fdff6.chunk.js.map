@@ -1,0 +1,1 @@
+{"version":3,"sources":["Profile/News/news.tsx"],"names":["News"],"mappings":"4IAAA,mEACe,SAASA,IACpB,OACI","file":"static/js/3.484fdff6.chunk.js","sourcesContent":["import React from \"react\";\r\nexport default function News (){\r\n    return(\r\n        <div>News</div>\r\n    )\r\n}"],"sourceRoot":""}
