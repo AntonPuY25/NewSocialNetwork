@@ -8,7 +8,7 @@ import {
     UNFOLLOW,
 } from "../Redux/Reducers/usersReducer";
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
-import {SetAuthIsAuthTestAC, SetEmailAC, SetLoginAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
+import {SetAuthIsAuthTestAC, SetCaptchaUrl, SetEmailAC, SetLoginAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
 import {ActionsProfile} from "../Redux/Reducers/profileReducer";
 import {ActionsApp} from "../Redux/Reducers/appReducer";
 import {reducers} from "../Redux/reduxStore";
@@ -22,7 +22,7 @@ export type TypeAppProps={
 export type TypeInitialState = {
     initialized:boolean
 }
-export type TypeActionsApp = ActionsTypeFromInfer<typeof ActionsApp>
+export type TypeActionsApp = ActionsTypeFromInfer<typeof ActionsApp>;
 export type TypeMapStateToPropsApp = {
     initialized:boolean
 }
@@ -380,15 +380,17 @@ export type TypeInitialStateAuth = {
     login:string
     isAuth: boolean
     userId:string
+    captchaUrl:string | null
 }
 export type TypeActionSetAuthEmail = ReturnType<typeof SetEmailAC>
 export type TypeActionSetAuthLogin = ReturnType<typeof SetLoginAC>
+export type TypeSetCaptchaUrl= ReturnType<typeof SetCaptchaUrl>
 
 export type TypeSetUserID = ReturnType<typeof SetUserIdAC>;
 
 export type TypeActionSetIsAuth = ReturnType<typeof SetAuthIsAuthTestAC>;
 export type TypeActionAuth = TypeActionSetAuthEmail |
-    TypeActionSetIsAuth| TypeSetUserID|TypeActionSetAuthLogin;
+    TypeActionSetIsAuth| TypeSetUserID|TypeActionSetAuthLogin |TypeSetCaptchaUrl;
 
 //HEADER
 export type TypePropsHeader = {
@@ -410,17 +412,20 @@ export type TypeMapDispatchToPropsHeader = {
 //Login
 export type TypeMapStateToPropsLogin = {
     isAuth:boolean
+    captchaUrl:string|null
 }
 export type TypeMapDispatchToPropsLogin = {
-    loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: boolean) => void
+    loginThunkCreator: (email: string, password: string, rememberMe: boolean,captcha:string) => void
 }
 export type TypeContainerLoginProps = {
-    loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: boolean) => void
+    loginThunkCreator: (email: string, password: string, rememberMe: boolean,captcha:string) => void
     isAuth:boolean
+    captchaUrl:string|null
 }
 export type TypeLoginProps = {
-    loginThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: boolean) => void
+    loginThunkCreator: (email: string, password: string, rememberMe: boolean,captcha:string) => void
     isAuth:boolean
+    captchaUrl: null|string
 }
 // export type TypeFormDataLogin = {
 //     email: string
@@ -448,8 +453,12 @@ export type TypeGetUsersApi = {
 }
 export type TypeGetAuthApi = {
     checkLogin: () => Promise<TypeResponseDataAuth>
-    login: (email: string, password: string, rememberMe: boolean, captcha: boolean) => Promise<TypeLoginResponseData>
+    login: (email: string, password: string, rememberMe: boolean, captcha: null|string) => Promise<TypeLoginResponseData>
     Logout: () => Promise<TypeLogoutResponseData>
+    captchaUrl:()=>Promise<TypeResponseDataCaptcha>
+}
+export type TypeResponseDataCaptcha={
+    url:string
 }
 export type TypeGetProfileApi = {
     getProfile: (userId: string) => Promise<TypeResponseDataProfile>

@@ -9,16 +9,17 @@ import {
     TypeStore
 } from "../../Types/Types";
 
-const ContainerLogin = (props:TypeContainerLoginProps)=>{
+const ContainerLogin:React.FC<TypeContainerLoginProps> = ({isAuth,captchaUrl,loginThunkCreator})=>{
 
     return<div>
-        <Login isAuth={props.isAuth} loginThunkCreator={props.loginThunkCreator} />
+        <Login isAuth={isAuth} captchaUrl={captchaUrl}   loginThunkCreator={loginThunkCreator} />
     </div>
 
 }
 const mapStateToProps =(state: TypeStore):TypeMapStateToPropsLogin=> {
       return {
-          isAuth:state.authPage.isAuth
+          isAuth:state.authPage.isAuth,
+          captchaUrl:state.authPage.captchaUrl
       }
 }
 const connectContainerLogin = connect<TypeMapStateToPropsLogin,TypeMapDispatchToPropsLogin,{},

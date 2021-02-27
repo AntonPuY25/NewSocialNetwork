@@ -3,7 +3,7 @@ import {
     TypeGetAuthApi,
     TypeGetProfileApi,
     TypeGetUsersApi, TypeLoginResponseData, TypeLogoutResponseData,
-    TypeResponseDataAuth, TypeResponseDataProfile, TypeResponseDataProfileStatus,
+    TypeResponseDataAuth, TypeResponseDataCaptcha, TypeResponseDataProfile, TypeResponseDataProfileStatus,
     TypeResponseDataUsers, TypeResponseSetDataPhoto, TypeResponseSetDataProfileStatus, TypeUserResponseData
 } from "../Types/Types";
 
@@ -62,8 +62,16 @@ export const getAuthApi: TypeGetAuthApi = {
                 return response.data
             }
         )
+    },
+    captchaUrl(){
+        return instance.get<TypeResponseDataCaptcha>('security/get-captcha-url').then(response => {
+            return response.data
+
+        })
     }
 }
+
+
 export const getProfileApi: TypeGetProfileApi = {
     getProfile(userId) {
         return instance.get<TypeResponseDataProfile>(`profile/${userId}`).then(response => {

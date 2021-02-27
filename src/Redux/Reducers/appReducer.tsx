@@ -12,7 +12,7 @@ export const ActionsApp = {
             type: 'app/SET_INITIALIZED',
             initialized
         } as const
-    }
+    },
 }
 export const AppReducer = (state: TypeInitialState = initialState, action: TypeActionsApp): TypeInitialState => {
     switch (action.type) {
@@ -24,14 +24,16 @@ export const AppReducer = (state: TypeInitialState = initialState, action: TypeA
         default:
             return state
     }
+
 }
 
-export const initialThunkCreator =  (initialized: boolean): ThunkAction<void, any,
+export const initialThunkCreator = (initialized: boolean): ThunkAction<void, any,
     TypeStore, TypeActionsApp> => {
-    return  async (dispatch) => {
-             await  dispatch( authThunkCreator())
-              dispatch(ActionsApp.setInitializedAC(initialized))
+    return async (dispatch) => {
 
+
+        await dispatch(authThunkCreator())
+        dispatch(ActionsApp.setInitializedAC(initialized))
 
 
     }
