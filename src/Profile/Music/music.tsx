@@ -19,7 +19,7 @@ const Music: React.FC<TypePropsMusic> = ({songs, AddSongAC}) => {
             setTextSong("")
         }
     }
-    return <div>
+    return <div className={s.music}>
         <div>
             {songs.map((s, id) => {
                 return <div key={id}>{s}</div>

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import './App.css';
 import Footer from "./Footer/footer";
 import Menu from "./Menu/menu";
@@ -16,6 +16,7 @@ import {TypeMapStateToPropsApp, TypeStore} from "./Types/Types";
 import Preloader from "./Profile/Preloader/Preloader";
 import {initialThunkCreator} from "./Redux/Reducers/appReducer";
 import store from "./Redux/reduxStore";
+
 const LazyNews = React.lazy(() => import("./Profile/News/news"));
 const App: React.FC = () => {
     const state = useSelector<TypeStore, TypeMapStateToPropsApp>(state => state.appPage)
@@ -38,19 +39,22 @@ const App: React.FC = () => {
                 <Menu/>
             </nav>
             <aside className='aside'>
-                <Route path='/profile/:userId?' render={() =>
-                    <ProfileContainer/>}/>
-                <Route path='/dialogs' render={() => <DialogsContainer name={'Anton'}/>}/>
-                <Route path='/friends' render={() => <UserContainer/>}/>
-                <Route path='/news' render={() =>{
-                    return <React.Suspense fallback={<Preloader />}>
-                        <LazyNews/>
-                    </React.Suspense>
-                } }/>
-                <Route path='/music' render={() => <MusicContainer/>}/>
-                <Route path='/settings' render={() => <Settings/>}/>
-                <Route path='/login' render={() => <ContainerLogin/>}/>
-                <Route path='/logout' render={() => <Logout/>}/>
+                <Switch>
+                    <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    <Route path='/friends' render={() => <UserContainer/>}/>
+                    <Route path='/news' render={() => {
+                        return <React.Suspense fallback={<Preloader/>}>
+                            <LazyNews/>
+                        </React.Suspense>
+                    }}/>
+                    <Route path='/music' render={() => <MusicContainer/>}/>
+                    <Route path='/settings' render={() => <Settings/>}/>
+                    <Route path='/login' render={() => <ContainerLogin/>}/>
+                    <Route path='/logout' render={() => <Logout/>}/>
+                    <Route render={() => <div>Error 404: PAGE IS NOT FOUND</div>}/>
+                </Switch>
             </aside>
             <footer className='footer'><Footer/></footer>
         </div>

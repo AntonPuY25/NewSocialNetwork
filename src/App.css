@@ -6,13 +6,12 @@
     grid-template-areas:'header header header'
     'nav aside aside'
     'footer footer footer';
-    grid-template-rows: 60px 1fr 20px;
+    grid-template-rows: 60px minmax(85vh,1fr) 60px;
     grid-template-columns: 2fr 10fr;
 }
 
 .header {
     background-color: #304159;
-
     grid-area: header;
 }
 

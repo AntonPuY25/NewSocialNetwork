@@ -30,11 +30,9 @@ let mapDispatchToProps = (dispatch: Dispatch<TypeAction>): TypeMapDispatchToProp
         }
     }
 }
-type TypeTest = {
-    name: string
-}
 
-export default compose<React.ComponentType<TypeTest>>(
+
+export default compose<React.ComponentType>(
     connect<TypeMapStateToProps, TypeMapDispatchToProps,
         {}, TypeStore>(mapStateToProps, mapDispatchToProps),
     RedirectHoc
