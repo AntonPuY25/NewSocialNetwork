@@ -1,31 +1,35 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3e72102482b961243febd5094538136f",
+    "revision": "2330778f90a3895c60866e7b91820122",
     "url": "/NewSocialNetwork/index.html"
   },
   {
-    "revision": "28018689ef81622464af",
-    "url": "/NewSocialNetwork/static/css/main.9bcd0dec.chunk.css"
+    "revision": "b16782f1e352831d136d",
+    "url": "/NewSocialNetwork/static/css/3.52c06d2c.chunk.css"
   },
   {
-    "revision": "d752cf124c8f516f8f83",
-    "url": "/NewSocialNetwork/static/js/2.7a1166f8.chunk.js"
+    "revision": "8a6340692cb345e7ffc0",
+    "url": "/NewSocialNetwork/static/css/main.9680a908.chunk.css"
+  },
+  {
+    "revision": "18a3029683c191e3fab5",
+    "url": "/NewSocialNetwork/static/js/2.e0322dcf.chunk.js"
   },
   {
     "revision": "d2266803016540034565984c8bb59069",
-    "url": "/NewSocialNetwork/static/js/2.7a1166f8.chunk.js.LICENSE.txt"
+    "url": "/NewSocialNetwork/static/js/2.e0322dcf.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "bf4d97aa6a75e582523f",
-    "url": "/NewSocialNetwork/static/js/3.484fdff6.chunk.js"
+    "revision": "b16782f1e352831d136d",
+    "url": "/NewSocialNetwork/static/js/3.097a0a83.chunk.js"
   },
   {
-    "revision": "28018689ef81622464af",
-    "url": "/NewSocialNetwork/static/js/main.b2f470c6.chunk.js"
+    "revision": "8a6340692cb345e7ffc0",
+    "url": "/NewSocialNetwork/static/js/main.cf677c17.chunk.js"
   },
   {
-    "revision": "8f657758be3b35342349",
-    "url": "/NewSocialNetwork/static/js/runtime-main.f0ae58c8.js"
+    "revision": "db54a1d420e07ba6c54e",
+    "url": "/NewSocialNetwork/static/js/runtime-main.013e1d0a.js"
   },
   {
     "revision": "efeaeea871c17859a3d0d995adaafbef",
@@ -50,6 +54,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "aef379ad89acc583951d66f07efe3092",
     "url": "/NewSocialNetwork/static/media/post2.aef379ad.jpg"
+  },
+  {
+    "revision": "53850211b8207a77beda1a24fbde7390",
+    "url": "/NewSocialNetwork/static/media/realFriends.53850211.png"
   },
   {
     "revision": "92c25f37d91bbc70ba1a197b38c0b57c",
