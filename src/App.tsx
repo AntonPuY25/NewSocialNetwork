@@ -16,6 +16,7 @@ import {TypeMapStateToPropsApp, TypeStore} from "./Types/Types";
 import Preloader from "./Profile/Preloader/Preloader";
 import {initialThunkCreator} from "./Redux/Reducers/appReducer";
 import store from "./Redux/reduxStore";
+import Friends from "./Profile/Friends/friends";
 
 const LazyNews = React.lazy(() => import("./Profile/News/news"));
 const App: React.FC = () => {
@@ -43,7 +44,8 @@ const App: React.FC = () => {
                     <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/friends' render={() => <UserContainer/>}/>
+                    <Route path='/people' render={() => <UserContainer/>}/>
+                    <Route path='/friends' render={() => <Friends/>}/>
                     <Route path='/news' render={() => {
                         return <React.Suspense fallback={<Preloader/>}>
                             <LazyNews/>

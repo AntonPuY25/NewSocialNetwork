@@ -14,9 +14,13 @@ export default function Menu() {
                                                                                                     activeClassName={s.ownItem}
                                                                                                     to='/dialogs'>Message</NavLink>
             </div>
-            <div className={s.icon}><img alt={'icon'} src={require('../Img/friends.png')}/><NavLink className={s.items}
+            <div className={s.icon}><img alt={'icon'} src={require('../Img/realFriends.png')}/><NavLink className={s.items}
                                                                                                     activeClassName={s.ownItem}
                                                                                                     to='/friends'>Friends</NavLink>
+            </div>
+            <div className={s.icon}><img alt={'icon'} src={require('../Img/friends.png')}/><NavLink className={s.items}
+                                                                                                    activeClassName={s.ownItem}
+                                                                                                    to='/people'>People</NavLink>
             </div>
             <div className={s.icon}><img alt={'icon'} src={require('../Img/news.png')}/><NavLink className={s.items}
                                                                                                  activeClassName={s.ownItem}

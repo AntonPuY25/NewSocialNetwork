@@ -7,6 +7,7 @@ import authReducer from "./Reducers/authReducer";
 import thunkMiddleware from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
 import AppReducer from "./Reducers/appReducer";
+import FriendsReducer from "./Reducers/friendsReducer";
 
 export let reducers = combineReducers({
     profilePage: profileReducer,
@@ -15,9 +16,11 @@ export let reducers = combineReducers({
     musicPage:MusicReducer,
     authPage:authReducer,
     appPage:AppReducer,
+    friendsPage:FriendsReducer,
     form:formReducer
 })
 //@ts-ignore
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers,composeEnhancers(applyMiddleware(thunkMiddleware)));
 

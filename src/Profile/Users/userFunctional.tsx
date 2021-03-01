@@ -45,11 +45,11 @@ let UserFun: React.FC<TypeUserFunProps> = ({
 
                             dispatch(followThunkCreator(i.id))
 
-                        }}>Follow</Button>
+                        }}>UnFollow</Button>
                         : <Button disabled={disabledButton.some(id=>id===i.id)} variant={"contained"} onClick={() => {
                             dispatch(unFollowThunkCreator(i.id))
 
-                        }}>UnFollow</Button>}
+                        }}>Follow</Button>}
 
                 </div>
 

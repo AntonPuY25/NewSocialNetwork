@@ -19,6 +19,7 @@ const instance = axios.create({
 export const getUsersApi: TypeGetUsersApi = {
     getUsersPages(pageNumber, count) {
         return instance.get<TypeResponseDataUsers>(`users?page=${pageNumber}&count=${count}`).then(response => {
+
             return response.data
         })
     },
@@ -75,7 +76,9 @@ export const getAuthApi: TypeGetAuthApi = {
 export const getProfileApi: TypeGetProfileApi = {
     getProfile(userId) {
         return instance.get<TypeResponseDataProfile>(`profile/${userId}`).then(response => {
+
             return response.data
+
         })
     },
     getStatusProfile(userId) {
