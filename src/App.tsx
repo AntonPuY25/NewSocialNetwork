@@ -40,7 +40,6 @@ const App: React.FC = () => {
                 <Menu/>
             </nav>
             <aside className='aside'>
-                <Switch>
                     <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
@@ -55,8 +54,7 @@ const App: React.FC = () => {
                     <Route path='/settings' render={() => <Settings/>}/>
                     <Route path='/login' render={() => <ContainerLogin/>}/>
                     <Route path='/logout' render={() => <Logout/>}/>
-                    <Route render={() => <div>Error 404: PAGE IS NOT FOUND</div>}/>
-                </Switch>
+
             </aside>
             <footer className='footer'><Footer/></footer>
         </div>
