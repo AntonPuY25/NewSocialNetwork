@@ -15,6 +15,7 @@
 }
 
 .ava {
+
     grid-area: ava;
 }
 
@@ -23,9 +24,9 @@
 }
 
 .ava img {
-    width: 120px;
-    height: 120px;
-
+    border: 25px solid white;
+    width: 250px;
+    height: 250px;
 }
 
 .posts {

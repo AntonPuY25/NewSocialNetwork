@@ -57,7 +57,7 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
                 date: '21.12.2020',
                 textPost: state.valueTextPost,
                 likes: 0,
-                imgPost: 'post1',
+                imgPost: 'post2',
 
             }
 
@@ -65,7 +65,7 @@ let profileReducer = (state: TypeInitialStateProfile = initialState, action: Typ
                 ...state,
                 postData: {
                     ...state.postData,
-                    dataPost: [...state.postData.dataPost, newPost]
+                    dataPost: [newPost,...state.postData.dataPost]
                 },
                 valueTextPost: ""
 

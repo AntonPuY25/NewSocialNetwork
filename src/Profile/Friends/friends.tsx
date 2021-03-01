@@ -22,7 +22,7 @@ const Friends = ()=>{
             return<div className={s.people} key={i.id}>
                 {i.followed? <div>
                     <div><NavLink to={`/profile/${i.id}`}> <img className={s.avaUser} alt={'Ava'}
-                    src={i.photos.small ? i.photos.small : require(`../../Img/ava1.png`)}/></NavLink>
+                    src={i.photos.large ? i.photos.large : require(`../../Img/ava1.png`)}/></NavLink>
                     </div>
                     <div>{i.name}</div>
                     <div>{i.status}</div>
