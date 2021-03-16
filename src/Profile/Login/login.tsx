@@ -5,15 +5,16 @@ import {maxLengthCreator, required} from "../../Validators/validator";
 import {Input} from "../../Validators/TagsForValidators/tags";
 import {Redirect} from "react-router-dom";
 import s from '../../Validators/TagsForValidators/validatorsTags.module.css'
-
+type TypeCaptcha = {
+    captchaUrl: string
+}
 let maxLength = maxLengthCreator(20)
-const LoginForm: React.FC<InjectedFormProps<TypeFormData, { captchaUrl: string }> & { captchaUrl: string }>
+const LoginForm: React.FC<InjectedFormProps<TypeFormData,TypeCaptcha> & TypeCaptcha>
     = ({
            captchaUrl,
            handleSubmit
            , error,
        }) => {
-    console.log('Render')
     return <div>
 
         <form onSubmit={handleSubmit}>
@@ -48,7 +49,7 @@ const LoginForm: React.FC<InjectedFormProps<TypeFormData, { captchaUrl: string }
     </div>
 }
 
-export const LoginReduxForm = reduxForm<TypeFormData, { captchaUrl: string }>({
+export const LoginReduxForm = reduxForm<TypeFormData,TypeCaptcha>({
     form: "Login"
 })(LoginForm);
 
