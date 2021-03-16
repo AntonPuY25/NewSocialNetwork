@@ -38,7 +38,8 @@ const FriendsReducer = (state: TypeFriendsState = initialState, action: TypeActi
 
 export const friendsThunkCreator = (): ThunkAction<void, TypeFriendsState, unknown, TypeActions> => async (dispatch) => {
 
-    const friends = await getUsersApi.getUsersPages(104, 100)
+    const friends = await getUsersApi.getUsersPages(1077, 10)
     dispatch(setFriendsAC(friends.items))
+
 }
 export default FriendsReducer;
