@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/NewSocialNetwork/static/css/main.e30e05de.chunk.css",
-    "main.js": "/NewSocialNetwork/static/js/main.4e66595b.chunk.js",
-    "main.js.map": "/NewSocialNetwork/static/js/main.4e66595b.chunk.js.map",
+    "main.js": "/NewSocialNetwork/static/js/main.df7c9f81.chunk.js",
+    "main.js.map": "/NewSocialNetwork/static/js/main.df7c9f81.chunk.js.map",
     "runtime-main.js": "/NewSocialNetwork/static/js/runtime-main.013e1d0a.js",
     "runtime-main.js.map": "/NewSocialNetwork/static/js/runtime-main.013e1d0a.js.map",
-    "static/js/2.f2404b6b.chunk.js": "/NewSocialNetwork/static/js/2.f2404b6b.chunk.js",
-    "static/js/2.f2404b6b.chunk.js.map": "/NewSocialNetwork/static/js/2.f2404b6b.chunk.js.map",
+    "static/js/2.8eaac89c.chunk.js": "/NewSocialNetwork/static/js/2.8eaac89c.chunk.js",
+    "static/js/2.8eaac89c.chunk.js.map": "/NewSocialNetwork/static/js/2.8eaac89c.chunk.js.map",
     "static/css/3.52c06d2c.chunk.css": "/NewSocialNetwork/static/css/3.52c06d2c.chunk.css",
     "static/js/3.097a0a83.chunk.js": "/NewSocialNetwork/static/js/3.097a0a83.chunk.js",
     "static/js/3.097a0a83.chunk.js.map": "/NewSocialNetwork/static/js/3.097a0a83.chunk.js.map",
     "index.html": "/NewSocialNetwork/index.html",
-    "precache-manifest.3f07b4c7c1b14e3f77e48a1b5cb3a5ff.js": "/NewSocialNetwork/precache-manifest.3f07b4c7c1b14e3f77e48a1b5cb3a5ff.js",
+    "precache-manifest.a647c0d9482c9499010f1aa80fcaf539.js": "/NewSocialNetwork/precache-manifest.a647c0d9482c9499010f1aa80fcaf539.js",
     "service-worker.js": "/NewSocialNetwork/service-worker.js",
     "static/css/3.52c06d2c.chunk.css.map": "/NewSocialNetwork/static/css/3.52c06d2c.chunk.css.map",
     "static/css/main.e30e05de.chunk.css.map": "/NewSocialNetwork/static/css/main.e30e05de.chunk.css.map",
-    "static/js/2.f2404b6b.chunk.js.LICENSE.txt": "/NewSocialNetwork/static/js/2.f2404b6b.chunk.js.LICENSE.txt",
+    "static/js/2.8eaac89c.chunk.js.LICENSE.txt": "/NewSocialNetwork/static/js/2.8eaac89c.chunk.js.LICENSE.txt",
     "static/media/ava1.png": "/NewSocialNetwork/static/media/ava1.efeaeea8.png",
     "static/media/ava2.png": "/NewSocialNetwork/static/media/ava2.2189f529.png",
     "static/media/fon.jpg": "/NewSocialNetwork/static/media/fon.778a408f.jpg",
@@ -28,8 +28,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.013e1d0a.js",
-    "static/js/2.f2404b6b.chunk.js",
+    "static/js/2.8eaac89c.chunk.js",
     "static/css/main.e30e05de.chunk.css",
-    "static/js/main.4e66595b.chunk.js"
+    "static/js/main.df7c9f81.chunk.js"
   ]
 }
