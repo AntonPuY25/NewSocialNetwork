@@ -118,6 +118,12 @@ export const getProfileApi: TypeGetProfileApi = {
     }
 
 }
+export const WebSocketApi = {
+    getMessages:()=>{
+        return  new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+
+    }
+}
 
 
 

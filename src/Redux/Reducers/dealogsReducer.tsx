@@ -1,110 +1,85 @@
-import {TypeAction, TypeInitialStateDialogs} from "../../Types/Types";
+import {TypeAction, TypeChatMessage, TypeInitialStateDialogs, TypeStore} from "../../Types/Types";
+import {Dispatch} from "react";
+import {WebSocketApi} from "../../DALL/api";
 
-export const ADD_TEXT_MESSAGE = "dialogs/ADD_TEXT_MESSAGE";
 export const ADD_MESSAGE = "dialogs/ADD_MESSAGE";
-export const DELETE_MESSAGE = "dialogs/DELETE_MESSAGE";
 
 
 let initialState = {
-    messageData: {
-        dataDialog: [
-            {
-                id: 1,
-                name: 'Anton',
-                address: 1
-            },
-            {
-                id: 2,
-                name: 'Yana',
-                address: 2
-            },
-            {
-                id: 3,
-                name: 'Kirill',
-                address: 3
-            },
-            {
-                id: 4,
-                name: 'Ira',
-                address: 4
-            },
-            {
-                id: 5,
-                name: 'Lera',
-                address: 5
-            }
-        ],
-        dataMessage: [
-            {
-                id: 1,
-                message: 'Hello,where are you from?'
-            },
-            {
-                id: 2,
-                message: 'What do you do?'
-            },
-            {
-                id: 3,
-                message: 'Do you have friends?'
-            }
-        ],
-    },
-    valueMessage: "",
+    dataDialog: [
+        {
+            id: 1,
+            name: 'Anton',
+            address: 1
+        },
+        {
+            id: 2,
+            name: 'Yana',
+            address: 2
+        },
+        {
+            id: 3,
+            name: 'Kirill',
+            address: 3
+        },
+        {
+            id: 4,
+            name: 'Ira',
+            address: 4
+        },
+        {
+            id: 5,
+            name: 'Lera',
+            address: 5
+        }
+    ],
+
+    dataMessage: [],
+
 }
-export let dialogsReducer = (state: TypeInitialStateDialogs = initialState, action: TypeAction):TypeInitialStateDialogs => {
+export let dialogsReducer = (state: TypeInitialStateDialogs = initialState, action: TypeAction): TypeInitialStateDialogs => {
     switch (action.type) {
-        case ADD_TEXT_MESSAGE:
-            return {
-                ...state,
-                valueMessage:action.text || ""
-            }
+
         case ADD_MESSAGE:
-            let newMessage = {
-                id: 5,
-                message: state.valueMessage
-            }
+            let newMessages = [...state.dataMessage,...action.messages]
             return {
                 ...state,
-                messageData:{
-                    ...state.messageData,
-                    dataMessage:[...state.messageData.dataMessage,newMessage]
-
-                },
-                valueMessage:""
+             dataMessage:newMessages,
             }
-        case "dialogs/DELETE_MESSAGE":
-            return {
-                ...state,
-                messageData:{
-                    ...state.messageData,
-                    dataMessage:[...state.messageData.dataMessage.filter(mes=>{
-                        return mes.id!==action.id
-                    })]
-                }
 
-            }
+
         default:
             return state
     }
 
 
 }
-export const DialogTextAC = (text:string)=>{
+
+export const DialogAC = (messages:TypeChatMessage[]) => {
     return {
-        type:ADD_TEXT_MESSAGE,
-        text
+        type: ADD_MESSAGE,
+        messages
     } as const
 }
-export const DialogAC= ()=>{
-    return{
-        type:ADD_MESSAGE
-    } as const
+
+let ws:any;
+export const getMessageTC = ()=> async (dispatch:Dispatch<TypeAction>)=>{
+    ws =  await WebSocketApi.getMessages()
+    ws.addEventListener('message',(e:MessageEvent)=>{
+        dispatch(DialogAC(JSON.parse(e.data)))
+
+    })
+
+
 }
-export const DeleteMessageAC = (id:number)=> {
-    return {
-        type: DELETE_MESSAGE,
-        id
-    } as const
+export const setMessageTC = (textMessage:string)=> async (dispatch:Dispatch<TypeAction>)=>{
+            if(!textMessage){
+                return
+            }
+           ws.send(textMessage)
+
+
+
 }
 
 export default dialogsReducer;

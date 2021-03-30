@@ -1,4 +1,4 @@
-import {DeleteMessageAC, DialogAC, DialogTextAC} from "../Redux/Reducers/dealogsReducer";
+import { DialogAC} from "../Redux/Reducers/dealogsReducer";
 import {
     FOLLOW,
     GET_USERS,
@@ -286,39 +286,31 @@ export type TypeDialog = {
     name: string
     address: number
 }
-export type TypeMessage = {
-    id: number
+export type TypeChatMessage =  {
     message: string
+    photo:string
+    userId:number
+    userName:string
 }
-export type TypeMessageData = {
-    dataDialog: Array<TypeDialog>
-    dataMessage: Array<TypeMessage>
-}
-export type TypeAddTextMessageAction = ReturnType<typeof DialogTextAC>
+
 export type TypeAddMessageAction = ReturnType<typeof DialogAC>
-export type TypeDeleteMessageAction = ReturnType<typeof DeleteMessageAC>
-export type TypeAction = TypeAddTextMessageAction | TypeAddMessageAction | TypeDeleteMessageAction
+export type TypeAction =  TypeAddMessageAction
 export type TypeInitialStateDialogs = {
-    messageData: TypeMessageData
-    valueMessage: string
+    dataDialog: Array<TypeDialog>
+    dataMessage: Array<TypeChatMessage>|any
 }
 //DIALOGS_CONTEINER
 export type TypeMapDispatchToProps = {
-    addMessage: () => void
     onChangeMessageText: (text: string) => void
 }
 export type TypeMapStateToProps = {
-    valueMessage: string
-    messageData: TypeMessageData
-    ws:any
+    dataDialog: Array<TypeDialog>
+    dataMessage: Array<TypeChatMessage>
 }
 //DIALOGS
 export type TypeDialogs = {
-    onChangeMessageText: (text: string) => void
-    addMessage: () => void
-    messageData: TypeMessageData
-    valueMessage: string
-    ws:any
+    dataDialog: Array<TypeDialog>
+    dataMessage: Array<TypeChatMessage>
 }
 //DIALOG
 export type TypeDialogData = {
