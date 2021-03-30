@@ -310,6 +310,7 @@ export type TypeMapDispatchToProps = {
 export type TypeMapStateToProps = {
     valueMessage: string
     messageData: TypeMessageData
+    ws:any
 }
 //DIALOGS
 export type TypeDialogs = {
@@ -317,6 +318,7 @@ export type TypeDialogs = {
     addMessage: () => void
     messageData: TypeMessageData
     valueMessage: string
+    ws:any
 }
 //DIALOG
 export type TypeDialogData = {

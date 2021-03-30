@@ -7,6 +7,8 @@ import {Button, TextField} from "@material-ui/core";
 
 
 export default function Dialogs(props: TypeDialogs) {
+
+
     let onChangeMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let text = (event.currentTarget.value)
         props.onChangeMessageText(text)
@@ -14,6 +16,10 @@ export default function Dialogs(props: TypeDialogs) {
 
     let addMessages = () => {
         props.addMessage()
+        if(!props.valueMessage){
+            return
+        }
+        props.ws.send('Hello Anybody!')
     }
     return (
      <div className={s.dialogs}>
@@ -22,7 +28,7 @@ export default function Dialogs(props: TypeDialogs) {
                 <Dialog dataDialog={props.messageData.dataDialog}/>
             </div>
             <div className={s.messages}>
-                <Message message={props.messageData.dataMessage}/>
+                <Message message={props.messageData.dataMessage} ws={props.ws}/>
                 <hr/>
                 <div className={s.nameMyPost}>New Message</div>
                 <div className={s.textareaPost}>

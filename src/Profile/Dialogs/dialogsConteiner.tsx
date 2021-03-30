@@ -13,11 +13,13 @@ import {
 } from "../../Types/Types";
 import {RedirectHoc} from "../../HOC/redirectHoc";
 import {compose} from "redux";
+const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
 
 let mapStateToProps = (state: TypeStore): TypeMapStateToProps => {
     return {
         valueMessage: state.dialogsPage.valueMessage,
         messageData: state.dialogsPage.messageData,
+        ws:ws
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch<TypeAction>): TypeMapDispatchToProps => {
