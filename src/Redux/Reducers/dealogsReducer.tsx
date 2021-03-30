@@ -1,4 +1,4 @@
-import {TypeAction, TypeChatMessage, TypeInitialStateDialogs, TypeStore} from "../../Types/Types";
+import {TypeAction, TypeChatMessage, TypeInitialStateDialogs} from "../../Types/Types";
 import {Dispatch} from "react";
 import {WebSocketApi} from "../../DALL/api";
 
@@ -46,7 +46,12 @@ export let dialogsReducer = (state: TypeInitialStateDialogs = initialState, acti
                 ...state,
              dataMessage:newMessages,
             }
-
+        case "CLOSE_PAGE_MESSAGES":{
+            return {
+                ...state,
+                dataMessage:action.messages
+            }
+        }
 
         default:
             return state
@@ -61,6 +66,13 @@ export const DialogAC = (messages:TypeChatMessage[]) => {
         messages
     } as const
 }
+export const ClosePageMessages = (messages:[]) => {
+    return {
+        type: 'CLOSE_PAGE_MESSAGES',
+        messages
+    } as const
+}
+
 
 let ws:any;
 export const getMessageTC = ()=> async (dispatch:Dispatch<TypeAction>)=>{

@@ -1,4 +1,4 @@
-import { DialogAC} from "../Redux/Reducers/dealogsReducer";
+import {ClosePageMessages, DialogAC} from "../Redux/Reducers/dealogsReducer";
 import {
     FOLLOW,
     GET_USERS,
@@ -293,7 +293,7 @@ export type TypeChatMessage =  {
     userName:string
 }
 
-export type TypeAddMessageAction = ReturnType<typeof DialogAC>
+export type TypeAddMessageAction = ReturnType<typeof DialogAC>|ReturnType<typeof ClosePageMessages>
 export type TypeAction =  TypeAddMessageAction
 export type TypeInitialStateDialogs = {
     dataDialog: Array<TypeDialog>

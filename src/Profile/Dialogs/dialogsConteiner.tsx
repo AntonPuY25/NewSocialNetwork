@@ -7,7 +7,6 @@ import {
 } from "../../Types/Types";
 import {RedirectHoc} from "../../HOC/redirectHoc";
 import {compose} from "redux";
-
 let mapStateToProps = (state: TypeStore): TypeMapStateToProps => {
     return {
         dataDialog: state.dialogsPage.dataDialog,
