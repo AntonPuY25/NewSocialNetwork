@@ -6,36 +6,7 @@ export const ADD_MESSAGE = "dialogs/ADD_MESSAGE";
 
 
 let initialState = {
-    dataDialog: [
-        {
-            id: 1,
-            name: 'Anton',
-            address: 1
-        },
-        {
-            id: 2,
-            name: 'Yana',
-            address: 2
-        },
-        {
-            id: 3,
-            name: 'Kirill',
-            address: 3
-        },
-        {
-            id: 4,
-            name: 'Ira',
-            address: 4
-        },
-        {
-            id: 5,
-            name: 'Lera',
-            address: 5
-        }
-    ],
-
     dataMessage: [],
-
 }
 export let dialogsReducer = (state: TypeInitialStateDialogs = initialState, action: TypeAction): TypeInitialStateDialogs => {
     switch (action.type) {
@@ -74,7 +45,7 @@ export const ClosePageMessages = (messages:[]) => {
 }
 
 
-let ws:any;
+let ws:WebSocket;
 export const getMessageTC = ()=> async (dispatch:Dispatch<TypeAction>)=>{
     ws =  await WebSocketApi.getMessages()
     ws.addEventListener('message',(e:MessageEvent)=>{

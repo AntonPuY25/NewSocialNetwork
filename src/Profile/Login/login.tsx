@@ -2,22 +2,30 @@ import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {TypeLoginProps} from "../../Types/Types";
 import {maxLengthCreator, required} from "../../Validators/validator";
-import {Input} from "../../Validators/TagsForValidators/tags";
+import {Input, RadioBtn} from "../../Validators/TagsForValidators/tags";
 import {Redirect} from "react-router-dom";
 import s from '../../Validators/TagsForValidators/validatorsTags.module.css'
+import styles from './form.module.css';
+import {Button, FormLabel} from "@material-ui/core";
+
 type TypeCaptcha = {
     captchaUrl: string
 }
 let maxLength = maxLengthCreator(20)
-const LoginForm: React.FC<InjectedFormProps<TypeFormData,TypeCaptcha> & TypeCaptcha>
+const LoginForm: React.FC<InjectedFormProps<TypeFormData, TypeCaptcha> & TypeCaptcha>
     = ({
            captchaUrl,
            handleSubmit
            , error,
        }) => {
     return <div>
+        <FormLabel>
 
-        <form onSubmit={handleSubmit}>
+            <p>Use common test account credentials:</p>
+            <p>Email: free@samuraijs.com</p>
+            <p>Password: free</p>
+        </FormLabel>
+        <form onSubmit={handleSubmit} className={styles.form}>
             <div>
                 <Field component={Input} validate={[required, maxLength]} name={'email'}
                        placeholder={"Login"}/>
@@ -29,7 +37,8 @@ const LoginForm: React.FC<InjectedFormProps<TypeFormData,TypeCaptcha> & TypeCapt
             </div>
             <div>
 
-                <Field component={"input"} type={"checkbox"} name={'rememberMe'}/>Remember me
+                <Field component={RadioBtn} type={"checkbox"} name={'rememberMe'}/>
+
             </div>
             {captchaUrl ? <div>
                 <img src={captchaUrl} alt="captcha"/>
@@ -41,15 +50,15 @@ const LoginForm: React.FC<InjectedFormProps<TypeFormData,TypeCaptcha> & TypeCapt
                 {error}
 
             </div> : ""}
-            <div>
-                <button>Login</button>
-            </div>
 
+            <Button variant="contained" type={"submit"} color="primary">
+                Login
+            </Button>
         </form>
     </div>
 }
 
-export const LoginReduxForm = reduxForm<TypeFormData,TypeCaptcha>({
+export const LoginReduxForm = reduxForm<TypeFormData, TypeCaptcha>({
     form: "Login"
 })(LoginForm);
 
@@ -72,7 +81,7 @@ const Login = (props: TypeLoginProps) => {
     if (props.isAuth) {
         return <Redirect to={'/profile'}/>
     }
-    return <div>
+    return <div className={styles.formContainer}>
 
 
         <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaOk}/>

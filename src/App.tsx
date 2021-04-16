@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {BrowserRouter, Redirect, Route} from "react-router-dom";
+import {BrowserRouter, Redirect, Route,Switch} from "react-router-dom";
 import './App.css';
 import Footer from "./Footer/footer";
 import Menu from "./Menu/menu";
@@ -40,7 +40,9 @@ const App: React.FC = () => {
                 <Menu/>
             </nav>
             <aside className='aside'>
-                    <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
+                <Switch>
+                    <Route exact path='/NewSocialNetwork' render={() => <Redirect to={'/login'}/>}/>
+                    <Route exact path='/' render={() => <Redirect to={'/login'}/>}/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/people' render={() => <UserContainer/>}/>
@@ -54,6 +56,7 @@ const App: React.FC = () => {
                     <Route path='/settings' render={() => <Settings/>}/>
                     <Route path='/login' render={() => <ContainerLogin/>}/>
                     <Route path='/logout' render={() => <Logout/>}/>
+                </Switch>
 
             </aside>
             <footer className='footer'><Footer/></footer>

@@ -1,0 +1,14 @@
+.formContainer{
+    height: 80vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.form Input{
+    width:400px;
+
+}

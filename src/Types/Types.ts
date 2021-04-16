@@ -296,7 +296,6 @@ export type TypeChatMessage =  {
 export type TypeAddMessageAction = ReturnType<typeof DialogAC>|ReturnType<typeof ClosePageMessages>
 export type TypeAction =  TypeAddMessageAction
 export type TypeInitialStateDialogs = {
-    dataDialog: Array<TypeDialog>
     dataMessage: Array<TypeChatMessage>|any
 }
 //DIALOGS_CONTEINER
@@ -304,12 +303,10 @@ export type TypeMapDispatchToProps = {
     onChangeMessageText: (text: string) => void
 }
 export type TypeMapStateToProps = {
-    dataDialog: Array<TypeDialog>
     dataMessage: Array<TypeChatMessage>
 }
 //DIALOGS
 export type TypeDialogs = {
-    dataDialog: Array<TypeDialog>
     dataMessage: Array<TypeChatMessage>
 }
 //DIALOG

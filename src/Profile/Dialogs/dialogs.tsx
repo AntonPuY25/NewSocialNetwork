@@ -1,6 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
 import s from './dialogs.module.css';
-import Dialog from "./dialog";
 import Message from "./message";
 import {TypeDialogs} from "../../Types/Types";
 import {Button, TextField} from "@material-ui/core";
@@ -24,7 +23,6 @@ export default function Dialogs(props: TypeDialogs) {
      <div className={s.dialogs}>
             <div className={s.nameMessages}>
 
-                <Dialog dataDialog={props.dataDialog}/>
             </div>
             <div className={s.messages}>
                 <Message messages={props.dataMessage}/>
