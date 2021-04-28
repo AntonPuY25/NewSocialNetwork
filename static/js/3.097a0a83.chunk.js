@@ -1,2 +1,0 @@
-(this["webpackJsonpit-incubator-todolist-ts"]=this["webpackJsonpit-incubator-todolist-ts"]||[]).push([[3],{394:function(t,n,s){},395:function(t,n,s){"use strict";s.r(n),s.d(n,"default",(function(){return c}));var i=s(0),e=s.n(i),o=s(394),a=s.n(o);function c(){return e.a.createElement("div",{className:a.a.news},"News")}}}]);
-//# sourceMappingURL=3.097a0a83.chunk.js.map

@@ -1,35 +1,35 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d23232c58b6c442348bb4fe93825e4c4",
+    "revision": "64fe060b7ad3d7beb7097c1fc61dad6e",
     "url": "/NewSocialNetwork/index.html"
   },
   {
-    "revision": "b16782f1e352831d136d",
+    "revision": "811a829afed51b40a842",
     "url": "/NewSocialNetwork/static/css/3.52c06d2c.chunk.css"
   },
   {
-    "revision": "9d01fe7fa580666b53ce",
-    "url": "/NewSocialNetwork/static/css/main.e30e05de.chunk.css"
+    "revision": "c640111579352af42c9c",
+    "url": "/NewSocialNetwork/static/css/main.84781289.chunk.css"
   },
   {
-    "revision": "600e7966cc0f3f62f666",
-    "url": "/NewSocialNetwork/static/js/2.8eaac89c.chunk.js"
+    "revision": "33de4763d261f3f205c7",
+    "url": "/NewSocialNetwork/static/js/2.209f2d02.chunk.js"
   },
   {
     "revision": "d2266803016540034565984c8bb59069",
-    "url": "/NewSocialNetwork/static/js/2.8eaac89c.chunk.js.LICENSE.txt"
+    "url": "/NewSocialNetwork/static/js/2.209f2d02.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b16782f1e352831d136d",
-    "url": "/NewSocialNetwork/static/js/3.097a0a83.chunk.js"
+    "revision": "811a829afed51b40a842",
+    "url": "/NewSocialNetwork/static/js/3.2078444b.chunk.js"
   },
   {
-    "revision": "9d01fe7fa580666b53ce",
-    "url": "/NewSocialNetwork/static/js/main.f879c379.chunk.js"
+    "revision": "c640111579352af42c9c",
+    "url": "/NewSocialNetwork/static/js/main.3ec542cf.chunk.js"
   },
   {
-    "revision": "db54a1d420e07ba6c54e",
-    "url": "/NewSocialNetwork/static/js/runtime-main.013e1d0a.js"
+    "revision": "ad761af88988c78e2d98",
+    "url": "/NewSocialNetwork/static/js/runtime-main.ded3f452.js"
   },
   {
     "revision": "efeaeea871c17859a3d0d995adaafbef",
