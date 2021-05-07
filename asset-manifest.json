@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/NewSocialNetwork/static/css/main.84781289.chunk.css",
-    "main.js": "/NewSocialNetwork/static/js/main.3ec542cf.chunk.js",
-    "main.js.map": "/NewSocialNetwork/static/js/main.3ec542cf.chunk.js.map",
-    "runtime-main.js": "/NewSocialNetwork/static/js/runtime-main.ded3f452.js",
-    "runtime-main.js.map": "/NewSocialNetwork/static/js/runtime-main.ded3f452.js.map",
-    "static/js/2.209f2d02.chunk.js": "/NewSocialNetwork/static/js/2.209f2d02.chunk.js",
-    "static/js/2.209f2d02.chunk.js.map": "/NewSocialNetwork/static/js/2.209f2d02.chunk.js.map",
+    "main.js": "/NewSocialNetwork/static/js/main.d6e4ceca.chunk.js",
+    "main.js.map": "/NewSocialNetwork/static/js/main.d6e4ceca.chunk.js.map",
+    "runtime-main.js": "/NewSocialNetwork/static/js/runtime-main.f2fc266d.js",
+    "runtime-main.js.map": "/NewSocialNetwork/static/js/runtime-main.f2fc266d.js.map",
+    "static/js/2.a7ba1ee3.chunk.js": "/NewSocialNetwork/static/js/2.a7ba1ee3.chunk.js",
+    "static/js/2.a7ba1ee3.chunk.js.map": "/NewSocialNetwork/static/js/2.a7ba1ee3.chunk.js.map",
     "static/css/3.52c06d2c.chunk.css": "/NewSocialNetwork/static/css/3.52c06d2c.chunk.css",
-    "static/js/3.2078444b.chunk.js": "/NewSocialNetwork/static/js/3.2078444b.chunk.js",
-    "static/js/3.2078444b.chunk.js.map": "/NewSocialNetwork/static/js/3.2078444b.chunk.js.map",
+    "static/js/3.25a8769d.chunk.js": "/NewSocialNetwork/static/js/3.25a8769d.chunk.js",
+    "static/js/3.25a8769d.chunk.js.map": "/NewSocialNetwork/static/js/3.25a8769d.chunk.js.map",
     "index.html": "/NewSocialNetwork/index.html",
-    "precache-manifest.8b3757c64ede5e02102356ac2576e8ad.js": "/NewSocialNetwork/precache-manifest.8b3757c64ede5e02102356ac2576e8ad.js",
+    "precache-manifest.cdc36673dccfe18a4267b78a650260db.js": "/NewSocialNetwork/precache-manifest.cdc36673dccfe18a4267b78a650260db.js",
     "service-worker.js": "/NewSocialNetwork/service-worker.js",
     "static/css/3.52c06d2c.chunk.css.map": "/NewSocialNetwork/static/css/3.52c06d2c.chunk.css.map",
     "static/css/main.84781289.chunk.css.map": "/NewSocialNetwork/static/css/main.84781289.chunk.css.map",
-    "static/js/2.209f2d02.chunk.js.LICENSE.txt": "/NewSocialNetwork/static/js/2.209f2d02.chunk.js.LICENSE.txt",
+    "static/js/2.a7ba1ee3.chunk.js.LICENSE.txt": "/NewSocialNetwork/static/js/2.a7ba1ee3.chunk.js.LICENSE.txt",
     "static/media/ava1.png": "/NewSocialNetwork/static/media/ava1.efeaeea8.png",
     "static/media/ava2.png": "/NewSocialNetwork/static/media/ava2.2189f529.png",
     "static/media/fon.jpg": "/NewSocialNetwork/static/media/fon.778a408f.jpg",
@@ -27,9 +27,9 @@
     "static/media/tms-loading.gif": "/NewSocialNetwork/static/media/tms-loading.6068d1f9.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.ded3f452.js",
-    "static/js/2.209f2d02.chunk.js",
+    "static/js/runtime-main.f2fc266d.js",
+    "static/js/2.a7ba1ee3.chunk.js",
     "static/css/main.84781289.chunk.css",
-    "static/js/main.3ec542cf.chunk.js"
+    "static/js/main.d6e4ceca.chunk.js"
   ]
 }
