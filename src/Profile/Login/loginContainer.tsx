@@ -1,18 +1,16 @@
 import React from "react";
 import Login from "./login";
 import {connect} from "react-redux";
-import {loginThunkCreator} from "../../Redux/Reducers/authReducer";
 import {
     TypeContainerLoginProps,
-    TypeMapDispatchToPropsLogin,
     TypeMapStateToPropsLogin,
     TypeStore
 } from "../../Types/Types";
 
-const ContainerLogin:React.FC<TypeContainerLoginProps> = ({isAuth,captchaUrl,loginThunkCreator})=>{
+const ContainerLogin:React.FC<TypeContainerLoginProps> = ({isAuth,captchaUrl})=>{
 
     return<div>
-        <Login isAuth={isAuth} captchaUrl={captchaUrl}   loginThunkCreator={loginThunkCreator} />
+        <Login isAuth={isAuth} captchaUrl={captchaUrl}   />
     </div>
 
 }
@@ -22,7 +20,5 @@ const mapStateToProps =(state: TypeStore):TypeMapStateToPropsLogin=> {
           captchaUrl:state.authPage.captchaUrl
       }
 }
-const connectContainerLogin = connect<TypeMapStateToPropsLogin,TypeMapDispatchToPropsLogin,{},
-    TypeStore>(mapStateToProps,
-    {loginThunkCreator})(ContainerLogin)
+const connectContainerLogin = connect(mapStateToProps,{})(ContainerLogin)
 export default connectContainerLogin;

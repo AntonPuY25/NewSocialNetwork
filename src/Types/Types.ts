@@ -3,15 +3,16 @@ import {
     FOLLOW,
     GET_USERS,
     SET_COUNTPAGE,
-    SET_PAGENUMBER, SetPreloader,
     SET_DISABLED_BUTTON,
+    SET_PAGENUMBER,
+    SetPreloader,
     UNFOLLOW,
 } from "../Redux/Reducers/usersReducer";
 import {AddSongAC} from "../Redux/Reducers/musicReducer";
-import {SetAuthIsAuthTestAC, SetCaptchaUrl, SetEmailAC, SetLoginAC, SetUserIdAC} from "../Redux/Reducers/authReducer";
 import {ActionsProfile} from "../Redux/Reducers/profileReducer";
-import {ActionsApp} from "../Redux/Reducers/appReducer";
 import {reducers} from "../Redux/reduxStore";
+import {ActionsApp} from "../Redux/Reducers/saga/appSaga";
+import {SetAuthIsAuthTestAC, SetCaptchaUrl, SetEmailAC, SetLoginAC, SetUserIdAC} from "../Redux/Reducers/saga/authSaga";
 //APP
 export type TypeAppProps={
     initialized:boolean
@@ -405,16 +406,12 @@ export type TypeMapStateToPropsLogin = {
     isAuth:boolean
     captchaUrl:string|null
 }
-export type TypeMapDispatchToPropsLogin = {
-    loginThunkCreator: (email: string, password: string, rememberMe: boolean,captcha:string) => void
-}
+
 export type TypeContainerLoginProps = {
-    loginThunkCreator: (email: string, password: string, rememberMe: boolean,captcha:string) => void
     isAuth:boolean
     captchaUrl:string|null
 }
 export type TypeLoginProps = {
-    loginThunkCreator: (email: string, password: string, rememberMe: boolean,captcha:string) => void
     isAuth:boolean
     captchaUrl: null|string
 }
@@ -428,11 +425,8 @@ export type TypeLoginProps = {
 export type TypeMapStateToPropsLogout = {
     isAuth:boolean
 }
-export type TypeMapDispatchToPropsLogout = {
-    logoutThunkCreator:()=>void
-}
+
 export type TypeLogoutContainerProps = {
-    logoutThunkCreator:()=>void
     isAuth:boolean
 }
 //DALL

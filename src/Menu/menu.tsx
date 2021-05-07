@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 export default function Menu() {
     return (<div className={s.nav}>
         <div className={s.test}>
-            <div className={s.icon}><img alt={'icon'} src={require('../Img/profile.png')}/><NavLink
+            <div className={s.icon}><img alt={'icon'} src={require('../Img/friends.png')}/><NavLink
                 className={`${s.items}`}
                 activeClassName={s.ownItem}
                 to='/profile'>Profile</NavLink>

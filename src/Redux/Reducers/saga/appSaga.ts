@@ -1,6 +1,6 @@
-import {TypeActionsApp, TypeInitialState, TypeStore} from "../../Types/Types";
-import {ThunkAction} from "redux-thunk";
-import {authThunkCreator} from "./authReducer";
+import {put, takeEvery} from 'redux-saga/effects'
+import {TypeActionsApp, TypeInitialState} from "../../../Types/Types";
+import {authSagaAC} from "./authSaga";
 
 let initialState: TypeInitialState = {
     initialized: false
@@ -27,16 +27,23 @@ export const AppReducer = (state: TypeInitialState = initialState, action: TypeA
 
 }
 
-export const initialThunkCreator = (initialized: boolean): ThunkAction<void, any,
-    TypeStore, TypeActionsApp> => {
-    return async (dispatch) => {
 
+function* appSaga(action:TypeAppSagaAC){
+    yield put(authSagaAC())
+    yield put(ActionsApp.setInitializedAC(action.initialized))
+}
+export const initialAppSagaAC = (initialized:boolean)=>{
+    return{
+        type:'/app/INITIAL_APP_SAGA',
+        initialized
+    } as const
+}
 
-        await dispatch(authThunkCreator())
-        dispatch(ActionsApp.setInitializedAC(initialized))
+export type TypeAppSagaAC = ReturnType<typeof initialAppSagaAC>
 
+export function* appWatcher() {
 
-    }
+    yield takeEvery('/app/INITIAL_APP_SAGA',appSaga)
 }
 
 export default AppReducer;

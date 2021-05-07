@@ -3,12 +3,13 @@ import dialogsReducer from "./Reducers/dealogsReducer";
 import profileReducer from "./Reducers/profileReducer";
 import usersReducer from "./Reducers/usersReducer";
 import MusicReducer from "./Reducers/musicReducer";
-import authReducer from "./Reducers/authReducer";
 import thunkMiddleware from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
-import AppReducer from "./Reducers/appReducer";
 import FriendsReducer from "./Reducers/friendsReducer";
-
+import createSagaMiddleware from 'redux-saga'
+import AppReducer, {appWatcher} from "./Reducers/saga/appSaga";
+import authReducer, {authWatcher} from "./Reducers/saga/authSaga";
+import { all } from 'redux-saga/effects';
 export let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
@@ -20,8 +21,12 @@ export let reducers = combineReducers({
     form:formReducer
 })
 //@ts-ignore
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers,composeEnhancers(applyMiddleware(thunkMiddleware)));
+const createSaga = createSagaMiddleware();
+const store = createStore(reducers,composeEnhancers(applyMiddleware(thunkMiddleware,createSaga)));
+createSaga.run(rootWatcher)
+ function* rootWatcher(){
+yield all([appWatcher(),authWatcher()])
+ }
 
 export default store;

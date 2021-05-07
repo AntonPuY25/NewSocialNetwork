@@ -14,16 +14,16 @@ import Logout from "./Profile/Login/logoutConteiner";
 import {Provider, useDispatch, useSelector} from "react-redux";
 import {TypeMapStateToPropsApp, TypeStore} from "./Types/Types";
 import Preloader from "./Profile/Preloader/Preloader";
-import {initialThunkCreator} from "./Redux/Reducers/appReducer";
 import store from "./Redux/reduxStore";
 import Friends from "./Profile/Friends/friends";
+import {initialAppSagaAC} from "./Redux/Reducers/saga/appSaga";
 
 const LazyNews = React.lazy(() => import("./Profile/News/news"));
 const App: React.FC = () => {
     const state = useSelector<TypeStore, TypeMapStateToPropsApp>(state => state.appPage)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(initialThunkCreator(true))
+        dispatch(initialAppSagaAC(true))
     }, [dispatch])
 
 

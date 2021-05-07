@@ -7,6 +7,8 @@ import {Redirect} from "react-router-dom";
 import s from '../../Validators/TagsForValidators/validatorsTags.module.css'
 import styles from './form.module.css';
 import {Button, FormLabel} from "@material-ui/core";
+import {loginSagaAC} from "../../Redux/Reducers/saga/authSaga";
+import {useDispatch} from "react-redux";
 
 type TypeCaptcha = {
     captchaUrl: string
@@ -59,6 +61,7 @@ const LoginForm: React.FC<InjectedFormProps<TypeFormData, TypeCaptcha> & TypeCap
 }
 
 export const LoginReduxForm = reduxForm<TypeFormData, TypeCaptcha>({
+
     form: "Login"
 })(LoginForm);
 
@@ -71,12 +74,13 @@ type TypeFormData = {
 }
 
 const Login = (props: TypeLoginProps) => {
+    const dispatch = useDispatch()
     let captchaOk = "";
     if (props.captchaUrl !== null) {
         captchaOk = props.captchaUrl
     }
     const onSubmit = (formData: TypeFormData) => {
-        props.loginThunkCreator(formData.email, formData.password, formData.rememberMe, formData.captcha)
+        dispatch(loginSagaAC(formData.email, formData.password, formData.rememberMe, formData.captcha))
     }
     if (props.isAuth) {
         return <Redirect to={'/profile'}/>
